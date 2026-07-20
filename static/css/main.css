@@ -1622,13 +1622,13 @@ div.botones-item img {
 }
 
 @media only screen and (max-width: 768px) {
-  div.botones-item {
+  div.botones-item img{
     width: calc(50% - 20px);
   }
 }
 
 @media only screen and (max-width: 480px) {
-  div.botones-item {
+  div.botones-item img{
     width: calc(100% - 20px);
   }
 }
