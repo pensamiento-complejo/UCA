@@ -1520,7 +1520,7 @@ input, select, textarea {
 		align-items: center;
 		display: grid;
         justify-content: center; /* Centers horizontally */
-        width: 100%;             /* Adjust container size as needed */
+                     /* Adjust container size as needed */
         overflow: hidden;        /* Prevents image from spilling out */
         margin: auto;
 
@@ -1528,6 +1528,7 @@ input, select, textarea {
 .imagenes img{
     object-fit: contain;
 	height: auto;
+	width: 100%;
 
 }
 
