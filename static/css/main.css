@@ -1518,19 +1518,22 @@ input, select, textarea {
 }
 .imagenes{
 		align-items: center;
-		display: grid;
+		display: block;
         justify-content: center; /* Centers horizontally */
-        width: 85%        /* Adjust container size as needed */
+        width: 80%;             /* Adjust container size as needed */
         overflow: hidden;        /* Prevents image from spilling out */
-        margin: auto;
+        margin: auto
 
 }
 .imagenes img{
-	height: auto;
-	width: auto;
+    object-fit: contain;
+    max-height: 100%;
+    max-width: 100%;
 
 }
-
+.tabla{
+	width: 100%;
+}
 
 
 
