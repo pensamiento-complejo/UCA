@@ -1518,16 +1518,16 @@ input, select, textarea {
 }
 .imagenes{
 		align-items: center;
-		display: block;
+		display: grid;
         justify-content: center; /* Centers horizontally */
         width: 100%;             /* Adjust container size as needed */
         overflow: hidden;        /* Prevents image from spilling out */
         margin: auto;
-	heigth: auto;
 
 }
 .imagenes img{
     object-fit: contain;
+	height: auto;
 
 }
 
