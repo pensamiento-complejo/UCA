@@ -1532,8 +1532,9 @@ input, select, textarea {
 
 }
 .tabla{
-	width: 60%;
+	width: 80%;
 	height: auto;
+	justify-content: center;
 }
 
 
