@@ -1522,7 +1522,8 @@ input, select, textarea {
         justify-content: center; /* Centers horizontally */
         width: 80%;             /* Adjust container size as needed */
         overflow: hidden;        /* Prevents image from spilling out */
-        margin: auto
+        margin: auto;
+	heigth: auto;
 
 }
 .imagenes img{
