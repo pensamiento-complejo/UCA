@@ -1520,7 +1520,7 @@ input, select, textarea {
 		align-items: center;
 		display: block;
         justify-content: center; /* Centers horizontally */
-        width: 80%;             /* Adjust container size as needed */
+        width: 100%;             /* Adjust container size as needed */
         overflow: hidden;        /* Prevents image from spilling out */
         margin: auto;
 	heigth: auto;
