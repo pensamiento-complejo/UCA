@@ -1,0 +1,536 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="3100" viewBox="0 0 1800 3100">
+<rect width="1800" height="3100" fill="#FFFFFF"/>
+<defs>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="#234C72" flood-opacity="0.16"/>
+  </filter>
+</defs>
+
+<text x="900.0" y="70" font-family="Arial, Helvetica, sans-serif" font-size="43" font-weight="700" fill="#173F70" text-anchor="middle">Identifica los factores que favorecen tu motivación</text>
+<text x="900.0" y="125" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#37474F" text-anchor="middle">El propósito de este cuestionario es identificar qué factores influyen en tu motivación para estudiar tu carrera</text>
+<text x="900.0" y="155" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#37474F" text-anchor="middle">universitaria en diferentes contextos. Lee cada afirmación y marca el número que mejor represente tu grado de acuerdo.</text>
+<rect x="70" y="200" width="1660" height="150" rx="22" fill="#F7FAFD" stroke="#AFC4D7" stroke-width="2" filter="url(#shadow)"/>
+<text x="105" y="240" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#1F5C93" text-anchor="start">Escala Likert</text>
+<rect x="330" y="219" width="260" height="105" rx="16" fill="#F6D9DF" stroke="#B7475A" stroke-width="1.6"/>
+<text x="364" y="276" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#B7475A" text-anchor="middle">1</text>
+<text x="399" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#B7475A" text-anchor="start">Totalmente en</text>
+<text x="399" y="281" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#B7475A" text-anchor="start">desacuerdo</text>
+<rect x="606" y="219" width="260" height="105" rx="16" fill="#F7E4D0" stroke="#C66E2F" stroke-width="1.6"/>
+<text x="640" y="276" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#C66E2F" text-anchor="middle">2</text>
+<text x="675" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#C66E2F" text-anchor="start">En desacuerdo</text>
+<rect x="882" y="219" width="260" height="105" rx="16" fill="#FFF2BE" stroke="#9D7A00" stroke-width="1.6"/>
+<text x="916" y="276" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#9D7A00" text-anchor="middle">3</text>
+<text x="951" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#9D7A00" text-anchor="start">Ni de acuerdo</text>
+<text x="951" y="281" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#9D7A00" text-anchor="start">ni en desacuerdo</text>
+<rect x="1158" y="219" width="260" height="105" rx="16" fill="#DDF0D8" stroke="#4B8D46" stroke-width="1.6"/>
+<text x="1192" y="276" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#4B8D46" text-anchor="middle">4</text>
+<text x="1227" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#4B8D46" text-anchor="start">De acuerdo</text>
+<rect x="1434" y="219" width="260" height="105" rx="16" fill="#DDECF7" stroke="#2E78B7" stroke-width="1.6"/>
+<text x="1468" y="276" font-family="Arial, Helvetica, sans-serif" font-size="34" font-weight="700" fill="#2E78B7" text-anchor="middle">5</text>
+<text x="1503" y="255" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2E78B7" text-anchor="start">Totalmente de</text>
+<text x="1503" y="281" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2E78B7" text-anchor="start">acuerdo</text>
+<text x="72" y="405" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#263238" text-anchor="start">Carrera:</text>
+<line x1="150" y1="409" x2="730" y2="409" stroke="#455A64" stroke-width="1.5"/>
+<text x="775" y="405" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#263238" text-anchor="start">Semestre:</text>
+<line x1="875" y1="409" x2="1120" y2="409" stroke="#455A64" stroke-width="1.5"/>
+<text x="1160" y="405" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#263238" text-anchor="start">Fecha:</text>
+<line x1="1225" y1="409" x2="1725" y2="409" stroke="#455A64" stroke-width="1.5"/>
+<rect x="55" y="470" width="1690" height="82" rx="12" fill="#173F70"/>
+<text x="205.0" y="519" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">Contexto y factor</text>
+<text x="875.0" y="519" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">Afirmación</text>
+<text x="1570.0" y="497" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#FFFFFF" text-anchor="middle">Grado de acuerdo</text>
+<rect x="1395.0" y="510" width="70.0" height="42" fill="#D56C7A"/>
+<text x="1430.0" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<rect x="1465.0" y="510" width="70.0" height="42" fill="#E59A55"/>
+<text x="1500.0" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<rect x="1535.0" y="510" width="70.0" height="42" fill="#D7B23C"/>
+<text x="1570.0" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<rect x="1605.0" y="510" width="70.0" height="42" fill="#6BA86B"/>
+<text x="1640.0" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<rect x="1675.0" y="510" width="70.0" height="42" fill="#5B8FB8"/>
+<text x="1710.0" y="540" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<rect x="55" y="552" width="1690" height="390" fill="#FFFFFF" stroke="#B8C7D5" stroke-width="1.4"/>
+<rect x="55" y="552" width="300" height="390" fill="#EAF4FC"/>
+<circle cx="141" cy="642" r="48" fill="#FFFFFF" stroke="#3D83C6" stroke-width="2.5"/>
+<circle cx="141" cy="642" r="34" fill="none" stroke="#3D83C6" stroke-width="6"/>
+<circle cx="141" cy="642" r="20" fill="none" stroke="#3D83C6" stroke-width="6"/>
+<circle cx="141" cy="642" r="7" fill="#3D83C6"/>
+<line x1="146" y1="637" x2="183" y2="600" stroke="#3D83C6" stroke-width="6" stroke-linecap="round"/>
+<polygon points="183,600 165,604 179,618" fill="#3D83C6"/>
+<text x="210" y="610" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#3D83C6" text-anchor="start">Contexto</text>
+<text x="210" y="640" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#3D83C6" text-anchor="start">Personal</text>
+<text x="93" y="742" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">Factores relacionados</text>
+<text x="93" y="767" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">con tus intereses,</text>
+<text x="93" y="792" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">metas y bienestar</text>
+<text x="93" y="817" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">personal.</text>
+<text x="375" y="580.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">1. Estudiar esta carrera está alineado con mis intereses y pasiones.</text>
+<line x1="1395.0" y1="552.0" x2="1395.0" y2="617.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="573.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="552.0" x2="1465.0" y2="617.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="573.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="552.0" x2="1535.0" y2="617.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="573.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="552.0" x2="1605.0" y2="617.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="573.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="552.0" x2="1675.0" y2="617.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="573.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="552.0" x2="1745" y2="617.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="617.0" x2="1745" y2="617.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="645.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">2. Tengo metas claras sobre lo que quiero lograr con mi carrera.</text>
+<line x1="1395.0" y1="617.0" x2="1395.0" y2="682.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="638.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="617.0" x2="1465.0" y2="682.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="638.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="617.0" x2="1535.0" y2="682.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="638.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="617.0" x2="1605.0" y2="682.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="638.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="617.0" x2="1675.0" y2="682.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="638.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="617.0" x2="1745" y2="682.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="682.0" x2="1745" y2="682.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="710.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">3. Me siento con energía y disposición para estudiar la mayoría de los días.</text>
+<line x1="1395.0" y1="682.0" x2="1395.0" y2="747.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="703.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="682.0" x2="1465.0" y2="747.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="703.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="682.0" x2="1535.0" y2="747.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="703.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="682.0" x2="1605.0" y2="747.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="703.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="682.0" x2="1675.0" y2="747.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="703.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="682.0" x2="1745" y2="747.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="747.0" x2="1745" y2="747.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="775.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">4. Creo que esta carrera me permitirá desarrollarme como persona.</text>
+<line x1="1395.0" y1="747.0" x2="1395.0" y2="812.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="768.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="747.0" x2="1465.0" y2="812.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="768.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="747.0" x2="1535.0" y2="812.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="768.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="747.0" x2="1605.0" y2="812.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="768.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="747.0" x2="1675.0" y2="812.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="768.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="747.0" x2="1745" y2="812.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="812.0" x2="1745" y2="812.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="840.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">5. Me motiva superarme y demostrarme a mí mismo/a que puedo lograrlo.</text>
+<line x1="1395.0" y1="812.0" x2="1395.0" y2="877.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="833.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="812.0" x2="1465.0" y2="877.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="833.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="812.0" x2="1535.0" y2="877.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="833.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="812.0" x2="1605.0" y2="877.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="833.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="812.0" x2="1675.0" y2="877.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="833.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="812.0" x2="1745" y2="877.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="877.0" x2="1745" y2="877.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="905.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">6. Disfruto aprender sobre los temas que aborda mi carrera.</text>
+<line x1="1395.0" y1="877.0" x2="1395.0" y2="942.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="898.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="877.0" x2="1465.0" y2="942.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="898.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="877.0" x2="1535.0" y2="942.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="898.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="877.0" x2="1605.0" y2="942.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="898.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="877.0" x2="1675.0" y2="942.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="898.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="877.0" x2="1745" y2="942.0" stroke="#B8C7D5" stroke-width="1"/>
+<rect x="55" y="942" width="1690" height="390" fill="#FFFFFF" stroke="#B8C7D5" stroke-width="1.4"/>
+<rect x="55" y="942" width="300" height="390" fill="#EAF6EC"/>
+<circle cx="141" cy="1032" r="48" fill="#FFFFFF" stroke="#4C9B63" stroke-width="2.5"/>
+<polygon points="99,1024 141,1002 183,1024 141,1046" fill="#4C9B63"/>
+<path d="M 115 1034 Q 141 1062 167 1034 L 167 1052 Q 141 1074 115 1052 Z" fill="#4C9B63" opacity="0.88"/>
+<line x1="183" y1="1024" x2="183" y2="1057" stroke="#4C9B63" stroke-width="5"/>
+<circle cx="183" cy="1062" r="5" fill="#4C9B63"/>
+<text x="210" y="1000" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#4C9B63" text-anchor="start">Contexto</text>
+<text x="210" y="1030" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#4C9B63" text-anchor="start">Académico</text>
+<text x="93" y="1132" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">Factores relacionados</text>
+<text x="93" y="1157" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">con la experiencia</text>
+<text x="93" y="1182" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">de aprendizaje y</text>
+<text x="93" y="1207" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">la institución.</text>
+<text x="375" y="970.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">7. Los contenidos de las materias me resultan relevantes y útiles.</text>
+<line x1="1395.0" y1="942.0" x2="1395.0" y2="1007.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="963.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="942.0" x2="1465.0" y2="1007.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="963.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="942.0" x2="1535.0" y2="1007.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="963.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="942.0" x2="1605.0" y2="1007.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="963.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="942.0" x2="1675.0" y2="1007.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="963.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="942.0" x2="1745" y2="1007.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1007.0" x2="1745" y2="1007.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1035.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">8. Los profesores me inspiran y motivan a aprender.</text>
+<line x1="1395.0" y1="1007.0" x2="1395.0" y2="1072.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1028.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1007.0" x2="1465.0" y2="1072.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1028.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1007.0" x2="1535.0" y2="1072.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1028.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1007.0" x2="1605.0" y2="1072.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1028.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1007.0" x2="1675.0" y2="1072.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1028.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1007.0" x2="1745" y2="1072.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1072.0" x2="1745" y2="1072.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1100.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">9. Las clases son dinámicas y me permiten participar activamente.</text>
+<line x1="1395.0" y1="1072.0" x2="1395.0" y2="1137.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1093.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1072.0" x2="1465.0" y2="1137.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1093.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1072.0" x2="1535.0" y2="1137.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1093.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1072.0" x2="1605.0" y2="1137.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1093.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1072.0" x2="1675.0" y2="1137.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1093.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1072.0" x2="1745" y2="1137.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1137.0" x2="1745" y2="1137.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1165.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">10. Recibo retroalimentación útil que me ayuda a mejorar.</text>
+<line x1="1395.0" y1="1137.0" x2="1395.0" y2="1202.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1158.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1137.0" x2="1465.0" y2="1202.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1158.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1137.0" x2="1535.0" y2="1202.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1158.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1137.0" x2="1605.0" y2="1202.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1158.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1137.0" x2="1675.0" y2="1202.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1158.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1137.0" x2="1745" y2="1202.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1202.0" x2="1745" y2="1202.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1230.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">11. Los recursos y materiales de la universidad facilitan mi aprendizaje.</text>
+<line x1="1395.0" y1="1202.0" x2="1395.0" y2="1267.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1223.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1202.0" x2="1465.0" y2="1267.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1223.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1202.0" x2="1535.0" y2="1267.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1223.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1202.0" x2="1605.0" y2="1267.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1223.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1202.0" x2="1675.0" y2="1267.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1223.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1202.0" x2="1745" y2="1267.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1267.0" x2="1745" y2="1267.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1286.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">12. Las evaluaciones me motivan a seguir aprendiendo, no solo a obtener una</text>
+<text x="375" y="1309.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">calificación.</text>
+<line x1="1395.0" y1="1267.0" x2="1395.0" y2="1332.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1288.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1267.0" x2="1465.0" y2="1332.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1288.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1267.0" x2="1535.0" y2="1332.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1288.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1267.0" x2="1605.0" y2="1332.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1288.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1267.0" x2="1675.0" y2="1332.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1288.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1267.0" x2="1745" y2="1332.0" stroke="#B8C7D5" stroke-width="1"/>
+<rect x="55" y="1332" width="1690" height="390" fill="#FFFFFF" stroke="#B8C7D5" stroke-width="1.4"/>
+<rect x="55" y="1332" width="300" height="390" fill="#FFF6D9"/>
+<circle cx="141" cy="1422" r="48" fill="#FFFFFF" stroke="#D59724" stroke-width="2.5"/>
+<circle cx="141" cy="1404" r="15" fill="#D59724"/>
+<circle cx="111" cy="1416" r="12" fill="#D59724" opacity="0.9"/>
+<circle cx="171" cy="1416" r="12" fill="#D59724" opacity="0.9"/>
+<path d="M 115 1452 Q 141 1424 167 1452 Z" fill="#D59724"/>
+<path d="M 89 1452 Q 111 1430 133 1452 Z" fill="#D59724" opacity="0.88"/>
+<path d="M 149 1452 Q 171 1430 193 1452 Z" fill="#D59724" opacity="0.88"/>
+<text x="210" y="1390" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#D59724" text-anchor="start">Contexto</text>
+<text x="210" y="1420" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#D59724" text-anchor="start">Social</text>
+<text x="93" y="1522" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">Factores relacionados</text>
+<text x="93" y="1547" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">con las personas que</text>
+<text x="93" y="1572" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">te rodean y con el</text>
+<text x="93" y="1597" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">apoyo que recibes.</text>
+<text x="375" y="1360.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">13. Mi familia apoya mi decisión de estudiar esta carrera.</text>
+<line x1="1395.0" y1="1332.0" x2="1395.0" y2="1397.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1353.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1332.0" x2="1465.0" y2="1397.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1353.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1332.0" x2="1535.0" y2="1397.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1353.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1332.0" x2="1605.0" y2="1397.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1353.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1332.0" x2="1675.0" y2="1397.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1353.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1332.0" x2="1745" y2="1397.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1397.0" x2="1745" y2="1397.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1425.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">14. Mis amigos/as me motivan y me acompañan en mi proceso académico.</text>
+<line x1="1395.0" y1="1397.0" x2="1395.0" y2="1462.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1418.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1397.0" x2="1465.0" y2="1462.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1418.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1397.0" x2="1535.0" y2="1462.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1418.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1397.0" x2="1605.0" y2="1462.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1418.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1397.0" x2="1675.0" y2="1462.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1418.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1397.0" x2="1745" y2="1462.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1462.0" x2="1745" y2="1462.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1490.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">15. Puedo contar con apoyo cuando tengo dificultades con mis estudios.</text>
+<line x1="1395.0" y1="1462.0" x2="1395.0" y2="1527.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1483.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1462.0" x2="1465.0" y2="1527.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1483.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1462.0" x2="1535.0" y2="1527.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1483.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1462.0" x2="1605.0" y2="1527.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1483.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1462.0" x2="1675.0" y2="1527.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1483.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1462.0" x2="1745" y2="1527.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1527.0" x2="1745" y2="1527.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1555.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">16. Participar en actividades grupales me motiva a aprender más.</text>
+<line x1="1395.0" y1="1527.0" x2="1395.0" y2="1592.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1548.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1527.0" x2="1465.0" y2="1592.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1548.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1527.0" x2="1535.0" y2="1592.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1548.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1527.0" x2="1605.0" y2="1592.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1548.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1527.0" x2="1675.0" y2="1592.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1548.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1527.0" x2="1745" y2="1592.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1592.0" x2="1745" y2="1592.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1620.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">17. Me siento parte de la comunidad universitaria.</text>
+<line x1="1395.0" y1="1592.0" x2="1395.0" y2="1657.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1613.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1592.0" x2="1465.0" y2="1657.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1613.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1592.0" x2="1535.0" y2="1657.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1613.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1592.0" x2="1605.0" y2="1657.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1613.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1592.0" x2="1675.0" y2="1657.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1613.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1592.0" x2="1745" y2="1657.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1657.0" x2="1745" y2="1657.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1685.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">18. Las relaciones positivas con mis compañeros/as contribuyen a mi motivación.</text>
+<line x1="1395.0" y1="1657.0" x2="1395.0" y2="1722.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1678.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1657.0" x2="1465.0" y2="1722.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1678.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1657.0" x2="1535.0" y2="1722.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1678.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1657.0" x2="1605.0" y2="1722.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1678.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1657.0" x2="1675.0" y2="1722.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1678.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1657.0" x2="1745" y2="1722.0" stroke="#B8C7D5" stroke-width="1"/>
+<rect x="55" y="1722" width="1690" height="390" fill="#FFFFFF" stroke="#B8C7D5" stroke-width="1.4"/>
+<rect x="55" y="1722" width="300" height="390" fill="#F2ECFA"/>
+<circle cx="141" cy="1812" r="48" fill="#FFFFFF" stroke="#8B65B8" stroke-width="2.5"/>
+<rect x="99" y="1792" width="84" height="58" rx="8" fill="#8B65B8"/>
+<path d="M 123 1792 V 1778 H 159 V 1792" fill="none" stroke="#8B65B8" stroke-width="7"/>
+<line x1="99" y1="1815" x2="183" y2="1815" stroke="#FFFFFF" stroke-width="4" opacity="0.9"/>
+<rect x="134" y="1810" width="14" height="12" rx="2" fill="#FFFFFF"/>
+<text x="210" y="1780" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#8B65B8" text-anchor="start">Contexto</text>
+<text x="210" y="1810" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#8B65B8" text-anchor="start">Profesional</text>
+<text x="93" y="1912" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">Factores relacionados</text>
+<text x="93" y="1937" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">con tu proyección</text>
+<text x="93" y="1962" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">profesional y el</text>
+<text x="93" y="1987" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">futuro laboral.</text>
+<text x="375" y="1750.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">19. Visualizo oportunidades laborales interesantes al terminar mi carrera.</text>
+<line x1="1395.0" y1="1722.0" x2="1395.0" y2="1787.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1743.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1722.0" x2="1465.0" y2="1787.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1743.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1722.0" x2="1535.0" y2="1787.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1743.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1722.0" x2="1605.0" y2="1787.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1743.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1722.0" x2="1675.0" y2="1787.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1743.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1722.0" x2="1745" y2="1787.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1787.0" x2="1745" y2="1787.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1815.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">20. Creo que esta carrera me permitirá tener estabilidad económica.</text>
+<line x1="1395.0" y1="1787.0" x2="1395.0" y2="1852.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1808.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1787.0" x2="1465.0" y2="1852.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1808.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1787.0" x2="1535.0" y2="1852.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1808.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1787.0" x2="1605.0" y2="1852.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1808.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1787.0" x2="1675.0" y2="1852.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1808.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1787.0" x2="1745" y2="1852.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1852.0" x2="1745" y2="1852.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1880.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">21. Contribuir a la sociedad a través de mi profesión me motiva.</text>
+<line x1="1395.0" y1="1852.0" x2="1395.0" y2="1917.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1873.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1852.0" x2="1465.0" y2="1917.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1873.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1852.0" x2="1535.0" y2="1917.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1873.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1852.0" x2="1605.0" y2="1917.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1873.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1852.0" x2="1675.0" y2="1917.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1873.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1852.0" x2="1745" y2="1917.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1917.0" x2="1745" y2="1917.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="1945.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">22. Conozco el perfil profesional y las habilidades que necesito desarrollar.</text>
+<line x1="1395.0" y1="1917.0" x2="1395.0" y2="1982.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="1938.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1917.0" x2="1465.0" y2="1982.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="1938.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1917.0" x2="1535.0" y2="1982.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="1938.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1917.0" x2="1605.0" y2="1982.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="1938.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1917.0" x2="1675.0" y2="1982.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="1938.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1917.0" x2="1745" y2="1982.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="1982.0" x2="1745" y2="1982.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2010.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">23. Las prácticas profesionales y proyectos reales me motivan a aprender.</text>
+<line x1="1395.0" y1="1982.0" x2="1395.0" y2="2047.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2003.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="1982.0" x2="1465.0" y2="2047.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2003.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="1982.0" x2="1535.0" y2="2047.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2003.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="1982.0" x2="1605.0" y2="2047.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2003.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="1982.0" x2="1675.0" y2="2047.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2003.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="1982.0" x2="1745" y2="2047.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2047.0" x2="1745" y2="2047.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2075.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">24. Me emociona imaginar el impacto que puedo tener en mi campo profesional.</text>
+<line x1="1395.0" y1="2047.0" x2="1395.0" y2="2112.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2068.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2047.0" x2="1465.0" y2="2112.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2068.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2047.0" x2="1535.0" y2="2112.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2068.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2047.0" x2="1605.0" y2="2112.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2068.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2047.0" x2="1675.0" y2="2112.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2068.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2047.0" x2="1745" y2="2112.0" stroke="#B8C7D5" stroke-width="1"/>
+<rect x="55" y="2112" width="1690" height="390" fill="#FFFFFF" stroke="#B8C7D5" stroke-width="1.4"/>
+<rect x="55" y="2112" width="300" height="390" fill="#E7F7F7"/>
+<circle cx="141" cy="2202" r="48" fill="#FFFFFF" stroke="#2A9B9C" stroke-width="2.5"/>
+<polygon points="95,2198 141,2159 187,2198" fill="#2A9B9C"/>
+<rect x="107" y="2198" width="68" height="48" rx="3" fill="#2A9B9C" opacity="0.92"/>
+<rect x="131" y="2215" width="20" height="31" fill="#FFFFFF"/>
+<rect x="157" y="2209" width="11" height="11" fill="#FFFFFF"/>
+<text x="210" y="2170" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#2A9B9C" text-anchor="start">Contexto</text>
+<text x="210" y="2200" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2A9B9C" text-anchor="start">Físico y</text>
+<text x="210" y="2230" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#2A9B9C" text-anchor="start">Ambiental</text>
+<text x="93" y="2302" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">Factores relacionados</text>
+<text x="93" y="2327" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">con el entorno físico</text>
+<text x="93" y="2352" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">y las condiciones de</text>
+<text x="93" y="2377" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#53626F" text-anchor="start">estudio.</text>
+<text x="375" y="2140.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">25. Dispongo de un espacio adecuado y tranquilo para estudiar.</text>
+<line x1="1395.0" y1="2112.0" x2="1395.0" y2="2177.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2133.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2112.0" x2="1465.0" y2="2177.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2133.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2112.0" x2="1535.0" y2="2177.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2133.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2112.0" x2="1605.0" y2="2177.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2133.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2112.0" x2="1675.0" y2="2177.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2133.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2112.0" x2="1745" y2="2177.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2177.0" x2="1745" y2="2177.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2205.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">26. Cuento con las herramientas tecnológicas necesarias para mi aprendizaje.</text>
+<line x1="1395.0" y1="2177.0" x2="1395.0" y2="2242.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2198.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2177.0" x2="1465.0" y2="2242.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2198.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2177.0" x2="1535.0" y2="2242.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2198.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2177.0" x2="1605.0" y2="2242.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2198.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2177.0" x2="1675.0" y2="2242.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2198.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2177.0" x2="1745" y2="2242.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2242.0" x2="1745" y2="2242.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2270.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">27. El ambiente en la universidad es seguro y agradable.</text>
+<line x1="1395.0" y1="2242.0" x2="1395.0" y2="2307.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2263.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2242.0" x2="1465.0" y2="2307.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2263.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2242.0" x2="1535.0" y2="2307.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2263.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2242.0" x2="1605.0" y2="2307.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2263.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2242.0" x2="1675.0" y2="2307.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2263.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2242.0" x2="1745" y2="2307.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2307.0" x2="1745" y2="2307.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2335.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">28. La ubicación y el acceso a la universidad facilitan mi asistencia.</text>
+<line x1="1395.0" y1="2307.0" x2="1395.0" y2="2372.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2328.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2307.0" x2="1465.0" y2="2372.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2328.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2307.0" x2="1535.0" y2="2372.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2328.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2307.0" x2="1605.0" y2="2372.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2328.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2307.0" x2="1675.0" y2="2372.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2328.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2307.0" x2="1745" y2="2372.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2372.0" x2="1745" y2="2372.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2400.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">29. Tengo una buena organización de mi tiempo para estudiar.</text>
+<line x1="1395.0" y1="2372.0" x2="1395.0" y2="2437.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2393.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2372.0" x2="1465.0" y2="2437.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2393.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2372.0" x2="1535.0" y2="2437.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2393.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2372.0" x2="1605.0" y2="2437.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2393.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2372.0" x2="1675.0" y2="2437.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2393.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2372.0" x2="1745" y2="2437.0" stroke="#B8C7D5" stroke-width="1"/>
+<line x1="355" y1="2437.0" x2="1745" y2="2437.0" stroke="#D5DEE6" stroke-width="1"/>
+<text x="375" y="2465.0" font-family="Arial, Helvetica, sans-serif" font-size="17.5" font-weight="400" fill="#263238" text-anchor="start">30. Mi salud física y mental me permite mantenerme motivado/a.</text>
+<line x1="1395.0" y1="2437.0" x2="1395.0" y2="2502.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1419.0" y="2458.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1465.0" y1="2437.0" x2="1465.0" y2="2502.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1489.0" y="2458.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1535.0" y1="2437.0" x2="1535.0" y2="2502.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1559.0" y="2458.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1605.0" y1="2437.0" x2="1605.0" y2="2502.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1629.0" y="2458.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1675.0" y1="2437.0" x2="1675.0" y2="2502.0" stroke="#C9D3DC" stroke-width="1"/>
+<rect x="1699.0" y="2458.5" width="22" height="22" rx="3" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1745" y1="2437.0" x2="1745" y2="2502.0" stroke="#B8C7D5" stroke-width="1"/>
+<rect x="55" y="470" width="1690" height="2032" rx="12" fill="none" stroke="#9FB3C4" stroke-width="2"/>
+<rect x="55" y="2530" width="1120" height="320" rx="18" fill="#F8FBFD" stroke="#AFC3D6" stroke-width="2"/>
+<text x="83" y="2575" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#1F5C93" text-anchor="start">Reflexión final (opcional)</text>
+<text x="83" y="2622" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="400" fill="#263238" text-anchor="start">• ¿Qué factores son los que más influyen en tu motivación?</text>
+<line x1="91" y1="2650" x2="1141" y2="2650" stroke="#8797A4" stroke-width="1.2"/>
+<line x1="91" y1="2680" x2="1141" y2="2680" stroke="#8797A4" stroke-width="1.2"/>
+<text x="83" y="2714" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="400" fill="#263238" text-anchor="start">• ¿Qué factores podrías mejorar para fortalecer tu motivación?</text>
+<line x1="91" y1="2742" x2="1141" y2="2742" stroke="#8797A4" stroke-width="1.2"/>
+<line x1="91" y1="2772" x2="1141" y2="2772" stroke="#8797A4" stroke-width="1.2"/>
+<text x="83" y="2806" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="400" fill="#263238" text-anchor="start">• ¿Qué acciones puedes implementar para mantenerte motivado/a en tu carrera?</text>
+<line x1="91" y1="2834" x2="1141" y2="2834" stroke="#8797A4" stroke-width="1.2"/>
+<line x1="91" y1="2864" x2="1141" y2="2864" stroke="#8797A4" stroke-width="1.2"/>
+<rect x="1200" y="2530" width="545" height="320" rx="18" fill="#F4F8FC" stroke="#8FAEC8" stroke-width="2"/>
+<text x="1228" y="2575" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#1F5C93" text-anchor="start">Interpretación</text>
+<text x="1228" y="2616" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#37474F" text-anchor="start">Suma tus respuestas por contexto</text>
+<text x="1228" y="2642" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#37474F" text-anchor="start">(puntaje mínimo: 6 / máximo: 30).</text>
+<text x="1228" y="2668" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#37474F" text-anchor="start">A mayor puntaje, mayor influencia del</text>
+<text x="1228" y="2694" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#37474F" text-anchor="start">contexto en tu motivación.</text>
+<text x="1245" y="2730" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#B7475A" text-anchor="start">6–14</text>
+<text x="1340" y="2730" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="700" fill="#B7475A" text-anchor="start">Influencia baja</text>
+<text x="1245" y="2768" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#C58A22" text-anchor="start">15–22</text>
+<text x="1340" y="2768" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="700" fill="#C58A22" text-anchor="start">Influencia moderada</text>
+<text x="1245" y="2806" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#4B8D46" text-anchor="start">23–30</text>
+<text x="1340" y="2806" font-family="Arial, Helvetica, sans-serif" font-size="18.5" font-weight="700" fill="#4B8D46" text-anchor="start">Influencia alta</text>
+<rect x="55" y="2880" width="1690" height="95" rx="18" fill="#173F70"/>
+<text x="835" y="2920" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">Recuerda: la motivación puede cambiar según las circunstancias. Identificar lo que te impulsa</text>
+<text x="835" y="2948" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#FFFFFF" text-anchor="middle">es el primer paso para mantenerte enfocado/a en tus metas.</text>
+<circle cx="1690" cy="2925" r="28" fill="#FFF1B5" stroke="#D5A326" stroke-width="2"/>
+<text x="1690" y="2935" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700" fill="#D5A326" text-anchor="middle">✦</text>
+</svg>

@@ -1,0 +1,591 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="2510" viewBox="0 0 1600 2510">
+<rect width="1600" height="2510" fill="#FFFFFF"/>
+<defs>
+  <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="5" stdDeviation="6" flood-color="#17365D" flood-opacity="0.18"/>
+  </filter>
+</defs>
+
+<rect x="40" y="35" width="1520" height="105" rx="26" fill="#173F70" filter="url(#shadow)"/>
+<text x="800" y="87" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="700" fill="#FFFFFF" text-anchor="middle">CUESTIONARIO DE INTELIGENCIAS MÚLTIPLES</text>
+<text x="800" y="122" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="400" fill="#DDEAF7" text-anchor="middle">(Escala Likert)</text>
+<text x="55" y="178" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="700" fill="#173F70" text-anchor="start">Instrucciones:</text>
+<text x="190" y="178" font-family="Arial, Helvetica, sans-serif" font-size="20" font-weight="400" fill="#263238" text-anchor="start">Lee cada afirmación y marca el número que mejor describa tu grado de acuerdo contigo.</text>
+<text x="55" y="208" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="400" fill="#4E5B68" text-anchor="start">No hay respuestas correctas o incorrectas.</text>
+<text x="55" y="240" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#173F70" text-anchor="start">La escala es la siguiente:</text>
+<rect x="55" y="255" width="292" height="75" rx="14" fill="#F7D9DE" stroke="#B94A5A" stroke-width="1.5"/>
+<text x="91" y="303" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#B94A5A" text-anchor="middle">1</text>
+<text x="127" y="286" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#B94A5A" text-anchor="start">Totalmente en</text>
+<text x="127" y="309" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#B94A5A" text-anchor="start">desacuerdo</text>
+<rect x="357" y="255" width="292" height="75" rx="14" fill="#F9E4D2" stroke="#C66D2E" stroke-width="1.5"/>
+<text x="393" y="303" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#C66D2E" text-anchor="middle">2</text>
+<text x="429" y="286" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#C66D2E" text-anchor="start">En desacuerdo</text>
+<rect x="659" y="255" width="292" height="75" rx="14" fill="#FFF2BE" stroke="#9D7A00" stroke-width="1.5"/>
+<text x="695" y="303" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#9D7A00" text-anchor="middle">3</text>
+<text x="731" y="286" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#9D7A00" text-anchor="start">Ni de acuerdo</text>
+<text x="731" y="309" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#9D7A00" text-anchor="start">ni en desacuerdo</text>
+<rect x="961" y="255" width="292" height="75" rx="14" fill="#DDF1D8" stroke="#4B8D46" stroke-width="1.5"/>
+<text x="997" y="303" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#4B8D46" text-anchor="middle">4</text>
+<text x="1033" y="286" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#4B8D46" text-anchor="start">De acuerdo</text>
+<rect x="1263" y="255" width="292" height="75" rx="14" fill="#DDECF8" stroke="#2E78B7" stroke-width="1.5"/>
+<text x="1299" y="303" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#2E78B7" text-anchor="middle">5</text>
+<text x="1335" y="286" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2E78B7" text-anchor="start">Totalmente</text>
+<text x="1335" y="309" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="700" fill="#2E78B7" text-anchor="start">de acuerdo</text>
+<rect x="40" y="350" width="1520" height="70" rx="12" fill="#1F5C93"/>
+<text x="165.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">Inteligencia</text>
+<text x="775.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">Afirmación</text>
+<line x1="1260.0" y1="350" x2="1260.0" y2="420" stroke="#D8E6F2" stroke-width="1"/>
+<text x="1290.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">1</text>
+<line x1="1320.0" y1="350" x2="1320.0" y2="420" stroke="#D8E6F2" stroke-width="1"/>
+<text x="1350.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">2</text>
+<line x1="1380.0" y1="350" x2="1380.0" y2="420" stroke="#D8E6F2" stroke-width="1"/>
+<text x="1410.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">3</text>
+<line x1="1440.0" y1="350" x2="1440.0" y2="420" stroke="#D8E6F2" stroke-width="1"/>
+<text x="1470.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">4</text>
+<line x1="1500.0" y1="350" x2="1500.0" y2="420" stroke="#D8E6F2" stroke-width="1"/>
+<text x="1530.0" y="395" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" fill="#FFFFFF" text-anchor="middle">5</text>
+<line x1="290" y1="350" x2="290" y2="2180" stroke="#B8C7D5" stroke-width="1.5"/>
+<line x1="1260" y1="350" x2="1260" y2="2180" stroke="#B8C7D5" stroke-width="1.5"/>
+<rect x="40" y="420" width="1520" height="220" fill="#F0EBFA" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="420" width="250" height="220" fill="#F0EBFA"/>
+<circle cx="98" cy="520.0" r="35" fill="#FFFFFF" stroke="#7B5CC7" stroke-width="3"/>
+<text x="98" y="530.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#7B5CC7" text-anchor="middle">●●●</text>
+<text x="145" y="511" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#7B5CC7" text-anchor="start">1. Lingüística</text>
+<text x="145" y="540" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#7B5CC7" text-anchor="start">(verbal)</text>
+<text x="308" y="459" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">1. Disfruto leer y comprender diferentes tipos de textos.</text>
+<line x1="1260.0" y1="432" x2="1260.0" y2="472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="432" x2="1320.0" y2="472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="432" x2="1380.0" y2="472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="432" x2="1440.0" y2="472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="432" x2="1500.0" y2="472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="472" x2="1560" y2="472" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="499" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">2. Expresar mis ideas por escrito me resulta fácil.</text>
+<line x1="1260.0" y1="472" x2="1260.0" y2="512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="472" x2="1320.0" y2="512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="472" x2="1380.0" y2="512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="472" x2="1440.0" y2="512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="472" x2="1500.0" y2="512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="512" x2="1560" y2="512" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="539" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">3. Me gusta participar en debates o expresar mis opiniones.</text>
+<line x1="1260.0" y1="512" x2="1260.0" y2="552" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="533.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="512" x2="1320.0" y2="552" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="533.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="512" x2="1380.0" y2="552" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="533.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="512" x2="1440.0" y2="552" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="533.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="512" x2="1500.0" y2="552" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="533.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="552" x2="1560" y2="552" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="579" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">4. Puedo explicar claramente mis ideas a otras personas.</text>
+<line x1="1260.0" y1="552" x2="1260.0" y2="592" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="573.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="552" x2="1320.0" y2="592" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="573.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="552" x2="1380.0" y2="592" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="573.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="552" x2="1440.0" y2="592" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="573.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="552" x2="1500.0" y2="592" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="573.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="592" x2="1560" y2="592" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="619" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">5. Disfruto aprender nuevas palabras y mejorar mi lenguaje.</text>
+<line x1="1260.0" y1="592" x2="1260.0" y2="632" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="613.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="592" x2="1320.0" y2="632" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="613.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="592" x2="1380.0" y2="632" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="613.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="592" x2="1440.0" y2="632" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="613.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="592" x2="1500.0" y2="632" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="613.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="420" x2="1560" y2="640" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="640" width="1520" height="220" fill="#EAF4FC" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="640" width="250" height="220" fill="#EAF4FC"/>
+<circle cx="98" cy="740.0" r="35" fill="#FFFFFF" stroke="#2F80C9" stroke-width="3"/>
+<text x="98" y="750.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#2F80C9" text-anchor="middle">∑</text>
+<text x="145" y="731" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#2F80C9" text-anchor="start">2. Lógico-</text>
+<text x="145" y="760" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#2F80C9" text-anchor="start">matemática</text>
+<text x="308" y="679" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">6. Disfruto resolver problemas que impliquen razonamiento lógico.</text>
+<line x1="1260.0" y1="652" x2="1260.0" y2="692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="652" x2="1320.0" y2="692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="652" x2="1380.0" y2="692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="652" x2="1440.0" y2="692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="652" x2="1500.0" y2="692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="692" x2="1560" y2="692" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="719" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">7. Me gusta trabajar con números, datos o estadísticas.</text>
+<line x1="1260.0" y1="692" x2="1260.0" y2="732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="692" x2="1320.0" y2="732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="692" x2="1380.0" y2="732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="692" x2="1440.0" y2="732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="692" x2="1500.0" y2="732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="732" x2="1560" y2="732" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="759" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">8. Puedo identificar patrones y relaciones con facilidad.</text>
+<line x1="1260.0" y1="732" x2="1260.0" y2="772" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="753.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="732" x2="1320.0" y2="772" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="753.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="732" x2="1380.0" y2="772" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="753.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="732" x2="1440.0" y2="772" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="753.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="732" x2="1500.0" y2="772" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="753.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="772" x2="1560" y2="772" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="799" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">9. Me gusta analizar causas y consecuencias de situaciones.</text>
+<line x1="1260.0" y1="772" x2="1260.0" y2="812" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="793.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="772" x2="1320.0" y2="812" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="793.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="772" x2="1380.0" y2="812" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="793.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="772" x2="1440.0" y2="812" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="793.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="772" x2="1500.0" y2="812" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="793.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="812" x2="1560" y2="812" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="839" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">10. Disfruto actividades que impliquen cálculo o estimaciones.</text>
+<line x1="1260.0" y1="812" x2="1260.0" y2="852" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="833.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="812" x2="1320.0" y2="852" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="833.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="812" x2="1380.0" y2="852" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="833.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="812" x2="1440.0" y2="852" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="833.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="812" x2="1500.0" y2="852" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="833.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="640" x2="1560" y2="860" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="860" width="1520" height="220" fill="#EAF7F1" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="860" width="250" height="220" fill="#EAF7F1"/>
+<circle cx="98" cy="960.0" r="35" fill="#FFFFFF" stroke="#3F9B78" stroke-width="3"/>
+<text x="98" y="970.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#3F9B78" text-anchor="middle">◇</text>
+<text x="145" y="951" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#3F9B78" text-anchor="start">3. Espacial</text>
+<text x="145" y="980" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#3F9B78" text-anchor="start">(visual)</text>
+<text x="308" y="899" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">11. Comprendo mejor las ideas cuando las veo representadas.</text>
+<line x1="1260.0" y1="872" x2="1260.0" y2="912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="872" x2="1320.0" y2="912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="872" x2="1380.0" y2="912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="872" x2="1440.0" y2="912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="872" x2="1500.0" y2="912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="912" x2="1560" y2="912" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="939" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">12. Me gusta crear mapas, diagramas o esquemas.</text>
+<line x1="1260.0" y1="912" x2="1260.0" y2="952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="912" x2="1320.0" y2="952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="912" x2="1380.0" y2="952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="912" x2="1440.0" y2="952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="912" x2="1500.0" y2="952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="952" x2="1560" y2="952" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="979" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">13. Puedo imaginar cómo se verían las cosas desde otro ángulo.</text>
+<line x1="1260.0" y1="952" x2="1260.0" y2="992" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="973.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="952" x2="1320.0" y2="992" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="973.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="952" x2="1380.0" y2="992" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="973.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="952" x2="1440.0" y2="992" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="973.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="952" x2="1500.0" y2="992" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="973.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="992" x2="1560" y2="992" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1019" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">14. Me gusta armar rompecabezas o juegos de construcción.</text>
+<line x1="1260.0" y1="992" x2="1260.0" y2="1032" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1013.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="992" x2="1320.0" y2="1032" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1013.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="992" x2="1380.0" y2="1032" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1013.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="992" x2="1440.0" y2="1032" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1013.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="992" x2="1500.0" y2="1032" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1013.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1032" x2="1560" y2="1032" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1059" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">15. Tengo buena orientación y sentido de dirección.</text>
+<line x1="1260.0" y1="1032" x2="1260.0" y2="1072" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1053.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1032" x2="1320.0" y2="1072" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1053.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1032" x2="1380.0" y2="1072" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1053.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1032" x2="1440.0" y2="1072" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1053.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1032" x2="1500.0" y2="1072" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1053.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="860" x2="1560" y2="1080" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="1080" width="1520" height="220" fill="#FFF7D8" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="1080" width="250" height="220" fill="#FFF7D8"/>
+<circle cx="98" cy="1180.0" r="35" fill="#FFFFFF" stroke="#D9A323" stroke-width="3"/>
+<text x="98" y="1190.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#D9A323" text-anchor="middle">♪</text>
+<text x="145" y="1184" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#D9A323" text-anchor="start">4. Musical</text>
+<text x="308" y="1119" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">16. Disfruto escuchar música de diferentes estilos.</text>
+<line x1="1260.0" y1="1092" x2="1260.0" y2="1132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1092" x2="1320.0" y2="1132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1092" x2="1380.0" y2="1132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1092" x2="1440.0" y2="1132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1092" x2="1500.0" y2="1132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1132" x2="1560" y2="1132" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1159" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">17. Puedo identificar ritmos, tonos o cambios en una canción.</text>
+<line x1="1260.0" y1="1132" x2="1260.0" y2="1172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1132" x2="1320.0" y2="1172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1132" x2="1380.0" y2="1172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1132" x2="1440.0" y2="1172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1132" x2="1500.0" y2="1172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1172" x2="1560" y2="1172" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1199" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">18. Me resulta fácil memorizar canciones o melodías.</text>
+<line x1="1260.0" y1="1172" x2="1260.0" y2="1212" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1193.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1172" x2="1320.0" y2="1212" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1193.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1172" x2="1380.0" y2="1212" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1193.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1172" x2="1440.0" y2="1212" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1193.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1172" x2="1500.0" y2="1212" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1193.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1212" x2="1560" y2="1212" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1239" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">19. La música me ayuda a concentrarme o relajarme.</text>
+<line x1="1260.0" y1="1212" x2="1260.0" y2="1252" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1233.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1212" x2="1320.0" y2="1252" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1233.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1212" x2="1380.0" y2="1252" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1233.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1212" x2="1440.0" y2="1252" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1233.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1212" x2="1500.0" y2="1252" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1233.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1252" x2="1560" y2="1252" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1279" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">20. Me gustaría aprender a tocar un instrumento musical.</text>
+<line x1="1260.0" y1="1252" x2="1260.0" y2="1292" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1273.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1252" x2="1320.0" y2="1292" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1273.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1252" x2="1380.0" y2="1292" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1273.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1252" x2="1440.0" y2="1292" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1273.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1252" x2="1500.0" y2="1292" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1273.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="1080" x2="1560" y2="1300" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="1300" width="1520" height="220" fill="#FFF0E4" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="1300" width="250" height="220" fill="#FFF0E4"/>
+<circle cx="98" cy="1400.0" r="35" fill="#FFFFFF" stroke="#E9853D" stroke-width="3"/>
+<text x="98" y="1410.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#E9853D" text-anchor="middle">◆</text>
+<text x="145" y="1391" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#E9853D" text-anchor="start">5. Corporal-</text>
+<text x="145" y="1420" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#E9853D" text-anchor="start">cinestésica</text>
+<text x="308" y="1339" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">21. Aprendo mejor cuando hago las cosas de manera práctica.</text>
+<line x1="1260.0" y1="1312" x2="1260.0" y2="1352" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1333.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1312" x2="1320.0" y2="1352" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1333.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1312" x2="1380.0" y2="1352" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1333.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1312" x2="1440.0" y2="1352" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1333.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1312" x2="1500.0" y2="1352" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1333.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1352" x2="1560" y2="1352" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1379" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">22. Me gusta el deporte, la danza o actividades físicas.</text>
+<line x1="1260.0" y1="1352" x2="1260.0" y2="1392" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1373.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1352" x2="1320.0" y2="1392" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1373.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1352" x2="1380.0" y2="1392" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1373.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1352" x2="1440.0" y2="1392" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1373.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1352" x2="1500.0" y2="1392" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1373.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1392" x2="1560" y2="1392" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1419" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">23. Expreso mis ideas fácilmente a través del movimiento.</text>
+<line x1="1260.0" y1="1392" x2="1260.0" y2="1432" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1413.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1392" x2="1320.0" y2="1432" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1413.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1392" x2="1380.0" y2="1432" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1413.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1392" x2="1440.0" y2="1432" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1413.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1392" x2="1500.0" y2="1432" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1413.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1432" x2="1560" y2="1432" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1459" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">24. Me siento cómodo/a usando mis manos para crear o construir.</text>
+<line x1="1260.0" y1="1432" x2="1260.0" y2="1472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1432" x2="1320.0" y2="1472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1432" x2="1380.0" y2="1472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1432" x2="1440.0" y2="1472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1432" x2="1500.0" y2="1472" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1453.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1472" x2="1560" y2="1472" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1499" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">25. Necesito moverme o hacer pausas activas para concentrarme mejor.</text>
+<line x1="1260.0" y1="1472" x2="1260.0" y2="1512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1472" x2="1320.0" y2="1512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1472" x2="1380.0" y2="1512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1472" x2="1440.0" y2="1512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1472" x2="1500.0" y2="1512" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1493.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="1300" x2="1560" y2="1520" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="1520" width="1520" height="220" fill="#EDF8EC" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="1520" width="250" height="220" fill="#EDF8EC"/>
+<circle cx="98" cy="1620.0" r="35" fill="#FFFFFF" stroke="#57A65A" stroke-width="3"/>
+<text x="98" y="1630.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#57A65A" text-anchor="middle">✦</text>
+<text x="145" y="1624" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700" fill="#57A65A" text-anchor="start">6. Naturalista</text>
+<text x="308" y="1559" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">26. Me gusta observar y comprender la naturaleza.</text>
+<line x1="1260.0" y1="1532" x2="1260.0" y2="1572" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1553.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1532" x2="1320.0" y2="1572" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1553.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1532" x2="1380.0" y2="1572" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1553.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1532" x2="1440.0" y2="1572" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1553.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1532" x2="1500.0" y2="1572" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1553.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1572" x2="1560" y2="1572" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1599" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">27. Disfruto actividades al aire libre o en contacto con el entorno.</text>
+<line x1="1260.0" y1="1572" x2="1260.0" y2="1612" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1593.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1572" x2="1320.0" y2="1612" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1593.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1572" x2="1380.0" y2="1612" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1593.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1572" x2="1440.0" y2="1612" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1593.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1572" x2="1500.0" y2="1612" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1593.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1612" x2="1560" y2="1612" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1639" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">28. Me interesa aprender sobre animales, plantas o el medio ambiente.</text>
+<line x1="1260.0" y1="1612" x2="1260.0" y2="1652" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1633.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1612" x2="1320.0" y2="1652" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1633.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1612" x2="1380.0" y2="1652" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1633.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1612" x2="1440.0" y2="1652" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1633.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1612" x2="1500.0" y2="1652" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1633.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1652" x2="1560" y2="1652" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1679" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">29. Puedo identificar diferencias entre elementos de la naturaleza.</text>
+<line x1="1260.0" y1="1652" x2="1260.0" y2="1692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1652" x2="1320.0" y2="1692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1652" x2="1380.0" y2="1692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1652" x2="1440.0" y2="1692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1652" x2="1500.0" y2="1692" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1673.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1692" x2="1560" y2="1692" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1719" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">30. Me preocupa el cuidado del planeta y los seres vivos.</text>
+<line x1="1260.0" y1="1692" x2="1260.0" y2="1732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1692" x2="1320.0" y2="1732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1692" x2="1380.0" y2="1732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1692" x2="1440.0" y2="1732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1692" x2="1500.0" y2="1732" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1713.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="1520" x2="1560" y2="1740" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="1740" width="1520" height="220" fill="#FDECEF" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="1740" width="250" height="220" fill="#FDECEF"/>
+<circle cx="98" cy="1840.0" r="35" fill="#FFFFFF" stroke="#D95C74" stroke-width="3"/>
+<text x="98" y="1850.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#D95C74" text-anchor="middle">● ● ●</text>
+<text x="145" y="1831" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#D95C74" text-anchor="start">7. Interpersonal</text>
+<text x="145" y="1860" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#D95C74" text-anchor="start">(social)</text>
+<text x="308" y="1779" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">31. Disfruto trabajar en equipo y colaborar con otros.</text>
+<line x1="1260.0" y1="1752" x2="1260.0" y2="1792" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1773.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1752" x2="1320.0" y2="1792" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1773.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1752" x2="1380.0" y2="1792" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1773.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1752" x2="1440.0" y2="1792" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1773.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1752" x2="1500.0" y2="1792" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1773.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1792" x2="1560" y2="1792" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1819" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">32. Comprendo fácilmente cómo se sienten otras personas.</text>
+<line x1="1260.0" y1="1792" x2="1260.0" y2="1832" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1813.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1792" x2="1320.0" y2="1832" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1813.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1792" x2="1380.0" y2="1832" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1813.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1792" x2="1440.0" y2="1832" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1813.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1792" x2="1500.0" y2="1832" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1813.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1832" x2="1560" y2="1832" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1859" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">33. Soy bueno/a para resolver conflictos entre compañeros.</text>
+<line x1="1260.0" y1="1832" x2="1260.0" y2="1872" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1853.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1832" x2="1320.0" y2="1872" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1853.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1832" x2="1380.0" y2="1872" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1853.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1832" x2="1440.0" y2="1872" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1853.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1832" x2="1500.0" y2="1872" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1853.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1872" x2="1560" y2="1872" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1899" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">34. Me gusta ayudar o apoyar a otras personas.</text>
+<line x1="1260.0" y1="1872" x2="1260.0" y2="1912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1872" x2="1320.0" y2="1912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1872" x2="1380.0" y2="1912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1872" x2="1440.0" y2="1912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1872" x2="1500.0" y2="1912" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1893.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="1912" x2="1560" y2="1912" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="1939" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">35. Tengo facilidad para hacer amigos/as y comunicarme.</text>
+<line x1="1260.0" y1="1912" x2="1260.0" y2="1952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1912" x2="1320.0" y2="1952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1912" x2="1380.0" y2="1952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1912" x2="1440.0" y2="1952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1912" x2="1500.0" y2="1952" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1933.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="1740" x2="1560" y2="1960" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="1960" width="1520" height="220" fill="#E7F7F6" stroke="#C9D4DE" stroke-width="1"/>
+<rect x="40" y="1960" width="250" height="220" fill="#E7F7F6"/>
+<circle cx="98" cy="2060.0" r="35" fill="#FFFFFF" stroke="#249D9A" stroke-width="3"/>
+<text x="98" y="2070.0" font-family="Arial, Helvetica, sans-serif" font-size="27" font-weight="700" fill="#249D9A" text-anchor="middle">♥</text>
+<text x="145" y="2051" font-family="Arial, Helvetica, sans-serif" font-size="21" font-weight="700" fill="#249D9A" text-anchor="start">8. Intrapersonal</text>
+<text x="145" y="2080" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#249D9A" text-anchor="start">(autoconocimiento)</text>
+<text x="308" y="1999" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">36. Me conozco bien y sé cuáles son mis fortalezas y debilidades.</text>
+<line x1="1260.0" y1="1972" x2="1260.0" y2="2012" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="1993.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="1972" x2="1320.0" y2="2012" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="1993.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="1972" x2="1380.0" y2="2012" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="1993.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="1972" x2="1440.0" y2="2012" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="1993.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="1972" x2="1500.0" y2="2012" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="1993.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="2012" x2="1560" y2="2012" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="2039" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">37. Reflexiono sobre mis emociones y cómo me afectan.</text>
+<line x1="1260.0" y1="2012" x2="1260.0" y2="2052" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="2033.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="2012" x2="1320.0" y2="2052" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="2033.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="2012" x2="1380.0" y2="2052" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="2033.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="2012" x2="1440.0" y2="2052" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="2033.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="2012" x2="1500.0" y2="2052" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="2033.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="2052" x2="1560" y2="2052" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="2079" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">38. Me pongo metas personales y trato de cumplirlas.</text>
+<line x1="1260.0" y1="2052" x2="1260.0" y2="2092" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="2073.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="2052" x2="1320.0" y2="2092" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="2073.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="2052" x2="1380.0" y2="2092" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="2073.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="2052" x2="1440.0" y2="2092" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="2073.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="2052" x2="1500.0" y2="2092" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="2073.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="2092" x2="1560" y2="2092" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="2119" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">39. Puedo trabajar de manera independiente y autoorganizarme.</text>
+<line x1="1260.0" y1="2092" x2="1260.0" y2="2132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="2113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="2092" x2="1320.0" y2="2132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="2113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="2092" x2="1380.0" y2="2132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="2113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="2092" x2="1440.0" y2="2132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="2113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="2092" x2="1500.0" y2="2132" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="2113.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="290" y1="2132" x2="1560" y2="2132" stroke="#D6DEE6" stroke-width="1"/>
+<text x="308" y="2159" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#263238" text-anchor="start">40. Me gusta tener momentos de soledad para pensar y aprender.</text>
+<line x1="1260.0" y1="2132" x2="1260.0" y2="2172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1290.0" cy="2153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1320.0" y1="2132" x2="1320.0" y2="2172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1350.0" cy="2153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1380.0" y1="2132" x2="1380.0" y2="2172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1410.0" cy="2153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1440.0" y1="2132" x2="1440.0" y2="2172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1470.0" cy="2153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1500.0" y1="2132" x2="1500.0" y2="2172" stroke="#CDD7DF" stroke-width="1"/>
+<circle cx="1530.0" cy="2153.0" r="9" fill="#FFFFFF" stroke="#718096" stroke-width="1.5"/>
+<line x1="1560" y1="1960" x2="1560" y2="2180" stroke="#B8C7D5" stroke-width="1.2"/>
+<rect x="40" y="2205" width="1520" height="250" rx="22" fill="#F4F8FC" stroke="#AFC3D6" stroke-width="1.8"/>
+<line x1="1015" y1="2233" x2="1015" y2="2427" stroke="#B9C8D6" stroke-width="2"/>
+<text x="75" y="2253" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#1F5C93" text-anchor="start">Interpretación general:</text>
+<text x="75" y="2290" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#263238" text-anchor="start">Suma los puntajes de cada inteligencia (ítems 1–5, 6–10, 11–15, …, 36–40).</text>
+<text x="75" y="2321" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#263238" text-anchor="start">El puntaje posible por inteligencia va de 5 a 25.</text>
+<text x="90" y="2362" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#3F7A43" text-anchor="start">• 20–25: Fortaleza alta</text>
+<text x="345" y="2362" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#9B7A1A" text-anchor="start">• 15–19: Fortaleza moderada</text>
+<text x="680" y="2362" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#B45D46" text-anchor="start">• 5–14: Fortaleza en desarrollo</text>
+<text x="75" y="2410" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="400" fill="#4E5B68" text-anchor="start">Usa este resultado como una guía para reconocer fortalezas y áreas de desarrollo.</text>
+<text x="1050" y="2253" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700" fill="#1F5C93" text-anchor="start">Reflexión final:</text>
+<text x="1050" y="2295" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="700" fill="#249D9A" text-anchor="start">Todas las inteligencias son valiosas.</text>
+<text x="1050" y="2331" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#263238" text-anchor="start">Conocer tu perfil te ayudará a potenciar tus</text>
+<text x="1050" y="2361" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="400" fill="#263238" text-anchor="start">aprendizajes y a desarrollarte de manera integral.</text>
+<circle cx="1492" cy="2310" r="36" fill="#FFF0B3" stroke="#D9A323" stroke-width="2"/>
+<text x="1492" y="2322" font-family="Arial, Helvetica, sans-serif" font-size="31" font-weight="700" fill="#D9A323" text-anchor="middle">✦</text>
+<rect x="40" y="350" width="1520" height="1830" rx="12" fill="none" stroke="#AFC0CF" stroke-width="2"/>
+</svg>
