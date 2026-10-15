@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Complejidades Hub - Acervo Audiovisual | Red Transversal UNRC</title>
+<style>
+  /* 1. CONFIGURACIÓN GLOBAL Y TIPOGRAFÍA */
+  @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+  :root {
+    --rojo-unrc: #ae0340;
+    --rojo-hover: #cf044d;
+    --negro-fondo: #0a0a0a;
+    --gris-fondo: #141414;
+    --gris-tarjeta: #1c1c1c;
+    --borde-dark: 1px solid rgba(255, 255, 255, 0.12);
+    --sombra-netflix: 0 14px 40px rgba(0, 0, 0, 0.85);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: var(--negro-fondo);
+    font-family: 'Open Sauce One', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+    color: #ffffff;
+    line-height: 1.4;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    padding-top: 60px;
+  }
+
+  /* 2. BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA */
+  .platform-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: rgba(10, 10, 10, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .platform-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+  }
+  .platform-brand img {
+    height: 34px;
+    width: auto;
+    object-fit: contain;
+  }
+  .platform-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .platform-link {
+    color: rgba(255, 255, 255, 0.75);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border-radius: 4px;
+    transition: color 0.25s, background 0.25s;
+  }
+  .platform-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
+  }
+  .platform-link.active {
+    color: #ffffff;
+    background: var(--rojo-unrc);
+  }
+
+  /* 3. ANIMACIONES SUTILES */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+  @keyframes blurFadeIn {
+    0% { opacity: 0; filter: blur(10px); transform: translateY(10px); }
+    100% { opacity: 1; filter: blur(0); transform: translateY(0); }
+  }
+
+  /* 4. CABECERA INSTITUCIONAL */
+  .hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px 30px; 
+    background-color: var(--negro-fondo);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(174, 3, 64, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto auto;
+    column-gap: 2vw;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-grid > * { opacity: 0; animation: blurFadeIn 1s ease-out forwards; }
+
+  .red-text { color: var(--rojo-unrc); font-weight: 500; font-size: clamp(1rem, 1.5vw, 1.5rem); letter-spacing: -0.02em; }
+  .white-text { color: #ffffff; font-weight: 800; font-size: clamp(3rem, 6vw, 7rem); line-height: 0.85; letter-spacing: -0.04em; }
+  
+  .text-top { grid-column: 1; grid-row: 1; justify-self: end; align-self: end; margin-bottom: 5px; animation-delay: 0.1s; }
+  .text-pensamiento { grid-column: 1; grid-row: 2; justify-self: end; animation-delay: 0.2s; }
+  .hero-img { grid-column: 2; grid-row: 1 / span 3; height: clamp(120px, 15vw, 200px); object-fit: contain; animation-delay: 0.3s; user-select: none; filter: brightness(0) invert(1); }
+  .text-complejo { grid-column: 3; grid-row: 2; justify-self: start; animation-delay: 0.4s; }
+  .text-bottom { grid-column: 3; grid-row: 3; justify-self: start; align-self: start; margin-top: 5px; animation-delay: 0.5s; }
+
+  /* 5. PRIMERA PLANA VOD (Netflix Billboard) */
+  #featured-hero {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    min-height: 520px;
+    background-color: #000000;
+    overflow: hidden;
+  }
+
+  .featured-slide {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 0.8s ease-in-out;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+  }
+  .featured-slide.active { opacity: 1; z-index: 2; }
+
+  .featured-video-wrapper {
+    position: absolute;
+    top: 0; right: 0; width: 100%; height: 100%;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  
+  .featured-iframe {
+    width: 100vw;
+    height: 56.25vw;
+    min-height: 100vh;
+    min-width: 177.77vh;
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .featured-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, rgba(0,0,0,0.2) 75%, transparent 100%),
+                linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.8) 15%, transparent 40%);
+    z-index: 2;
+  }
+
+  .featured-content {
+    position: relative;
+    z-index: 3;
+    padding: 0 5%;
+    max-width: 850px;
+  }
+
+  .featured-tag { 
+    color: var(--rojo-unrc); 
+    font-size: 0.85rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.12em; 
+    margin-bottom: 15px; 
+    display: inline-flex; 
+    align-items: center;
+    gap: 8px;
+    background: rgba(174, 3, 64, 0.15);
+    padding: 6px 14px;
+    border-radius: 4px;
+    border-left: 3px solid var(--rojo-unrc);
+  }
+  .featured-title { 
+    color: #ffffff; 
+    font-size: clamp(2.2rem, 4.5vw, 3.8rem); 
+    font-weight: 800; 
+    line-height: 1.1; 
+    letter-spacing: -0.02em; 
+    margin-bottom: 16px; 
+    text-shadow: 0 4px 16px rgba(0,0,0,0.7);
+  }
+  .featured-desc { 
+    font-size: 1.05rem; 
+    color: #d1d5db; 
+    line-height: 1.5; 
+    margin-bottom: 25px; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .featured-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  
+  .btn-play {
+    background-color: #ffffff; 
+    color: #000000; 
+    padding: 14px 34px; 
+    font-size: 0.95rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.06em; 
+    border: none; 
+    border-radius: 6px;
+    cursor: pointer; 
+    transition: background-color 0.25s, transform 0.2s, box-shadow 0.25s; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 10px;
+  }
+  .btn-play::before { content: '▶'; font-size: 1.1rem; }
+  .btn-play:hover { 
+    background-color: var(--rojo-unrc); 
+    color: #ffffff; 
+    transform: translateY(-2px); 
+    box-shadow: 0 8px 24px rgba(174, 3, 64, 0.4);
+  }
+
+  .btn-info {
+    background-color: rgba(255, 255, 255, 0.2); 
+    color: #ffffff; 
+    backdrop-filter: blur(8px);
+    padding: 14px 28px; 
+    font-size: 0.95rem; 
+    font-weight: 600; 
+    letter-spacing: 0.04em; 
+    border: 1px solid rgba(255, 255, 255, 0.3); 
+    border-radius: 6px;
+    cursor: pointer; 
+    transition: background-color 0.25s, transform 0.2s; 
+    display: inline-flex; 
+    align-items: center; 
+    gap: 8px;
+  }
+  .btn-info:hover { 
+    background-color: rgba(255, 255, 255, 0.35); 
+    transform: translateY(-2px); 
+  }
+
+  /* Controles manuales y barra de progreso de slide */
+  .hero-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .hero-nav-arrow:hover {
+    background: var(--rojo-unrc);
+    transform: translateY(-50%) scale(1.1);
+  }
+  .hero-nav-prev { left: 20px; }
+  .hero-nav-next { right: 20px; }
+
+  .hero-dots-container {
+    position: absolute;
+    bottom: 25px;
+    right: 5%;
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .hero-dot {
+    width: 28px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background 0.3s, width 0.3s;
+  }
+  .hero-dot.active {
+    background: var(--rojo-unrc);
+    width: 42px;
+  }
+
+  /* 6. CONTROLES DE BÚSQUEDA Y FILTRADO */
+  .controls-wrapper {
+    background-color: #0d0d0d;
+    padding: 24px 5%;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: var(--borde-dark);
+    position: sticky;
+    top: 60px;
+    z-index: 90;
+    backdrop-filter: blur(10px);
+  }
+  .search-box {
+    position: relative;
+    flex-grow: 1;
+    min-width: 280px;
+  }
+  .search-box svg {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    fill: #888888;
+    pointer-events: none;
+  }
+  .control-input {
+    width: 100%;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.06);
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 14px 44px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .control-input:focus {
+    border-color: var(--rojo-unrc);
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .clear-search {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #888888;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: none;
+  }
+  .control-select {
+    font-family: inherit;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    outline: none;
+    cursor: pointer;
+    min-width: 260px;
+    transition: border-color 0.3s;
+  }
+  .control-select:focus { border-color: var(--rojo-unrc); }
+  .catalog-stats {
+    font-size: 0.85rem;
+    color: #9ca3af;
+    white-space: nowrap;
+  }
+
+  /* 7. CATÁLOGO CON CARROUSELES ESTILO NETFLIX */
+  .category-section {
+    padding: 40px 5% 50px;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .category-section:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.015);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+  .section-title {
+    color: #ffffff;
+    font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    position: relative;
+    padding-left: 14px;
+  }
+  .section-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 15%;
+    bottom: 15%;
+    width: 4px;
+    background: var(--rojo-unrc);
+    border-radius: 2px;
+  }
+  .section-counter {
+    font-size: 0.85rem;
+    color: #888888;
+    font-weight: 500;
+  }
+
+  /* Carrusel con Controles de Flecha */
+  .carousel-wrapper {
+    position: relative;
+  }
+  .carousel-paddle {
+    position: absolute;
+    top: 0;
+    bottom: 30px;
+    width: 48px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    border: none;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s, background 0.3s;
+    backdrop-filter: blur(4px);
+  }
+  .carousel-wrapper:hover .carousel-paddle { opacity: 1; }
+  .carousel-paddle:hover { background: var(--rojo-unrc); }
+  .paddle-left { left: 0; border-radius: 0 8px 8px 0; }
+  .paddle-right { right: 0; border-radius: 8px 0 0 8px; }
+
+  .carousel-slider {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 22px;
+    padding: 10px 0 25px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--rojo-unrc) rgba(255, 255, 255, 0.05);
+    scroll-behavior: smooth;
+  }
+  .carousel-slider::-webkit-scrollbar { height: 6px; }
+  .carousel-slider::-webkit-scrollbar-thumb { background-color: var(--rojo-unrc); border-radius: 3px; }
+
+  /* TARJETA NETFLIX */
+  .card {
+    flex: 0 0 min(82%, 360px);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+    background: var(--gris-tarjeta);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s, border-color 0.35s;
+    position: relative;
+  }
+  .card:hover { 
+    transform: translateY(-8px) scale(1.02); 
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.9);
+    border-color: var(--rojo-unrc);
+  }
+
+  .card-video-container {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background-color: #000;
+  }
+  .card-thumbnail {
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .card:hover .card-thumbnail { transform: scale(1.05); }
+  
+  .card-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(174, 3, 64, 0.85);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    z-index: 3;
+    letter-spacing: 0.05em;
+  }
+
+  .card-play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.8);
+    width: 48px;
+    height: 48px;
+    background: rgba(174, 3, 64, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1.2rem;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    z-index: 3;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+  }
+  .card:hover .card-play-icon {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .card-iframe {
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: 2; 
+    pointer-events: none;
+  }
+
+  .card-info { 
+    display: flex; 
+    flex-direction: column; 
+    flex-grow: 1; 
+    padding: 16px 18px 18px;
+  }
+  .card-tag { 
+    color: var(--rojo-unrc); 
+    font-size: 0.72rem; 
+    font-weight: 700; 
+    text-transform: uppercase; 
+    letter-spacing: 0.06em; 
+    margin-bottom: 8px; 
+    display: block; 
+  }
+  .card-title { 
+    font-size: 1.15rem; 
+    font-weight: 700; 
+    margin-bottom: 8px; 
+    line-height: 1.3; 
+    letter-spacing: -0.01em; 
+    color: #f3f4f6;
+  }
+  .card-desc { 
+    font-size: 0.88rem; 
+    line-height: 1.45; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; 
+    overflow: hidden; 
+    margin-bottom: 14px; 
+    color: #9ca3af; 
+  }
+  .card-author { 
+    font-size: 0.78rem; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    letter-spacing: 0.05em; 
+    margin-top: auto; 
+    border-top: 1px solid rgba(255, 255, 255, 0.08); 
+    padding-top: 12px; 
+    color: #d1d5db;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .card-author::before {
+    content: '👤';
+    font-size: 0.85rem;
+    opacity: 0.7;
+  }
+
+  /* 8. MODAL DE REPRODUCCIÓN (CINEMA REA) */
+  .modal {
+    display: none; 
+    position: fixed; 
+    z-index: 99999; 
+    left: 0; 
+    top: 0; 
+    width: 100vw; 
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.95); 
+    justify-content: center; 
+    align-items: center;
+    opacity: 0; 
+    transition: opacity 0.3s ease; 
+    backdrop-filter: blur(10px);
+    padding: 20px;
+  }
+  .modal.active { display: flex; opacity: 1; }
+  
+  .modal-dialog {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    max-height: 92vh;
+    background: #141414;
+    border-radius: 12px;
+    overflow-y: auto;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.95);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+  .modal-video-box {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+  .close-modal {
+    position: absolute; 
+    top: 14px; 
+    right: 18px; 
+    color: #ffffff; 
+    font-size: 2rem;
+    font-weight: 300; 
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.2s; 
+    z-index: 20;
+    line-height: 1;
+    background: rgba(0,0,0,0.6);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .close-modal:hover { color: var(--rojo-unrc); transform: scale(1.1); }
+
+  .modal-details {
+    padding: 30px;
+  }
+  .modal-tag {
+    color: var(--rojo-unrc);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: inline-block;
+  }
+  .modal-title {
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+    font-weight: 800;
+    margin-bottom: 15px;
+    line-height: 1.25;
+  }
+  .modal-meta-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.88rem;
+    color: #9ca3af;
+  }
+  .modal-author {
+    color: #ffffff;
+    font-weight: 600;
+  }
+  .modal-rea-pill {
+    background: rgba(174, 3, 64, 0.15);
+    color: var(--rojo-unrc);
+    border: 1px solid var(--rojo-unrc);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .modal-desc {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #d1d5db;
+    margin-bottom: 25px;
+  }
+  .modal-actions {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+  .btn-modal-action {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-modal-action:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #fff;
+  }
+
+  /* 9. FOOTER INSTITUCIONAL */
+  footer { background: var(--rojo-unrc); color: #ffffff; padding: 60px 5%; margin-top: 60px; }
+  .footer-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .footer-logo { width: 52px; height: 52px; object-fit: contain; border-radius: 6px; margin-bottom: 20px; display: block; background-color: #ffffff; padding: 4px; }
+  .footer-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .subscribe-form { display: flex; gap: 0; border: 1px solid #ffffff; }
+  .subscribe-input { padding: 12px 15px; border: none; width: 100%; font-family: inherit; font-size: 0.9rem; background: transparent; color: white; outline: none; }
+  .subscribe-input::placeholder { color: rgba(255,255,255,0.7); }
+  .subscribe-btn { background: #ffffff; color: var(--rojo-unrc); border: none; padding: 0 20px; font-weight: 700; cursor: pointer; font-family: inherit; text-transform: uppercase; font-size: 0.8rem; transition: background 0.3s, color 0.3s; }
+  .subscribe-btn:hover { background: #000000; color: #ffffff; }
+  .footer-legal { grid-column: 1 / span 2; font-size: 0.8rem; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.3); padding-top: 20px; margin-top: 40px; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: auto 1fr; grid-template-rows: auto auto auto auto; column-gap: 15px; }
+    .hero-img { grid-column: 1; grid-row: 1 / span 2; height: 120px; justify-self: end; }
+    .text-top { grid-column: 2; grid-row: 1; justify-self: start; align-self: end; font-size: clamp(1rem, 3.5vw, 1.5rem); }
+    .text-pensamiento { grid-column: 2; grid-row: 2; justify-self: start; align-self: start; font-size: clamp(2.5rem, 8vw, 4rem); }
+    .text-complejo { grid-column: 1 / span 2; grid-row: 3; justify-self: center; font-size: clamp(4rem, 15vw, 6rem); margin-top: -10px; }
+    .text-bottom { grid-column: 1 / span 2; grid-row: 4; justify-self: center; margin-top: 5px; font-size: clamp(1rem, 4vw, 1.5rem); }
+    
+    .featured-overlay { background: linear-gradient(to top, #0a0a0a 0%, rgba(10,10,10,0.85) 50%, transparent 100%); }
+    .featured-video-wrapper { opacity: 0.45; }
+    .hero-nav-arrow { display: none; }
+    .carousel-paddle { display: none; }
+
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-legal { grid-column: 1; }
+  }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA -->
+  <nav class="platform-nav">
+    <a href="index.html" class="platform-brand">
+      <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
+      <span>Pensamiento Complejo</span>
+    </a>
+    <div class="platform-links">
+      <a href="index.html" class="platform-link">Inicio</a>
+      <a href="uca.html" class="platform-link">UCA</a>
+      <a href="complejidades-hub.html" class="platform-link active">Complejidades Hub</a>
+      <a href="newsletter.html" class="platform-link">Newsletter</a>
+    </div>
+  </nav>
+
+  <!-- CABECERA INSTITUCIONAL -->
+  <section class="hero-container">
+    <div class="hero-grid">
+      <div class="red-text text-top">Acervo Audiovisual</div>
+      <div class="white-text text-pensamiento">Complejidades</div>
+      <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Iconografía" class="hero-img">
+      <div class="white-text text-complejo">Hub</div>
+      <div class="red-text text-bottom">Red Transversal</div>
+    </div>
+  </section>
+
+  <!-- PRIMERA PLANA VOD (Netflix Billboard con rotación y controles) -->
+  <section id="featured-hero" class="fade-in">
+    <!-- El contenido se inyecta por JS -->
+  </section>
+
+  <!-- CONTROLES DE BÚSQUEDA Y FILTRADO -->
+  <section class="controls-wrapper fade-in">
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="search" id="search" class="control-input" placeholder="Buscar concepto, autor, taller, competencia REA...">
+      <button class="clear-search" id="clearSearch">&times;</button>
+    </div>
+    <select id="categoryFilter" class="control-select">
+      <option value="ALL">Todo el Acervo Audiovisual</option>
+    </select>
+    <div class="catalog-stats" id="catalogStats">Cargando catálogo...</div>
+  </section>
+
+  <!-- CATÁLOGO NETFLIX POR CATEGORÍAS -->
+  <main id="catalog"></main>
+
+  <!-- MODAL DE REPRODUCCIÓN (CINEMA REA) -->
+  <div id="videoModal" class="modal">
+    <div class="modal-dialog">
+      <span class="close-modal" id="closeModal">&times;</span>
+      <div class="modal-video-box" id="modalIframeContainer"></div>
+      <div class="modal-details" id="modalDetails"></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-grid fade-in">
+      <div>
+        <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1787861087069_Mesa_de_ayuda.jpg" alt="Logotipo UNRC" class="footer-logo">
+        <p style="color: rgba(255,255,255,0.9); font-size: 0.9rem; line-height: 1.6;">
+          Coordinación de la Red Transversal de Pensamiento Complejo para la Argumentación<br>
+          Universidad Nacional Rosario Castellanos
+        </p>
+      </div>
+      <div>
+        <h3 class="footer-title">Registro al Boletín</h3>
+        <form class="subscribe-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Recibirás nuestras novedades.'); this.reset();">
+          <input type="email" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
+          <button type="submit" class="subscribe-btn">Suscribir</button>
+        </form>
+      </div>
+      <div class="footer-legal">Red Transversal de Pensamiento Complejo © 2026. Recursos Educativos Abiertos (REA). Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <script>
+    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4/export?format=csv";
+    
+    let globalData = [];
+    let categories = new Set();
+    let featuredItems = [];
+    let currentFeaturedIndex = 0;
+    let featuredTimer = null;
+    let isHeroMuted = true;
+
+    const modal = document.getElementById('videoModal');
+    const modalIframeContainer = document.getElementById('modalIframeContainer');
+    const modalDetails = document.getElementById('modalDetails');
+    const closeModalBtn = document.getElementById('closeModal');
+    const searchInput = document.getElementById('search');
+    const clearSearchBtn = document.getElementById('clearSearch');
+    const categorySelect = document.getElementById('categoryFilter');
+    const catalogStats = document.getElementById('catalogStats');
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+      fetchData();
+
+      searchInput.addEventListener('input', () => {
+        clearSearchBtn.style.display = searchInput.value ? 'block' : 'none';
+        renderUI();
+      });
+
+      clearSearchBtn.addEventListener('click', () => {
+        searchInput.value = '';
+        clearSearchBtn.style.display = 'none';
+        renderUI();
+      });
+
+      categorySelect.addEventListener('change', renderUI);
+      
+      closeModalBtn.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+    });
+
+    function extractYouTubeID(url) {
+      if (!url) return null;
+      const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+      const match = url.trim().match(regExp);
+      return (match && match[2].length === 11) ? match[2] : null;
+    }
+
+    function fetchData() {
+      Papa.parse(SHEET_CSV_URL, {
+        download: true, header: false, skipEmptyLines: true,
+        complete: function(results) {
+          const rows = results.data.slice(1);
+          globalData = rows.map((row, idx) => ({
+            id: idx + 1,
+            titulo: (row[0] || '').trim(),
+            descripcion: (row[1] || '').trim(),
+            etiquetas: (row[2] || '').trim(),
+            autor: (row[3] || '').trim(),
+            categoria: (row[4] || 'Sin Categoría').trim(),
+            video: (row[5] || '').trim(),
+            secciones: (row[6] || '').trim(),
+            newsletter: (row[7] || '').trim(),
+            imagen: (row[8] || '').trim(),
+            botonDescarga: (row[9] || '').trim()
+          })).filter(item => item.titulo !== ''); 
+
+          globalData.forEach(item => {
+            if (item.categoria) categories.add(item.categoria);
+          });
+          
+          featuredItems = globalData.slice(0, 5);
+          initFeaturedHero(featuredItems);
+          
+          populateCategories();
+          renderUI();
+        },
+        error: function(err) {
+          console.error("Error al cargar Google Sheet:", err);
+          catalogStats.textContent = "Error al sincronizar con Google Sheets.";
+        }
+      });
+    }
+
+    function populateCategories() {
+      categorySelect.innerHTML = '<option value="ALL">Todo el Acervo Audiovisual</option>';
+      Array.from(categories).sort().forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat; 
+        option.textContent = cat;
+        categorySelect.appendChild(option);
+      });
+    }
+
+    function initFeaturedHero(items) {
+      const heroContainer = document.getElementById('featured-hero');
+      heroContainer.innerHTML = '';
+      if (!items || items.length === 0) return;
+
+      items.forEach((item, index) => {
+        const ytId = extractYouTubeID(item.video);
+        const slide = document.createElement('div');
+        slide.className = `featured-slide ${index === 0 ? 'active' : ''}`;
+        slide.dataset.index = index;
+
+        let iframeHtml = ytId ? `<iframe class="featured-iframe" src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&modestbranding=1&playsinline=1" frameborder="0" allow="autoplay; encrypted-media"></iframe>` : '';
+
+        slide.innerHTML = `
+          <div class="featured-video-wrapper">
+            ${iframeHtml}
+          </div>
+          <div class="featured-overlay"></div>
+          <div class="featured-content">
+            <span class="featured-tag">★ Destacado REA • ${item.categoria}</span>
+            <h2 class="featured-title">${item.titulo}</h2>
+            <p class="featured-desc">${item.descripcion}</p>
+            <div class="featured-actions">
+              <button class="btn-play" onclick="openModalById(${item.id})">Reproducir</button>
+              <button class="btn-info" onclick="openDetailsById(${item.id})">ℹ Más información</button>
+            </div>
+          </div>
+        `;
+        heroContainer.appendChild(slide);
+      });
+
+      // Flechas de navegación
+      const prevBtn = document.createElement('button');
+      prevBtn.className = 'hero-nav-arrow hero-nav-prev';
+      prevBtn.innerHTML = '‹';
+      prevBtn.setAttribute('aria-label', 'Contenido anterior');
+      prevBtn.onclick = () => changeFeaturedSlide(-1);
+
+      const nextBtn = document.createElement('button');
+      nextBtn.className = 'hero-nav-arrow hero-nav-next';
+      nextBtn.innerHTML = '›';
+      nextBtn.setAttribute('aria-label', 'Siguiente contenido');
+      nextBtn.onclick = () => changeFeaturedSlide(1);
+
+      heroContainer.appendChild(prevBtn);
+      heroContainer.appendChild(nextBtn);
+
+      // Puntos indicadores
+      const dotsContainer = document.createElement('div');
+      dotsContainer.className = 'hero-dots-container';
+      items.forEach((_, idx) => {
+        const dot = document.createElement('div');
+        dot.className = `hero-dot ${idx === 0 ? 'active' : ''}`;
+        dot.onclick = () => setFeaturedSlide(idx);
+        dotsContainer.appendChild(dot);
+      });
+      heroContainer.appendChild(dotsContainer);
+
+      startFeaturedTimer();
+
+      heroContainer.addEventListener('mouseenter', () => clearInterval(featuredTimer));
+      heroContainer.addEventListener('mouseleave', startFeaturedTimer);
+    }
+
+    function startFeaturedTimer() {
+      clearInterval(featuredTimer);
+      featuredTimer = setInterval(() => {
+        changeFeaturedSlide(1);
+      }, 6000);
+    }
+
+    function changeFeaturedSlide(direction) {
+      const slides = document.querySelectorAll('.featured-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      if (slides.length <= 1) return;
+
+      slides[currentFeaturedIndex].classList.remove('active');
+      if (dots[currentFeaturedIndex]) dots[currentFeaturedIndex].classList.remove('active');
+
+      currentFeaturedIndex = (currentFeaturedIndex + direction + slides.length) % slides.length;
+
+      slides[currentFeaturedIndex].classList.add('active');
+      if (dots[currentFeaturedIndex]) dots[currentFeaturedIndex].classList.add('active');
+    }
+
+    function setFeaturedSlide(index) {
+      const slides = document.querySelectorAll('.featured-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      if (!slides[index]) return;
+
+      slides[currentFeaturedIndex].classList.remove('active');
+      if (dots[currentFeaturedIndex]) dots[currentFeaturedIndex].classList.remove('active');
+
+      currentFeaturedIndex = index;
+
+      slides[currentFeaturedIndex].classList.add('active');
+      if (dots[currentFeaturedIndex]) dots[currentFeaturedIndex].classList.add('active');
+      startFeaturedTimer();
+    }
+
+    function renderUI() {
+      const catalog = document.getElementById('catalog');
+      catalog.innerHTML = '';
+      
+      const query = searchInput.value.toLowerCase().trim();
+      const selectedCategory = categorySelect.value;
+
+      let filteredData = globalData.filter(item => {
+        const matchesQuery = item.titulo.toLowerCase().includes(query) || 
+                             item.descripcion.toLowerCase().includes(query) || 
+                             item.etiquetas.toLowerCase().includes(query) || 
+                             item.autor.toLowerCase().includes(query);
+        const matchesCategory = selectedCategory === "ALL" || item.categoria === selectedCategory;
+        return matchesQuery && matchesCategory;
+      });
+
+      catalogStats.textContent = `${filteredData.length} contenidos encontrados`;
+
+      if (filteredData.length === 0) {
+        catalog.innerHTML = `
+          <div style="text-align: center; padding: 80px 20px; color: #9ca3af;">
+            <p style="font-size: 1.3rem; margin-bottom: 12px; color: #fff;">No se encontraron contenidos para tu búsqueda.</p>
+            <p>Intenta con otros términos o selecciona "Todo el Acervo Audiovisual".</p>
+          </div>
+        `;
+        return;
+      }
+
+      const dataByCategory = {};
+      filteredData.forEach(item => {
+        if (!dataByCategory[item.categoria]) dataByCategory[item.categoria] = [];
+        dataByCategory[item.categoria].push(item);
+      });
+
+      for (const [category, items] of Object.entries(dataByCategory)) {
+        const section = document.createElement('div');
+        section.className = 'category-section fade-in visible';
+        
+        const header = document.createElement('div');
+        header.className = 'section-header';
+        header.innerHTML = `
+          <h2 class="section-title">${category}</h2>
+          <span class="section-counter">${items.length} ${items.length === 1 ? 'video' : 'videos'}</span>
+        `;
+        
+        const carouselWrapper = document.createElement('div');
+        carouselWrapper.className = 'carousel-wrapper';
+
+        const paddleLeft = document.createElement('button');
+        paddleLeft.className = 'carousel-paddle paddle-left';
+        paddleLeft.innerHTML = '‹';
+        paddleLeft.setAttribute('aria-label', 'Desplazar a la izquierda');
+
+        const paddleRight = document.createElement('button');
+        paddleRight.className = 'carousel-paddle paddle-right';
+        paddleRight.innerHTML = '›';
+        paddleRight.setAttribute('aria-label', 'Desplazar a la derecha');
+
+        const carousel = document.createElement('div');
+        carousel.className = 'carousel-slider';
+
+        paddleLeft.onclick = () => {
+          carousel.scrollBy({ left: -carousel.clientWidth * 0.8, behavior: 'smooth' });
+        };
+        paddleRight.onclick = () => {
+          carousel.scrollBy({ left: carousel.clientWidth * 0.8, behavior: 'smooth' });
+        };
+
+        items.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'card';
+          
+          const ytId = extractYouTubeID(item.video);
+          const thumbnailUrl = item.imagen ? item.imagen : (ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80');
+          
+          card.innerHTML = `
+            <div class="card-video-container">
+              <span class="card-badge">REA UNRC</span>
+              <img src="${thumbnailUrl}" class="card-thumbnail" alt="${item.titulo}" loading="lazy">
+              <div class="card-play-icon">▶</div>
+              <div class="card-iframe"></div>
+            </div>
+            <div class="card-info">
+              <span class="card-tag">${item.etiquetas || item.categoria}</span>
+              <h3 class="card-title">${item.titulo}</h3>
+              <p class="card-desc">${item.descripcion}</p>
+              <div class="card-author">${item.autor || 'Coordinación Red Transversal'}</div>
+            </div>
+          `;
+
+          const iframeContainer = card.querySelector('.card-iframe');
+          let hoverTimeout;
+
+          if (ytId) {
+            card.addEventListener('mouseenter', () => {
+              hoverTimeout = setTimeout(() => {
+                iframeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&mute=1&controls=0&loop=1&playlist=${ytId}&modestbranding=1" frameborder="0" style="width:100%; height:100%;"></iframe>`;
+              }, 400);
+            });
+            card.addEventListener('mouseleave', () => {
+              clearTimeout(hoverTimeout);
+              iframeContainer.innerHTML = ''; 
+            });
+            card.addEventListener('click', () => {
+              clearTimeout(hoverTimeout);
+              iframeContainer.innerHTML = '';
+              openModalByItem(item);
+            });
+          } else {
+            card.addEventListener('click', () => openModalByItem(item));
+          }
+
+          carousel.appendChild(card);
+        });
+
+        carouselWrapper.appendChild(paddleLeft);
+        carouselWrapper.appendChild(carousel);
+        carouselWrapper.appendChild(paddleRight);
+
+        section.appendChild(header);
+        section.appendChild(carouselWrapper);
+        catalog.appendChild(section);
+      }
+    }
+
+    function openModalById(id) {
+      const item = globalData.find(d => d.id === id);
+      if (item) openModalByItem(item);
+    }
+
+    function openDetailsById(id) {
+      openModalById(id);
+    }
+
+    function openModalByItem(item) {
+      const ytId = extractYouTubeID(item.video);
+      if (ytId) {
+        modalIframeContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=1&rel=0&modestbranding=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%; height:100%;"></iframe>`;
+      } else {
+        modalIframeContainer.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#fff;">Contenido multimedia no disponible.</div>`;
+      }
+
+      modalDetails.innerHTML = `
+        <span class="modal-tag">${item.categoria}</span>
+        <h2 class="modal-title">${item.titulo}</h2>
+        <div class="modal-meta-bar">
+          <span class="modal-author">👤 ${item.autor || 'Red Transversal UNRC'}</span>
+          <span class="modal-rea-pill">Recurso Educativo Abierto (REA)</span>
+          <span>🏷️ ${item.etiquetas}</span>
+        </div>
+        <p class="modal-desc">${item.descripcion}</p>
+        <div class="modal-actions">
+          ${item.video ? `<a href="${item.video}" target="_blank" rel="noopener noreferrer" class="btn-modal-action">Abrir en YouTube ↗</a>` : ''}
+          <button class="btn-modal-action" onclick="navigator.clipboard.writeText(window.location.href); alert('Enlace copiado al portapapeles.');">📋 Copiar enlace</button>
+          <a href="uca.html" class="btn-modal-action">📖 Explorar UCA</a>
+        </div>
+      `;
+
+      modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modal.classList.remove('active');
+      modalIframeContainer.innerHTML = '';
+      document.body.style.overflow = '';
+    }
+  </script>
+</body>
+</html>
