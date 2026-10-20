@@ -836,11 +836,12 @@
   <!-- BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA -->
   <nav class="platform-nav">
     <a href="index.html" class="platform-brand">
-      <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
+      <img id="navLogo" src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
       <span>Pensamiento Complejo</span>
     </a>
     <div class="platform-links">
       <a href="index.html" class="platform-link active">Inicio</a>
+      <a href="red.html" class="platform-link">Red</a>
       <a href="uca.html" class="platform-link">UCA</a>
       <a href="complejidades-hub.html" class="platform-link">Complejidades Hub</a>
       <a href="newsletter.html" class="platform-link">Newsletter</a>
@@ -850,25 +851,25 @@
   <!-- HERO SECTION CON EFECTOS DE APARICIÓN -->
   <section class="hero-container">
     <div class="hero-grid">
-      <div class="red-text text-top">Red Transversal de</div>
-      <div class="black-text text-pensamiento">Pensamiento</div>
-      <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Iconografía Pensamiento Complejo" class="hero-img">
-      <div class="black-text text-complejo">Complejo</div>
-      <div class="red-text text-bottom">Para la Argumentación</div>
+      <div class="red-text text-top" id="heroTextTop">Red Transversal de</div>
+      <div class="black-text text-pensamiento" id="heroTextPensamiento">Pensamiento</div>
+      <img id="heroLogo" src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Iconografía Pensamiento Complejo" class="hero-img">
+      <div class="black-text text-complejo" id="heroTextComplejo">Complejo</div>
+      <div class="red-text text-bottom" id="heroTextBottom">Para la Argumentación</div>
     </div>
-    <div class="hero-subtitle">Universidad Nacional Rosario Castellanos</div>
+    <div class="hero-subtitle" id="heroSubtitle">Universidad Nacional Rosario Castellanos</div>
   </section>
 
   <!-- INTRODUCCIÓN INSTITUCIONAL + PDF UCA -->
   <section class="intro-section fade-in">
     <div class="intro-text">
-      <p>Plataforma oficial de la <strong>Red Transversal de Pensamiento Complejo para la Argumentación.</strong></p>
-      <p>Este sitio centraliza los recursos didácticos, bibliográficos y multimedia correspondientes a la Unidad Curricular de Aprendizaje (UCA). Su estructura provee a la comunidad docente y estudiantil los materiales requeridos para el estudio del modelado de sistemas, la lógica y la teoría de la argumentación.</p>
+      <p id="introP1">Plataforma oficial de la <strong>Red Transversal de Pensamiento Complejo para la Argumentación.</strong></p>
+      <p id="introP2">Este sitio centraliza los recursos didácticos, bibliográficos y multimedia correspondientes a la Unidad Curricular de Aprendizaje (UCA). Su estructura provee a la comunidad docente y estudiantil los materiales requeridos para el estudio del modelado de sistemas, la lógica y la teoría de la argumentación.</p>
     </div>
     <div class="intro-pdf-wrapper">
       <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=400&q=80" alt="Portada UCA" class="book-cover">
       <h3 style="font-size: 1rem; color: var(--texto-secundario);">Unidad Curricular</h3>
-      <a href="uca.html" class="btn-descarga">Consultar UCA</a>
+      <a href="uca.html" class="btn-descarga" id="introUcaBtn">Consultar UCA</a>
     </div>
   </section>
 
@@ -941,7 +942,7 @@
       <!-- Lado Derecho: Noticias -->
       <div class="news-widget">
         <h3>📢 Noticias y Eventos</h3>
-        <div class="news-slider">
+        <div class="news-slider" id="newsSlider">
           <a href="newsletter.html" class="news-card-mini">
             <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" class="news-img-mini" alt="Seminario">
             <span class="news-tag-mini">Convocatoria</span>
@@ -962,9 +963,9 @@
           </a>
         </div>
 
-        <form class="event-form" onsubmit="event.preventDefault(); window.location.href='newsletter.html';">
+        <form class="event-form" onsubmit="handleSubscription(event, 'eventEmailInput');">
           <label>Recibe notificaciones de eventos:</label>
-          <input type="email" class="event-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
+          <input type="email" id="eventEmailInput" class="event-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
           <button type="submit" class="event-btn">Notificarme</button>
         </form>
       </div>
@@ -995,47 +996,8 @@
       <h2 class="section-title">
         <span>📚</span> Biblioteca <span>PDF</span>
       </h2>
-      <div class="media-slider">
-        <a href="uca.html" class="card card-pdf">
-          <div class="card-img-wrapper">
-            <span class="card-badge">Libro</span>
-            <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Introducción al Pensamiento Complejo" loading="lazy">
-          </div>
-          <h3 class="card-title">Introducción al Pensamiento Complejo</h3>
-          <span class="card-meta">Edgar Morin</span>
-        </a>
-        <a href="uca.html" class="card card-pdf">
-          <div class="card-img-wrapper">
-            <span class="card-badge">Paper</span>
-            <img src="https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Argumentación Sistémica" loading="lazy">
-          </div>
-          <h3 class="card-title">Argumentación Sistémica</h3>
-          <span class="card-meta">Revista Complecti</span>
-        </a>
-        <a href="uca.html" class="card card-pdf">
-          <div class="card-img-wrapper">
-            <span class="card-badge">Ensayo</span>
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Lógicas No Clásicas" loading="lazy">
-          </div>
-          <h3 class="card-title">Lógicas No Clásicas</h3>
-          <span class="card-meta">Susan Haack</span>
-        </a>
-        <a href="uca.html" class="card card-pdf">
-          <div class="card-img-wrapper">
-            <span class="card-badge">Guía</span>
-            <img src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Manual de Redacción Académica" loading="lazy">
-          </div>
-          <h3 class="card-title">Manual de Redacción Académica</h3>
-          <span class="card-meta">Material Docente</span>
-        </a>
-        <a href="uca.html" class="card card-pdf">
-          <div class="card-img-wrapper">
-            <span class="card-badge">Paper</span>
-            <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Cibernética y Sociedad" loading="lazy">
-          </div>
-          <h3 class="card-title">Cibernética y Sociedad</h3>
-          <span class="card-meta">Norbert Wiener</span>
-        </a>
+      <div class="media-slider" id="bibliotecaSlider">
+        <!-- Inyección dinámica desde Sheet con vista previa en Col I o fallback -->
       </div>
     </section>
 
@@ -1044,39 +1006,8 @@
       <h2 class="section-title">
         <span style="color:#1DB954;">🎙️</span> Análisis en <span>Audio</span>
       </h2>
-      <div class="media-slider">
-        <a href="newsletter.html" class="card card-podcast">
-          <div class="card-img-wrapper">
-            <span class="card-badge" style="background:#1DB954;">Spotify</span>
-            <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Filosofía Aplicada" loading="lazy">
-          </div>
-          <h3 class="card-title">Ep. 14: Filosofía Aplicada</h3>
-          <span class="card-meta">Red Transversal UNRC</span>
-        </a>
-        <a href="newsletter.html" class="card card-podcast">
-          <div class="card-img-wrapper">
-            <span class="card-badge" style="background:#1DB954;">Spotify</span>
-            <img src="https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Entropía e Información" loading="lazy">
-          </div>
-          <h3 class="card-title">Ep. 15: Entropía e Información</h3>
-          <span class="card-meta">Red Transversal UNRC</span>
-        </a>
-        <a href="newsletter.html" class="card card-podcast">
-          <div class="card-img-wrapper">
-            <span class="card-badge" style="background:#1DB954;">Spotify</span>
-            <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Diálogos Críticos" loading="lazy">
-          </div>
-          <h3 class="card-title">Ep. 16: Diálogos Críticos</h3>
-          <span class="card-meta">Red Transversal UNRC</span>
-        </a>
-        <a href="newsletter.html" class="card card-podcast">
-          <div class="card-img-wrapper">
-            <span class="card-badge" style="background:#1DB954;">Spotify</span>
-            <img src="https://images.unsplash.com/photo-1589903308904-1010c2294adc?auto=format&fit=crop&w=300&q=80" class="card-img" alt="Ciencia y Sociedad" loading="lazy">
-          </div>
-          <h3 class="card-title">Ep. 17: Ciencia y Sociedad</h3>
-          <span class="card-meta">Red Transversal UNRC</span>
-        </a>
+      <div class="media-slider" id="podcastsSlider">
+        <!-- Inyección dinámica desde Sheet o fallback -->
       </div>
     </section>
 
@@ -1111,11 +1042,11 @@
         </div>
       </a>
 
-      <a href="uca.html#banner" class="bento-card">
+      <a href="red.html" class="bento-card">
         <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=800&q=80" alt="Red" class="bento-bg" loading="lazy">
         <div class="bento-content">
-          <h3 class="bento-title">Conoce la Red</h3>
-          <p class="bento-desc">Información sobre el propósito, cuerpo docente y estructura formativa en la UNRC.</p>
+          <h3 class="bento-title">Red Transversal Docente</h3>
+          <p class="bento-desc">Directorio de docentes, perfiles académicos, líneas de investigación y producción intelectual.</p>
         </div>
       </a>
 
@@ -1143,8 +1074,8 @@
       
       <div>
         <h3 class="footer-title">Registro al Boletín</h3>
-        <form class="subscribe-form" onsubmit="event.preventDefault(); window.location.href='newsletter.html';">
-          <input type="email" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
+        <form class="subscribe-form" onsubmit="handleSubscription(event, 'footerSubEmail');">
+          <input type="email" id="footerSubEmail" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
           <button type="submit" class="subscribe-btn">Suscribir</button>
         </form>
       </div>
@@ -1156,9 +1087,11 @@
   </footer>
 
   <script>
-    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4/export?format=csv";
+    const SPREADSHEET_ID = "1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4";
+    const INICIO_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=Inicio`;
+    const HUB_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=Complejidades%20hub`;
 
-    let globalData = [];
+    let globalHubData = [];
     let currentStageItem = null;
 
     const modal = document.getElementById('videoModal');
@@ -1166,7 +1099,7 @@
     const closeModalBtn = document.getElementById('closeModal');
 
     document.addEventListener("DOMContentLoaded", () => {
-      // 1. Observer
+      // 1. Observer de animación fade-in
       const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -1202,8 +1135,18 @@
         }
       });
 
-      // 4. Cargar datos del Google Sheet
-      loadSheetData();
+      // Búsqueda en tiempo real
+      const searchInput = document.getElementById('ytSearchInput');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          const q = e.target.value.toLowerCase().trim();
+          filterContentOnSearch(q);
+        });
+      }
+
+      // 4. Cargar datos dinámicos desde Google Sheet
+      loadInicioData();
+      loadHubData();
     });
 
     function extractYouTubeID(url) {
@@ -1221,6 +1164,7 @@
       
       const targetMap = {
         'CAPSULAS': 'sec-capsulas',
+        'NOTICIAS': 'sec-capsulas',
         'VIDEOTECA': 'sec-videoteca',
         'DOCUMENTALES': 'sec-documentales',
         'BIBLIOTECA': 'sec-biblioteca',
@@ -1236,12 +1180,63 @@
       }
     }
 
-    function loadSheetData() {
-      Papa.parse(SHEET_CSV_URL, {
+    // MAPEO DE HOJA "Inicio"
+    function loadInicioData() {
+      Papa.parse(INICIO_CSV_URL, {
+        download: true, header: false, skipEmptyLines: true,
+        complete: function(results) {
+          const rows = results.data;
+          if (!rows || rows.length < 2) return;
+
+          // Col A: Título institucional dividido en líneas
+          // Fila 1: Line 1, Fila 2: Line 2, Fila 3: Line 3, Fila 4: Line 4, Fila 5: Subtítulo
+          if (rows[1] && rows[1][0]) document.getElementById('heroTextTop').textContent = rows[1][0].trim();
+          if (rows[2] && rows[2][0]) document.getElementById('heroTextPensamiento').textContent = rows[2][0].trim();
+          if (rows[3] && rows[3][0]) document.getElementById('heroTextComplejo').textContent = rows[3][0].trim();
+          if (rows[4] && rows[4][0]) document.getElementById('heroTextBottom').textContent = rows[4][0].trim();
+          if (rows[5] && rows[5][0]) document.getElementById('heroSubtitle').textContent = rows[5][0].trim();
+
+          // Col C: Imagen logotipo
+          if (rows[1] && rows[1][2]) {
+            const logoUrl = rows[1][2].trim();
+            if (logoUrl) {
+              const heroLogo = document.getElementById('heroLogo');
+              if (heroLogo) heroLogo.src = logoUrl;
+              const navLogo = document.getElementById('navLogo');
+              if (navLogo) navLogo.src = logoUrl;
+            }
+          }
+
+          // Col B: Mensaje de bienvenida
+          if (rows[1] && rows[1][1]) {
+            const intro1 = document.getElementById('introP1');
+            if (intro1) intro1.innerHTML = `<strong>${rows[1][1].trim()}</strong>`;
+          }
+          if (rows[2] && rows[2][1]) {
+            const intro2 = document.getElementById('introP2');
+            if (intro2) intro2.textContent = rows[2][1].trim();
+          }
+
+          // Col D: Botón enlace a UCA
+          if (rows[1] && rows[1][3]) {
+            const ucaBtn = document.getElementById('introUcaBtn');
+            const urlUca = rows[1][3].trim();
+            if (ucaBtn && urlUca) ucaBtn.href = urlUca;
+          }
+        },
+        error: function(err) {
+          console.warn("Uso de datos por defecto para Inicio:", err);
+        }
+      });
+    }
+
+    // MAPEO DE HOJA "Complejidades Hub"
+    function loadHubData() {
+      Papa.parse(HUB_CSV_URL, {
         download: true, header: false, skipEmptyLines: true,
         complete: function(results) {
           const rows = results.data.slice(1);
-          globalData = rows.map((row, idx) => ({
+          globalHubData = rows.map((row, idx) => ({
             id: idx + 1,
             titulo: (row[0] || '').trim(),
             descripcion: (row[1] || '').trim(),
@@ -1251,32 +1246,51 @@
             video: (row[5] || '').trim(),
             secciones: (row[6] || '').trim(),
             newsletter: (row[7] || '').trim(),
-            imagen: (row[8] || '').trim(),
-            botonDescarga: (row[9] || '').trim()
+            imagen: (row[8] || '').trim(), // Columna I: Vista previa
+            botonDescarga: (row[9] || '').trim() // Columna J
           })).filter(item => item.titulo !== '');
 
-          // Configurar video del Escenario Destacado inicial
-          if (globalData.length > 0) {
-            setStageVideo(globalData[0]);
+          if (globalHubData.length > 0) {
+            setStageVideo(globalHubData[0]);
           }
 
-          // Distribuir según Columna G: Secciones
-          const capsulasItems = globalData.filter(item => 
-            item.secciones.toLowerCase().includes('cápsula') || item.secciones.toLowerCase().includes('capsula')
+          // 1. Noticias y Eventos -> Columna G: "noticia"
+          const noticiasItems = globalHubData.filter(item => 
+            item.secciones.toLowerCase().includes('noticia')
           );
-          const videotecaItems = globalData.filter(item => 
+          renderNoticias(noticiasItems);
+
+          // 2. Clases y Documentales -> Columna G: "documentales"
+          const documentalesItems = globalHubData.filter(item => 
+            item.secciones.toLowerCase().includes('documental')
+          );
+          renderDocumentales(documentalesItems);
+
+          // 3. Biblioteca PDF -> Columna G: "biblioteca PDF" con vista previa en Col I
+          const bibliotecaItems = globalHubData.filter(item => 
+            item.secciones.toLowerCase().includes('biblioteca') || item.secciones.toLowerCase().includes('pdf')
+          );
+          renderBiblioteca(bibliotecaItems);
+
+          // 4. Análisis en Audio -> Columna G: "podcast"
+          const podcastItems = globalHubData.filter(item => 
+            item.secciones.toLowerCase().includes('podcast')
+          );
+          renderPodcasts(podcastItems);
+
+          // 5. Videoteca y Cápsulas
+          const videotecaItems = globalHubData.filter(item => 
             item.secciones.toLowerCase().includes('videoteca') || item.secciones.toLowerCase().includes('youtube')
           );
-          const documentalesItems = globalData.filter(item => 
-            item.secciones.toLowerCase().includes('documental') || item.secciones.toLowerCase().includes('clase')
-          );
-
-          renderCapsulas(capsulasItems);
           renderVideoteca(videotecaItems);
-          renderDocumentales(documentalesItems);
+
+          const capsulasItems = globalHubData.filter(item => 
+            item.secciones.toLowerCase().includes('cápsula') || item.secciones.toLowerCase().includes('capsula')
+          );
+          renderCapsulas(capsulasItems);
         },
         error: function(err) {
-          console.error("Error al cargar sheet en inicio:", err);
+          console.error("Error al cargar Complejidades Hub:", err);
         }
       });
     }
@@ -1289,83 +1303,168 @@
       if (ytId) {
         stagePlayerContainer.innerHTML = `<iframe src="https://www.youtube.com/embed/${ytId}?autoplay=0&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
       } else {
-        stagePlayerContainer.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#fff;">Video no disponible</div>`;
+        stagePlayerContainer.innerHTML = `<div style="display:flex;align-items:center;justify-content:center;height:100%;color:#fff;background:#111;">Vista previa no disponible</div>`;
       }
 
       document.getElementById('stageTitle').textContent = item.titulo;
       document.getElementById('stageDesc').textContent = item.descripcion;
       document.getElementById('stageAuthor').textContent = item.autor || 'Red Transversal UNRC';
-      document.getElementById('stageBadge').textContent = `▶ ${item.categoria || 'Recurso Educativo Abierto'}`;
+      document.getElementById('stageBadge').textContent = `▶ ${item.categoria || item.secciones || 'Recurso Educativo Abierto'}`;
 
       const avatarInitials = (item.autor || 'UNRC').split(' ').map(w => w[0]).slice(0, 2).join('').toUpperCase();
       document.getElementById('stageAvatar').textContent = avatarInitials || 'RC';
     }
 
-    function renderCapsulas(items) {
-      const container = document.getElementById('reelsSlider');
-      container.innerHTML = '';
+    function renderNoticias(items) {
+      const container = document.getElementById('newsSlider');
+      if (!container) return;
 
-      const fallbackCapsulas = [
-        { titulo: "Teoría de Sistemas", autor: "Michael Gilbert", video: "https://youtu.be/g6L2nrE6FWs", imagen: "https://images.unsplash.com/photo-1516280440502-8692da2b8b93?auto=format&fit=crop&w=400&q=80" },
-        { titulo: "Estructura Argumentativa", autor: "Axel Barceló", video: "https://www.youtube.com/watch?v=RUDSeNcWleY", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80" },
-        { titulo: "Modelos No Lineales", autor: "Vans Emerén", video: "https://www.youtube.com/watch?v=C-oWuLxcZO0", imagen: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80" },
-        { titulo: "Análisis Lógico", autor: "Toulmin", video: "https://www.youtube.com/watch?v=44VvLpcL3T0", imagen: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80" }
+      const fallbackNoticias = [
+        { titulo: "Seminario de Lógica Informal", descripcion: "Apertura de inscripciones para el ciclo 2026-II.", etiquetas: "Convocatoria", imagen: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" },
+        { titulo: "Cartografía Conceptual", descripcion: "Metodología para el mapeo de estructuras lógicas.", etiquetas: "Taller Práctico", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" },
+        { titulo: "Volumen Complecti", descripcion: "Repositorio de artículos sometidos a arbitraje.", etiquetas: "Publicación", imagen: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" }
       ];
 
-      const list = items.length > 0 ? items : fallbackCapsulas;
+      const list = items.length > 0 ? items : fallbackNoticias;
+      container.innerHTML = '';
+
+      list.forEach(item => {
+        const link = item.botonDescarga || item.video || item.url || 'newsletter.html';
+        const img = item.imagen || 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80';
+        const card = document.createElement('a');
+        card.href = link;
+        if (link.startsWith('http')) card.target = '_blank';
+        card.className = 'news-card-mini';
+        card.innerHTML = `
+          <img src="${img}" class="news-img-mini" alt="${item.titulo}" loading="lazy">
+          <span class="news-tag-mini">${item.etiquetas || 'Noticia'}</span>
+          <h4 class="news-title-mini">${item.titulo}</h4>
+          <p class="news-desc-mini">${item.descripcion}</p>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderDocumentales(items) {
+      const container = document.getElementById('documentalesSlider');
+      if (!container) return;
+
+      const fallbackDocumentales = [
+        { titulo: "Clase 01: Bases de la Argumentación", autor: "Vans Emerén", video: "https://www.youtube.com/watch?v=P-1QTW71bzk", imagen: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" },
+        { titulo: "Documental: Redes Complejas y Sistemas", autor: "Michael Gilbert", video: "https://www.youtube.com/watch?v=C-oWuLxcZO0", imagen: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" }
+      ];
+
+      const list = items.length > 0 ? items : fallbackDocumentales;
+      container.innerHTML = '';
 
       list.forEach(item => {
         const ytId = extractYouTubeID(item.video);
         let imgUrl = item.imagen;
-        if (!imgUrl && ytId) {
-          imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-        }
-        if (!imgUrl) {
-          imgUrl = 'https://images.unsplash.com/photo-1516280440502-8692da2b8b93?auto=format&fit=crop&w=400&q=80';
-        }
+        if (!imgUrl && ytId) imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        if (!imgUrl) imgUrl = 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80';
 
         const card = document.createElement('div');
-        card.className = 'reel-card';
+        card.className = 'card card-video';
         card.innerHTML = `
-          <span class="reel-badge">▶ Shorts</span>
-          <img src="${imgUrl}" alt="${item.titulo}" class="reel-video" loading="lazy">
-          <div class="reel-info">
-            <h3 class="reel-title">${item.titulo}</h3>
-            <span class="reel-author">${item.autor || 'Red Transversal UNRC'}</span>
+          <div class="card-img-wrapper">
+            <span class="card-badge" style="background:#111111;">Clase / Documental</span>
+            <img src="${imgUrl}" alt="${item.titulo}" class="card-img" loading="lazy">
           </div>
+          <h3 class="card-title">${item.titulo}</h3>
+          <span class="card-meta">👤 ${item.autor || 'Red Transversal UNRC'}</span>
         `;
-
         card.addEventListener('click', () => {
           setStageVideo(item);
           document.getElementById('stageSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
+        container.appendChild(card);
+      });
+    }
 
+    function renderBiblioteca(items) {
+      const container = document.getElementById('bibliotecaSlider');
+      if (!container) return;
+
+      const fallbackBiblioteca = [
+        { titulo: "Introducción al Pensamiento Complejo", autor: "Edgar Morin", imagen: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
+        { titulo: "Argumentación Sistémica", autor: "Revista Complecti", imagen: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
+        { titulo: "Lógicas No Clásicas", autor: "Susan Haack", imagen: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
+        { titulo: "Manual de Redacción Académica", autor: "Material Docente", imagen: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=300&q=80", url: "uca.html" }
+      ];
+
+      const list = items.length > 0 ? items : fallbackBiblioteca;
+      container.innerHTML = '';
+
+      list.forEach(item => {
+        const link = item.botonDescarga || item.video || item.url || 'uca.html';
+        const imgUrl = item.imagen || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80';
+
+        const card = document.createElement('a');
+        card.href = link;
+        if (link.startsWith('http')) card.target = '_blank';
+        card.className = 'card card-pdf';
+        card.innerHTML = `
+          <div class="card-img-wrapper">
+            <span class="card-badge">Biblioteca PDF</span>
+            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy">
+          </div>
+          <h3 class="card-title">${item.titulo}</h3>
+          <span class="card-meta">${item.autor || 'Recurso Abierto'}</span>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function renderPodcasts(items) {
+      const container = document.getElementById('podcastsSlider');
+      if (!container) return;
+
+      const fallbackPodcasts = [
+        { titulo: "Ep. 14: Filosofía Aplicada", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" },
+        { titulo: "Ep. 15: Entropía e Información", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" },
+        { titulo: "Ep. 16: Diálogos Críticos", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" }
+      ];
+
+      const list = items.length > 0 ? items : fallbackPodcasts;
+      container.innerHTML = '';
+
+      list.forEach(item => {
+        const link = item.botonDescarga || item.video || item.url || 'newsletter.html';
+        const imgUrl = item.imagen || 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80';
+
+        const card = document.createElement('a');
+        card.href = link;
+        if (link.startsWith('http')) card.target = '_blank';
+        card.className = 'card card-podcast';
+        card.innerHTML = `
+          <div class="card-img-wrapper">
+            <span class="card-badge" style="background:#1DB954;">Podcast Spotify</span>
+            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy">
+          </div>
+          <h3 class="card-title">${item.titulo}</h3>
+          <span class="card-meta">🎙️ ${item.autor || 'Red Transversal UNRC'}</span>
+        `;
         container.appendChild(card);
       });
     }
 
     function renderVideoteca(items) {
       const container = document.getElementById('videotecaSlider');
-      container.innerHTML = '';
+      if (!container) return;
 
       const fallbackVideoteca = [
         { titulo: "Introducción a los Sistemas Complejos", autor: "Dr. Michael Gilbert", video: "https://youtu.be/g6L2nrE6FWs", imagen: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Análisis de Lógica Informal", autor: "Facultad de Derecho UNAM", video: "https://www.youtube.com/watch?v=k2wDGxfvG84", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Teoría de la Argumentación Multimodal", autor: "Michael Gilbert", video: "https://www.youtube.com/watch?v=RUDSeNcWleY", imagen: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Conceptos de Epistemología", autor: "Axel Barceló", video: "https://youtu.be/QSJ2AII1I9M", imagen: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" }
+        { titulo: "Análisis de Lógica Informal", autor: "Facultad de Derecho UNAM", video: "https://www.youtube.com/watch?v=k2wDGxfvG84", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80" }
       ];
 
       const list = items.length > 0 ? items : fallbackVideoteca;
+      container.innerHTML = '';
 
       list.forEach(item => {
         const ytId = extractYouTubeID(item.video);
         let imgUrl = item.imagen;
-        if (!imgUrl && ytId) {
-          imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-        }
-        if (!imgUrl) {
-          imgUrl = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80';
-        }
+        if (!imgUrl && ytId) imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        if (!imgUrl) imgUrl = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80';
 
         const card = document.createElement('div');
         card.className = 'card card-video';
@@ -1377,55 +1476,58 @@
           <h3 class="card-title">${item.titulo}</h3>
           <span class="card-meta">👤 ${item.autor || 'Coordinación UNRC'}</span>
         `;
-
         card.addEventListener('click', () => {
           setStageVideo(item);
           document.getElementById('stageSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-
         container.appendChild(card);
       });
     }
 
-    function renderDocumentales(items) {
-      const container = document.getElementById('documentalesSlider');
-      container.innerHTML = '';
+    function renderCapsulas(items) {
+      const container = document.getElementById('reelsSlider');
+      if (!container) return;
 
-      const fallbackDocumentales = [
-        { titulo: "Clase 01: Bases de la Argumentación", autor: "Vans Emerén", video: "https://www.youtube.com/watch?v=P-1QTW71bzk", imagen: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Documental: Redes Complejas y Sistemas", autor: "Michael Gilbert", video: "https://www.youtube.com/watch?v=C-oWuLxcZO0", imagen: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Taller: Herramientas de Debate y Lógica", autor: "Toulmin", video: "https://www.youtube.com/watch?v=44VvLpcL3T0", imagen: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=600&q=80" }
+      const fallbackCapsulas = [
+        { titulo: "Teoría de Sistemas", autor: "Michael Gilbert", video: "https://youtu.be/g6L2nrE6FWs", imagen: "https://images.unsplash.com/photo-1516280440502-8692da2b8b93?auto=format&fit=crop&w=400&q=80" },
+        { titulo: "Estructura Argumentativa", autor: "Axel Barceló", video: "https://www.youtube.com/watch?v=RUDSeNcWleY", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80" }
       ];
 
-      const list = items.length > 0 ? items : fallbackDocumentales;
+      const list = items.length > 0 ? items : fallbackCapsulas;
+      container.innerHTML = '';
 
       list.forEach(item => {
         const ytId = extractYouTubeID(item.video);
         let imgUrl = item.imagen;
-        if (!imgUrl && ytId) {
-          imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-        }
-        if (!imgUrl) {
-          imgUrl = 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80';
-        }
+        if (!imgUrl && ytId) imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        if (!imgUrl) imgUrl = 'https://images.unsplash.com/photo-1516280440502-8692da2b8b93?auto=format&fit=crop&w=400&q=80';
 
         const card = document.createElement('div');
-        card.className = 'card card-video';
+        card.className = 'reel-card';
         card.innerHTML = `
-          <div class="card-img-wrapper">
-            <span class="card-badge" style="background:#111111;">Clase / Archivo</span>
-            <img src="${imgUrl}" alt="${item.titulo}" class="card-img" loading="lazy">
+          <span class="reel-badge">▶ Shorts</span>
+          <img src="${imgUrl}" alt="${item.titulo}" class="reel-video" loading="lazy">
+          <div class="reel-info">
+            <h3 class="reel-title">${item.titulo}</h3>
+            <span class="reel-author">${item.autor || 'Red Transversal UNRC'}</span>
           </div>
-          <h3 class="card-title">${item.titulo}</h3>
-          <span class="card-meta">👤 ${item.autor || 'Red Transversal UNRC'}</span>
         `;
-
         card.addEventListener('click', () => {
           setStageVideo(item);
           document.getElementById('stageSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
-
         container.appendChild(card);
+      });
+    }
+
+    function filterContentOnSearch(query) {
+      document.querySelectorAll('.card, .news-card-mini, .reel-card').forEach(el => {
+        const text = el.textContent.toLowerCase();
+        if (!query || text.includes(query)) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
       });
     }
 
@@ -1437,6 +1539,37 @@
     function closeModal() {
       modal.classList.remove('active');
       modalIframeContainer.innerHTML = '';
+    }
+
+    // GESTIÓN DE SUSCRIPCIÓN A "Suscriptores"
+    function handleSubscription(e, inputId) {
+      e.preventDefault();
+      const input = document.getElementById(inputId);
+      if (!input || !input.value) return;
+      const email = input.value.trim().toLowerCase();
+
+      // Guardar en almacenamiento local
+      try {
+        const saved = JSON.parse(localStorage.getItem('unrc_suscriptores') || '[]');
+        if (!saved.includes(email)) {
+          saved.push(email);
+          localStorage.setItem('unrc_suscriptores', JSON.stringify(saved));
+        }
+      } catch (err) {}
+
+      // Enviar a Apps Script Webhook si está configurado en el Sheet
+      const WEBHOOK_URL = window.UNRC_SUBSCRIBE_WEBHOOK || '';
+      if (WEBHOOK_URL) {
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `correo=${encodeURIComponent(email)}`
+        }).catch(err => console.log('Envío de suscripción:', err));
+      }
+
+      alert(`¡Gracias! El correo ${email} ha sido registrado exitosamente en la lista de Suscriptores de la Red Transversal de Pensamiento Complejo.`);
+      input.value = '';
     }
   </script>
 </body>

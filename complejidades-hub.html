@@ -798,6 +798,7 @@
     </a>
     <div class="platform-links">
       <a href="index.html" class="platform-link">Inicio</a>
+      <a href="red.html" class="platform-link">Red</a>
       <a href="uca.html" class="platform-link">UCA</a>
       <a href="complejidades-hub.html" class="platform-link active">Complejidades Hub</a>
       <a href="newsletter.html" class="platform-link">Newsletter</a>
@@ -857,8 +858,8 @@
       </div>
       <div>
         <h3 class="footer-title">Registro al Boletín</h3>
-        <form class="subscribe-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte! Recibirás nuestras novedades.'); this.reset();">
-          <input type="email" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
+        <form class="subscribe-form" onsubmit="handleSubscription(event, 'hubSubEmail');">
+          <input type="email" id="hubSubEmail" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
           <button type="submit" class="subscribe-btn">Suscribir</button>
         </form>
       </div>
@@ -867,7 +868,8 @@
   </footer>
 
   <script>
-    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4/export?format=csv";
+    const SPREADSHEET_ID = "1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4";
+    const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=Complejidades%20hub`;
     
     let globalData = [];
     let categories = new Set();
@@ -930,20 +932,45 @@
         download: true, header: false, skipEmptyLines: true,
         complete: function(results) {
           const rows = results.data.slice(1);
-          globalData = rows.map((row, idx) => ({
+          
+          // Palabras clave a excluir según requerimiento:
+          // biblioteca, noticias, convocatoria, artículo, actualidad y medios, primera plana y reportes
+          const excludedKeywords = [
+            'biblioteca',
+            'noticia',
+            'convocatoria',
+            'artículo',
+            'articulo',
+            'actualidad y medios',
+            'actualidad',
+            'primera plana',
+            'reporte'
+          ];
+
+          const allItems = rows.map((row, idx) => ({
             id: idx + 1,
             titulo: (row[0] || '').trim(),
             descripcion: (row[1] || '').trim(),
             etiquetas: (row[2] || '').trim(),
             autor: (row[3] || '').trim(),
-            categoria: (row[4] || 'Sin Categoría').trim(),
+            categoria: (row[4] || 'General').trim(),
             video: (row[5] || '').trim(),
             secciones: (row[6] || '').trim(),
             newsletter: (row[7] || '').trim(),
             imagen: (row[8] || '').trim(),
             botonDescarga: (row[9] || '').trim()
-          })).filter(item => item.titulo !== ''); 
+          })).filter(item => item.titulo !== '');
 
+          // Filtro negativo estricto para Complejidades Hub
+          globalData = allItems.filter(item => {
+            const sec = item.secciones.toLowerCase();
+            const cat = item.categoria.toLowerCase();
+            const tit = item.titulo.toLowerCase();
+            const isExcluded = excludedKeywords.some(kw => sec.includes(kw) || cat.includes(kw) || tit.includes(kw));
+            return !isExcluded;
+          });
+
+          categories.clear();
           globalData.forEach(item => {
             if (item.categoria) categories.add(item.categoria);
           });
@@ -959,6 +986,34 @@
           catalogStats.textContent = "Error al sincronizar con Google Sheets.";
         }
       });
+    }
+
+    function handleSubscription(e, inputId) {
+      e.preventDefault();
+      const input = document.getElementById(inputId);
+      if (!input || !input.value) return;
+      const email = input.value.trim().toLowerCase();
+
+      try {
+        const saved = JSON.parse(localStorage.getItem('unrc_suscriptores') || '[]');
+        if (!saved.includes(email)) {
+          saved.push(email);
+          localStorage.setItem('unrc_suscriptores', JSON.stringify(saved));
+        }
+      } catch (err) {}
+
+      const WEBHOOK_URL = window.UNRC_SUBSCRIBE_WEBHOOK || '';
+      if (WEBHOOK_URL) {
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `correo=${encodeURIComponent(email)}`
+        }).catch(err => console.log('Envío de suscripción:', err));
+      }
+
+      alert(`¡Gracias! El correo ${email} ha sido registrado exitosamente en la lista de Suscriptores de la Red Transversal de Pensamiento Complejo.`);
+      input.value = '';
     }
 
     function populateCategories() {

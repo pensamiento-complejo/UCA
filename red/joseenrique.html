@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Enrique Delgado López | Red Transversal de Pensamiento Complejo UNRC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        :root { 
+            --vino: #ae0340; 
+            --vino-dark: #620137; 
+            --bg: #ffffff; 
+            --text: #111111; 
+            --muted: #666666; 
+            --border: #f0f0f0;
+        }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Lato', sans-serif; 
+            margin: 0; 
+            background: var(--bg); 
+            color: var(--text); 
+            -webkit-font-smoothing: antialiased; 
+            padding-top: 60px;
+        }
+        
+        /* 1. BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA */
+        .platform-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+        .platform-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: #111111;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+        }
+        .platform-brand img {
+            height: 34px;
+            width: auto;
+            object-fit: contain;
+        }
+        .platform-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+        }
+        .platform-link {
+            color: #4b5563;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: color 0.25s, background 0.25s;
+        }
+        .platform-link:hover {
+            color: #000000;
+            background: rgba(0, 0, 0, 0.05);
+        }
+        .platform-link.active {
+            color: #ffffff;
+            background: var(--vino);
+        }
+
+        /* 2. SUBHEADER STICKY CON IDENTIDAD DOCENTE */
+        .header-identity-bar { 
+            background: rgba(255, 255, 255, 0.98); 
+            padding: 0 5%; 
+            display: flex; 
+            align-items: center; 
+            position: sticky; 
+            top: 60px; 
+            z-index: 999; 
+            height: 52px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .header-identity {
+            display: flex; 
+            align-items: center; 
+            gap: 15px; 
+            opacity: 0; 
+            transform: translateX(-20px); 
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .header-identity.visible { opacity: 1; transform: translateX(0); }
+        .header-photo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--vino); }
+        .header-name { font-weight: 900; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: var(--vino); }
+        .back-to-red {
+            margin-left: auto;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--vino);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--vino);
+            transition: all 0.25s;
+        }
+        .back-to-red:hover {
+            background: var(--vino);
+            color: #fff;
+        }
+
+        /* 3. HERO SECTION */
+        .hero { 
+            display: grid; 
+            grid-template-columns: 1fr 1.25fr; 
+            min-height: 65vh; 
+            align-items: center; 
+            padding: 50px 5% 40px; 
+            gap: 60px; 
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .photo-box { display: flex; justify-content: center; align-items: center; }
+        .photo-box img { 
+            width: 100%; 
+            max-width: 320px; 
+            aspect-ratio: 1/1; 
+            object-fit: cover; 
+            border-radius: 50%; 
+            filter: grayscale(100%); 
+            border: 2px solid #f0f0f0; 
+            transition: 0.8s ease; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06); 
+        }
+        .photo-box img:hover { filter: grayscale(0%); transform: scale(1.02); }
+        
+        .hero-info h1 { 
+            font-weight: 900; 
+            font-size: clamp(2rem, 3.8vw, 3.2rem); 
+            line-height: 1.05; 
+            color: var(--vino); 
+            margin: 0 0 10px; 
+            text-transform: uppercase; 
+            letter-spacing: -0.01em;
+        }
+        
+        .degree-badge {
+            display: inline-block;
+            background: rgba(174, 3, 64, 0.08);
+            color: var(--vino);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 5px 14px;
+            border-radius: 20px;
+            margin-bottom: 12px;
+            border: 1px solid rgba(174, 3, 64, 0.15);
+        }
+
+        .lines { 
+            font-size: 0.85rem; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            color: var(--muted); 
+            margin: 12px 0 20px; 
+            font-weight: 400; 
+            line-height: 1.6; 
+        }
+        
+        .semblanza-text { 
+            font-size: 1.05rem; 
+            font-weight: 300; 
+            line-height: 1.85; 
+            margin: 20px 0; 
+            color: #444; 
+            text-align: justify; 
+            max-width: 95%; 
+        }
+        
+        .contact-info { 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            color: var(--vino-dark); 
+            letter-spacing: 1px; 
+            margin-top: 15px; 
+            text-transform: uppercase; 
+        }
+
+        .action-bar { display: flex; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
+        .btn-minimal { 
+            padding: 10px 18px; 
+            text-decoration: none; 
+            text-transform: uppercase; 
+            font-size: 0.68rem; 
+            letter-spacing: 2px; 
+            font-weight: 700; 
+            border: 1px solid var(--vino); 
+            transition: 0.3s; 
+            cursor: pointer; 
+            text-align: center; 
+            border-radius: 4px;
+        }
+        .btn-outline { color: var(--vino); background: transparent; }
+        .btn-outline:hover { background: var(--vino); color: white; transform: translateY(-2px); }
+        .btn-solid { background: var(--vino); color: white; }
+        .btn-solid:hover { background: var(--vino-dark); border-color: var(--vino-dark); transform: translateY(-2px); }
+
+        /* 4. PRODUCCIÓN INTELECTUAL */
+        .section-label { 
+            font-size: 1.8rem; 
+            font-weight: 900; 
+            text-transform: uppercase; 
+            margin: 80px 5% 30px; 
+            border-bottom: 2px solid var(--text); 
+            padding-bottom: 12px; 
+            max-width: 1300px;
+        }
+        .pub-list { 
+            padding: 0 5% 100px; 
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        .apa-entry { 
+            margin-bottom: 25px; 
+            font-size: 0.92rem; 
+            line-height: 1.65; 
+            border-bottom: 1px solid #f4f4f4; 
+            padding-bottom: 20px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            gap: 30px; 
+        }
+        .apa-text { color: #222; max-width: 85%; }
+        .btn-link { 
+            font-size: 0.65rem; 
+            font-weight: 900; 
+            color: var(--vino); 
+            text-decoration: none; 
+            border: 1px solid var(--vino); 
+            padding: 7px 14px; 
+            transition: 0.3s; 
+            white-space: nowrap; 
+            text-transform: uppercase; 
+            border-radius: 4px;
+        }
+        .btn-link:hover { background: var(--vino); color: white; }
+
+        /* 5. FOOTER INSTITUCIONAL */
+        footer { 
+            background: #fafafa; 
+            border-top: 1px solid #eee; 
+            padding: 60px 5%; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 20px; 
+        }
+        .logo-footer { height: 55px; max-width: 100%; object-fit: contain; }
+        .footer-tag { 
+            color: var(--vino); 
+            font-size: 0.72rem; 
+            font-weight: 600; 
+            letter-spacing: 6px; 
+            text-transform: uppercase; 
+            text-align: center; 
+            display: flex; 
+            flex-direction: row; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 15px;
+        }
+
+        /* 6. MODAL CV */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(174, 3, 64, 0.3); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px); 
+            z-index: 20000; 
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+        .modal-box { 
+            width: 100%;
+            max-width: 800px; 
+            max-height: 85vh; 
+            background: white; 
+            padding: 50px; 
+            overflow-y: auto; 
+            position: relative; 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.25); 
+            border-radius: 12px;
+            border: 1px solid #eee; 
+        }
+        .close-btn { 
+            position: absolute; 
+            top: 25px; right: 30px; 
+            cursor: pointer; 
+            font-size: 0.75rem; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            color: var(--vino); 
+        }
+        .cv-title { 
+            font-weight: 900; 
+            font-size: 1.8rem; 
+            text-transform: uppercase; 
+            color: var(--vino); 
+            margin-bottom: 25px; 
+            border-bottom: 4px solid var(--vino); 
+            display: inline-block; 
+            padding-bottom: 6px;
+        }
+        .cv-section h4 { 
+            border-bottom: 1px solid #f0f0f0; 
+            text-transform: uppercase; 
+            font-size: 0.8rem; 
+            letter-spacing: 2px; 
+            color: var(--vino); 
+            margin-top: 30px; 
+            padding-bottom: 8px; 
+        }
+        .cv-row { 
+            display: grid; 
+            grid-template-columns: 140px 1fr; 
+            gap: 20px; 
+            margin: 15px 0; 
+            font-size: 0.9rem; 
+            font-weight: 300; 
+            line-height: 1.6; 
+            color: #444; 
+        }
+        .cv-year { font-weight: 700; color: #999; }
+
+        @media(max-width: 900px) {
+            .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 40px; gap: 30px; text-align: center; }
+            .semblanza-text { text-align: left; margin: 20px auto; }
+            .action-bar { justify-content: center; }
+            .apa-entry { flex-direction: column; gap: 15px; }
+            .modal-box { padding: 30px 20px; }
+            .cv-row { grid-template-columns: 1fr; gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PLATFORM NAV -->
+    <nav class="platform-nav">
+        <a href="../index.html" class="platform-brand">
+            <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
+            <span>Pensamiento Complejo</span>
+        </a>
+        <div class="platform-links">
+            <a href="../index.html" class="platform-link">Inicio</a>
+            <a href="../red.html" class="platform-link active">Red</a>
+            <a href="../uca.html" class="platform-link">UCA</a>
+            <a href="../complejidades-hub.html" class="platform-link">Complejidades Hub</a>
+            <a href="../newsletter.html" class="platform-link">Newsletter</a>
+        </div>
+    </nav>
+
+    <!-- STICKY IDENTITY HEADER -->
+    <div class="header-identity-bar">
+        <div class="header-identity" id="headerIdentity">
+            <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1792456381024_Retrato_Enrique_Delgado_-_Jos__Enrique_Delgado_L_pez.jpg" class="header-photo" alt="José Enrique Delgado López">
+            <span class="header-name">José Enrique Delgado López</span>
+        </div>
+        <a href="../red.html" class="back-to-red">‹ Volver a la Red</a>
+    </div>
+
+    <!-- HERO -->
+    <div class="hero" id="heroTrigger">
+        <div class="photo-box">
+            <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1792456381024_Retrato_Enrique_Delgado_-_Jos__Enrique_Delgado_L_pez.jpg" alt="José Enrique Delgado López">
+        </div>
+        <div class="hero-info">
+            <span class="degree-badge">Doctorado</span>
+            <h1>José Enrique Delgado López</h1>
+            <div class="lines">Zemiología • criminología crítica • derecho • sistemas normativos • democracia y símbolos de poder indígenas.</div>
+            <div class="semblanza-text">Doctor y Maestro en Estudios Mesoamericanos; Licenciado en Historia y Licenciado en Derecho, todo en la Universidad Nacional Autónoma de México; Maestro en Derecho Indígena por la Universidad Nacional Rosario Castellanos, con Especialidad en Criminología por el Colegio Jurista. Profesor de Tiempo Completo de la Universidad Nacional Rosario Castellanos; perteneciente al “Observatorio en Criminología. Por la memoria, la verdad y la justicia” de la misma UNRC.</div>
+            <div class="contact-info">Contacto institucional: jose.delgado@rcastellanos.cdmx.gob.mx</div>
+            <div class="action-bar">
+                <a href="https://orcid.org/0009-0005-5865-1118" target="_blank" class="btn-minimal btn-outline">ORCID</a>
+<a href="https://scholar.google.com/citations?user=JSOdgqkAAAAJ&hl=es" target="_blank" class="btn-minimal btn-outline">Google Scholar</a>
+<div class="btn-minimal btn-solid" onclick="toggleCV(true)">Curriculum Vitae</div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- PRODUCCIÓN INTELECTUAL -->
+    <h2 class="section-label">Producción Intelectual</h2>
+    <div class="pub-list">
+        
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2023). Estrategias de enseñanza-aprendizaje con perspectiva de género. Algunos ejemplos didácticos y pedagógicos. Revista Digital UDEMEX, 3, (12), 29-39</div>
+                <a href="https://online.fliphtml5.com/gfcix/favk/#p=1" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2024). Enseñanza de la Criminología desde la hibridualidad. Revista de Investigación Educativa, Intervención Pedagógica y Docencia, 2 (1), 37-52</div>
+                <a href="https://doi.org/10.71770/rieipd.v2i1.2204" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2024). El bastón de mando como representación de la legitimidad y legalidad en los sistemas normativos indígenas. El caso de los Altos de Chiapas. Revista Mente STEM, 2(1), 24-42</div>
+                <a href="https://www.mentestem.mx/portfolio/pdf/2023/2024_enero.pdf" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2024). Las competencias educativas de la criminología y su ampliación en el campo laboral. Runae, (11), 96–109</div>
+                <a href="https://revistas.unae.edu.ec/index.php/runae/article/view/968" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Varón-Rojas, D., y Delgado-López, J. (2024). Bastones de mando y fragilidad de la democracia en contextos de violencia: Chiapas - México y Cauca - Colombia. Jangwa Pana, 23(3), 1-15. doi</div>
+                <a href="https://doi.org/10.21676/16574923.5704" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Varón-Rojas, D.-H., &amp; Delgado-López , J.-E. (2024). Narcotráfico y política en territorio indígena. Resistencia entre los Tsotziles y Tseltales de Chiapas – México. URVIO. Revista Latinoamericana De Estudios De Seguridad, (40), 46–61</div>
+                <a href="https://doi.org/10.17141/urvio.40.2024.6266" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. y Delgado, S. (2025). Las implicaciones del Derecho y la Psicología para la formación del criminólogo. Estudios de Seguridad Ciudadana, 11(8), 99-120</div>
+                <a href="https://revista.ucs.edu.mx/wp-content/uploads/2025/06/9-99-las-implicaciones-del-derecho.pdf" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. y Varón, D. H. (2025). El bastón de mando como discurso neocolonial en dos países latinoamericanos. Revista Latinoamericana de Estudios del Discurso, 25(1), 159-174</div>
+                <a href="https://doi.org/10.35956/v.25.n1.2025.p.159-174" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2025). Los retos de la Criminología más allá del Derecho penal. Revista Diké, Irene y Eunomía, 1(1), 121-139</div>
+                <a href="https://doi.org/10.36151/RDIE.2025.1.1.07" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2025). Cetros, bastones, varas y báculos en cómics, mangas y animes. Revista Latente, (23), 215-230</div>
+                <a href="https://doi.org/10.25145/j.latente.2025.23.09" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2025). La enseñanza del Derecho desde el modelo híbrido-dual. Elementos teóricos y prácticos. Revista Electrónica Tecnologías Emergentes En La Educación, 2(2), 1-15</div>
+                <a href="https://doi.org/10.71713/retee.v2i2.3617" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2025). El Derecho Indígena, una asignatura pendiente en México a cursar desde la interculturalidad y decolonialidad. Trenzar. Revista De Educación Popular, Pedagogía Crítica E Investigación Militante, 7(14), 19–38</div>
+                <a href="https://doi.org/10.5281/zenodo.18027802" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2026). Criminología. Propuesta para un enfoque intercultural. InterconectaRC. (3), 111-136</div>
+                <a href="https://www.rcastellanos.cdmx.gob.mx/interconectarc" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+            <div class="apa-entry">
+                <div class="apa-text">Delgado, J. E. (2026). Inteligencia Artificial y zemiología para la visibilización del daño social en los Altos de Chiapas. KAIRÓS, Revista De Ciencias económicas, jurídicas Y Administrativas, 9(17), 21-46</div>
+                <a href="https://doi.org/10.37135/kai.03.17.02" target="_blank" class="btn-link">Consultar Publicación ↗</a>
+            </div>
+            
+    </div>
+
+    <!-- MODAL CV -->
+    <div id="cvModal" class="modal-overlay" onclick="toggleCV(false)">
+        <div class="modal-box" onclick="event.stopPropagation()">
+            <div class="close-btn" onclick="toggleCV(false)">[ CERRAR ]</div>
+            <div class="cv-title">Trayectoria Académica</div>
+            
+            <div class="cv-section">
+                <h4>Grado y Especialidad</h4>
+                <div class="cv-row">
+                    <div class="cv-year">Formación</div>
+                    <div><strong>Doctorado</strong><br>Universidad Nacional Rosario Castellanos</div>
+                </div>
+                <div class="cv-row">
+                    <div class="cv-year">Líneas de Investigación</div>
+                    <div>Zemiología • criminología crítica • derecho • sistemas normativos • democracia y símbolos de poder indígenas.</div>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h4>Semblanza Curricular</h4>
+                <div style="font-size:0.92rem; line-height:1.7; color:#444; margin-top:10px;">
+                    Doctor y Maestro en Estudios Mesoamericanos; Licenciado en Historia y Licenciado en Derecho, todo en la Universidad Nacional Autónoma de México; Maestro en Derecho Indígena por la Universidad Nacional Rosario Castellanos, con Especialidad en Criminología por el Colegio Jurista. Profesor de Tiempo Completo de la Universidad Nacional Rosario Castellanos; perteneciente al “Observatorio en Criminología. Por la memoria, la verdad y la justicia” de la misma UNRC.
+                </div>
+            </div>
+
+            
+        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0;">
+            <a href="https://drive.google.com/open?id=1AkydcukaYnOKDLc9zzMke_l1r7pe3SMN" target="_blank" class="btn-minimal btn-solid" style="display:inline-block; max-width:280px; text-decoration:none;">Descargar CV en PDF ↗</a>
+        </div>
+        
+        </div>
+    </div>
+
+    <!-- FOOTER INSTITUCIONAL -->
+    <footer>
+        <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC" class="logo-footer">
+        <div class="footer-tag">
+            <span>Claustro Docente</span>
+            <span>•</span>
+            <span>Red Transversal de Pensamiento Complejo UNRC</span>
+        </div>
+    </footer>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+        ScrollTrigger.create({
+            trigger: "#heroTrigger",
+            start: "top -50px",
+            onEnter: () => document.getElementById('headerIdentity').classList.add('visible'),
+            onLeaveBack: () => document.getElementById('headerIdentity').classList.remove('visible')
+        });
+
+        function toggleCV(show) { 
+            document.getElementById('cvModal').style.display = show ? 'flex' : 'none'; 
+            document.body.style.overflow = show ? 'hidden' : '';
+        }
+    </script>
+</body>
+</html>

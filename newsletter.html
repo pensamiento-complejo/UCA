@@ -475,6 +475,7 @@
     </a>
     <div class="platform-links">
       <a href="index.html" class="platform-link">Inicio</a>
+      <a href="red.html" class="platform-link">Red</a>
       <a href="uca.html" class="platform-link">UCA</a>
       <a href="complejidades-hub.html" class="platform-link">Complejidades Hub</a>
       <a href="newsletter.html" class="platform-link active">Newsletter</a>
@@ -523,10 +524,12 @@
       <!-- Lado Derecho: Columna de Podcasts (Columna G = "Podcasts") -->
       <div class="podcast-sidebar" id="podcast-sidebar-container">
         <div class="podcast-header">🎙️ Últimos Episodios</div>
-        <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/1w3qhsu7OnO1uTy3Qq8URS?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/74OPStkPxpIH26awoV2c9B?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/6jVy1c17kdRv9tOTll9lnh?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-        <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/6qjUwQQBIuzSVS2t8U1FY6?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <div id="podcast-items-list" style="display:flex; flex-direction:column; gap:16px;">
+          <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/1w3qhsu7OnO1uTy3Qq8URS?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/74OPStkPxpIH26awoV2c9B?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/6jVy1c17kdRv9tOTll9lnh?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          <iframe class="spotify-embed" src="https://open.spotify.com/embed/episode/6qjUwQQBIuzSVS2t8U1FY6?utm_source=generator&theme=0" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
       </div>
 
     </div>
@@ -557,8 +560,8 @@
       
       <div>
         <h3 class="footer-title">Registro al Boletín</h3>
-        <form class="subscribe-form" onsubmit="event.preventDefault(); alert('¡Gracias por registrarte a nuestro boletín!'); this.reset();">
-          <input type="email" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
+        <form class="subscribe-form" onsubmit="handleSubscription(event, 'newsletterFooterSub');">
+          <input type="email" id="newsletterFooterSub" class="subscribe-input" placeholder="correo@rcastellanos.cdmx.gob.mx" required>
           <button type="submit" class="subscribe-btn">Suscribir</button>
         </form>
       </div>
@@ -570,7 +573,8 @@
   </footer>
 
   <script>
-    const SHEET_CSV_URL = "https://docs.google.com/spreadsheets/d/1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4/export?format=csv";
+    const SPREADSHEET_ID = "1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4";
+    const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:csv&sheet=Complejidades%20hub`;
 
     // Contenidos base curados (fallback para mantener simetría visual)
     const fallbackPrimeraPlana = [
@@ -726,15 +730,22 @@
             item.secciones.toLowerCase().includes('actualidad') || item.secciones.toLowerCase().includes('medio')
           );
 
+          // Podcasts mapeados directamente desde la Columna G
+          const podcastItems = allItems.filter(item => 
+            item.secciones.toLowerCase().includes('podcast') || item.categoria.toLowerCase().includes('podcast')
+          );
+
           renderPrimeraPlana(primeraPlanaItems);
           renderReportes(reportesItems);
           renderActualidad(actualidadItems);
+          renderPodcasts(podcastItems);
         },
         error: function(err) {
           console.error("Error al cargar sheet en newsletter:", err);
           renderPrimeraPlana([]);
           renderReportes([]);
           renderActualidad([]);
+          renderPodcasts([]);
         }
       });
     }
@@ -877,6 +888,95 @@
       slider.addEventListener('mouseleave', startAutoPlay);
       slider.addEventListener('touchstart', () => clearInterval(slideTimer));
       slider.addEventListener('touchend', startAutoPlay);
+    }
+
+    function renderPodcasts(items) {
+      const container = document.getElementById('podcast-items-list');
+      if (!container) return;
+
+      if (!items || items.length === 0) {
+        return; // Mantiene los embeds fallback existentes si no hay registros nuevos
+      }
+
+      container.innerHTML = '';
+      items.slice(0, 5).forEach(item => {
+        const videoUrl = item.video || item.botonDescarga || '';
+        const ytId = extractYouTubeID(videoUrl);
+
+        if (videoUrl.includes('spotify.com')) {
+          let embedUrl = videoUrl;
+          if (!embedUrl.includes('/embed/')) {
+            embedUrl = embedUrl.replace('spotify.com/episode/', 'open.spotify.com/embed/episode/');
+          }
+          const iframe = document.createElement('iframe');
+          iframe.className = 'spotify-embed';
+          iframe.src = embedUrl;
+          iframe.frameBorder = '0';
+          iframe.allowFullscreen = true;
+          iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+          iframe.loading = 'lazy';
+          container.appendChild(iframe);
+        } else if (ytId) {
+          const card = document.createElement('div');
+          card.style.background = '#ffffff';
+          card.style.borderRadius = '10px';
+          card.style.overflow = 'hidden';
+          card.style.border = '1px solid #e5e7eb';
+          card.style.boxShadow = '0 2px 8px rgba(0,0,0,0.04)';
+          card.innerHTML = `
+            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
+              <iframe src="https://www.youtube.com/embed/${ytId}?rel=0" frameborder="0" allowfullscreen style="width:100%; height:100%;"></iframe>
+            </div>
+            <div style="padding:12px;">
+              <span style="font-size:0.7rem; font-weight:700; color:#ae0340; text-transform:uppercase;">🎙️ Podcast Sonoro</span>
+              <h4 style="font-size:0.95rem; font-weight:700; margin:4px 0 2px; color:#111;">${item.titulo}</h4>
+              <span style="font-size:0.8rem; color:#6b7280;">${item.autor || 'Red Transversal UNRC'}</span>
+            </div>
+          `;
+          container.appendChild(card);
+        } else {
+          const card = document.createElement('div');
+          card.style.background = '#ffffff';
+          card.style.borderRadius = '10px';
+          card.style.padding = '14px';
+          card.style.border = '1px solid #e5e7eb';
+          card.innerHTML = `
+            <span style="font-size:0.7rem; font-weight:700; color:#ae0340; text-transform:uppercase;">🎙️ Episodio de Audio</span>
+            <h4 style="font-size:0.95rem; font-weight:700; margin:4px 0 6px; color:#111;">${item.titulo}</h4>
+            <p style="font-size:0.82rem; color:#4b5563; margin-bottom:8px;">${item.descripcion}</p>
+            ${videoUrl ? `<a href="${videoUrl}" target="_blank" style="font-size:0.8rem; font-weight:700; color:#ae0340; text-decoration:none;">Escuchar Episodio ↗</a>` : ''}
+          `;
+          container.appendChild(card);
+        }
+      });
+    }
+
+    function handleSubscription(e, inputId) {
+      e.preventDefault();
+      const input = document.getElementById(inputId);
+      if (!input || !input.value) return;
+      const email = input.value.trim().toLowerCase();
+
+      try {
+        const saved = JSON.parse(localStorage.getItem('unrc_suscriptores') || '[]');
+        if (!saved.includes(email)) {
+          saved.push(email);
+          localStorage.setItem('unrc_suscriptores', JSON.stringify(saved));
+        }
+      } catch (err) {}
+
+      const WEBHOOK_URL = window.UNRC_SUBSCRIBE_WEBHOOK || '';
+      if (WEBHOOK_URL) {
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: `correo=${encodeURIComponent(email)}`
+        }).catch(err => console.log('Envío de suscripción:', err));
+      }
+
+      alert(`¡Gracias! El correo ${email} ha sido registrado exitosamente en la lista de Suscriptores de la Red Transversal de Pensamiento Complejo.`);
+      input.value = '';
     }
   </script>
 </body>
