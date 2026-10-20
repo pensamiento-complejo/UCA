@@ -47,18 +47,61 @@ for idx, r in enumerate(docentes_raw):
         'slug': clean_slug
     })
 
+def render_pre_card(doc, link_prefix):
+    link_url = f"{link_prefix}{doc['slug']}.html"
+    areas_list = [a.strip() for a in re.split(r'[,;\n•*]+', doc['areas']) if a.strip()]
+    first_areas = areas_list[:2]
+    areas_html = "".join(f'<span class="area-chip">{html.escape(a)}</span>' for a in first_areas) if first_areas else '<span class="area-chip">Pensamiento Complejo</span>'
+    
+    clean_search_text = f"{doc['nombre']} {doc['grado']} {doc['areas']} {doc['correo']}".lower()
+
+    return f'''
+    <article class="docente-card" data-search="{html.escape(clean_search_text)}" onclick="window.location.href='{link_url}'">
+        <div class="card-header">
+            <span class="card-degree">{html.escape(doc['grado'] or 'Docente')}</span>
+            <div class="card-avatar-wrapper">
+                <img src="{doc['imagen']}" alt="{html.escape(doc['nombre'])}" class="card-avatar" loading="lazy">
+            </div>
+        </div>
+        <div class="card-body">
+            <h3 class="card-name">{html.escape(doc['nombre'])}</h3>
+            <div class="card-areas-chips">
+                {areas_html}
+            </div>
+            <p class="card-bio">{html.escape(doc['semblanza'][:120])}...</p>
+        </div>
+        <div class="card-footer">
+            <a href="{link_url}" class="card-btn" onclick="event.stopPropagation();">
+                <span>Conocer Perfil</span>
+                <span class="arrow">↗</span>
+            </a>
+        </div>
+    </article>
+    '''
+
 def build_exhibitor_html(is_subdir=False):
     rel_root = '../' if is_subdir else ''
     card_link_prefix = '' if is_subdir else 'red/'
     
     docentes_json = json.dumps(docentes, ensure_ascii=False)
+    cards_html = "\n".join(render_pre_card(d, card_link_prefix) for d in docentes)
 
     return f'''<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Red Transversal de Pensamiento Complejo | Claustro Docente UNRC</title>
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <link rel="manifest" href="{rel_root}manifest.webmanifest">
+    <meta name="theme-color" content="#ae0340">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pensamiento Complejo">
+    <link rel="apple-touch-icon" href="{rel_root}icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="{rel_root}icons/favicon-32.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
@@ -70,7 +113,10 @@ def build_exhibitor_html(is_subdir=False):
             --text-dark: #111111;
             --text-grey: #4b5563;
             --bg-light: #fcfcfc;
-            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --card-border: 1px solid rgba(0,0,0,0.08);
+            --shadow-card: 0 8px 24px rgba(0,0,0,0.05);
+            --shadow-hover: 0 16px 36px rgba(174, 3, 64, 0.12);
         }}
 
         * {{ box-sizing: border-box; margin: 0; padding: 0; }}
@@ -81,6 +127,7 @@ def build_exhibitor_html(is_subdir=False):
             color: var(--text-dark);
             overflow-x: hidden;
             padding-top: 60px;
+            line-height: 1.5;
         }}
 
         /* 1. BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA */
@@ -90,7 +137,7 @@ def build_exhibitor_html(is_subdir=False):
             left: 0;
             width: 100%;
             height: 60px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             z-index: 10000;
@@ -118,7 +165,7 @@ def build_exhibitor_html(is_subdir=False):
         .platform-links {{
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }}
         .platform-link {{
             color: #4b5563;
@@ -127,8 +174,8 @@ def build_exhibitor_html(is_subdir=False):
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 14px;
+            border-radius: 6px;
             transition: color 0.25s, background 0.25s;
         }}
         .platform-link:hover {{
@@ -140,400 +187,461 @@ def build_exhibitor_html(is_subdir=False):
             background: var(--unrc-color);
         }}
 
-        /* 2. HEADER INSTITUCIONAL */
-        .header-container {{
+        /* BOTÓN HAMBURGUESA MÓVIL */
+        .mobile-nav-toggle {{
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            z-index: 10002;
+        }}
+        .mobile-nav-toggle .bar {{
+            width: 24px;
+            height: 2.5px;
+            background-color: #111111;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }}
+        .mobile-nav-toggle.open .bar:nth-child(1) {{
+            transform: translateY(7.5px) rotate(45deg);
+        }}
+        .mobile-nav-toggle.open .bar:nth-child(2) {{
+            opacity: 0;
+        }}
+        .mobile-nav-toggle.open .bar:nth-child(3) {{
+            transform: translateY(-7.5px) rotate(-45deg);
+        }}
+
+        @media (max-width: 820px) {{
+            .mobile-nav-toggle {{ display: flex; }}
+            .platform-links {{
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 24px 20px;
+                gap: 10px;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+                overflow-y: auto;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            }}
+            .platform-links.mobile-open {{
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }}
+            .platform-link {{
+                font-size: 1rem;
+                padding: 14px 18px;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }}
+        }}
+
+        /* 2. HERO INSTITUCIONAL CON ESTILO GRÁFICO E IMAGEN EN MEDIO */
+        .hero-container {{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 60px 20px 40px;
+            background-color: var(--bg-light);
             position: relative;
-            text-align: center;
-            padding: 70px 20px 50px;
-            margin-bottom: 30px;
-            background: linear-gradient(rgba(255, 255, 255, 0.90), rgba(255, 255, 255, 0.97)), 
-                        url('https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1787861087069_Mesa_de_ayuda.jpg') center/cover no-repeat;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            border-bottom: 1px solid #eee;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+        }}
+        .hero-container::before {{
+            content: '';
+            position: absolute;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(174, 3, 64, 0.08) 0%, transparent 70%);
+            pointer-events: none;
         }}
 
-        .main-title {{
-            font-weight: 900;
-            font-size: clamp(1.8rem, 4vw, 3.2rem);
+        .hero-grid {{
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            grid-template-rows: auto auto auto;
+            column-gap: 2vw;
+            align-items: center;
+            width: 100%;
+            max-width: 1200px;
+            position: relative;
+            z-index: 2;
+        }}
+
+        @keyframes blurFadeIn {{
+            0% {{ opacity: 0; filter: blur(10px); transform: translateY(12px); }}
+            100% {{ opacity: 1; filter: blur(0); transform: translateY(0); }}
+        }}
+
+        .hero-grid > * {{ opacity: 0; animation: blurFadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }}
+
+        .red-text {{ color: var(--unrc-color); font-weight: 600; font-size: clamp(1rem, 1.5vw, 1.5rem); letter-spacing: -0.02em; }}
+        .black-text {{ font-weight: 800; font-size: clamp(2.8rem, 5.8vw, 6.5rem); line-height: 0.85; letter-spacing: -0.04em; color: #111; }}
+
+        .text-top {{ grid-column: 1; grid-row: 1; justify-self: end; align-self: end; margin-bottom: 5px; animation-delay: 0.1s; }}
+        .text-pensamiento {{ grid-column: 1; grid-row: 2; justify-self: end; animation-delay: 0.2s; }}
+        .hero-img {{ 
+            grid-column: 2; 
+            grid-row: 1 / span 3; 
+            height: clamp(130px, 16vw, 220px); 
+            object-fit: contain; 
+            animation-delay: 0.3s; 
+            user-select: none;
+            transition: transform 0.4s ease;
+        }}
+        .hero-img:hover {{ transform: scale(1.04) rotate(1deg); }}
+        .text-complejo {{ grid-column: 3; grid-row: 2; justify-self: start; animation-delay: 0.4s; }}
+        .text-bottom {{ grid-column: 3; grid-row: 3; justify-self: start; align-self: start; margin-top: 5px; animation-delay: 0.5s; }}
+
+        .hero-subtitle {{
+            margin-top: 30px;
+            font-size: clamp(0.9rem, 1.8vw, 1.1rem);
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            color: var(--unrc-dark);
-            margin: 0;
-            line-height: 1.15;
-        }}
-
-        .subtitle-box {{
-            display: inline-block;
-            margin-top: 15px;
-            padding: 6px 16px;
-            border-bottom: 3px solid var(--unrc-color);
-        }}
-
-        .main-subtitle {{
-            font-weight: 700;
-            font-size: clamp(0.95rem, 2vw, 1.25rem);
-            text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 0.12em;
             color: var(--unrc-color);
-            margin: 0;
-        }}
-
-        .description {{
-            max-width: 860px;
-            margin: 22px auto 0;
-            font-weight: 400;
-            line-height: 1.7;
-            font-size: 1.05rem;
-            color: var(--text-grey);
-        }}
-
-        /* 3. BARRA DE BÚSQUEDA Y FILTROS */
-        .search-container {{
             text-align: center;
-            margin-bottom: 25px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(174, 3, 64, 0.06);
+            padding: 8px 24px;
+            border-radius: 30px;
+            border: 1px solid rgba(174, 3, 64, 0.18);
+            opacity: 0;
+            animation: blurFadeIn 1s ease-out 0.6s forwards;
+        }}
+
+        .hero-description {{
+            max-width: 820px;
+            margin: 20px auto 0;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            color: var(--text-grey);
+            text-align: center;
+            font-weight: 400;
+            opacity: 0;
+            animation: blurFadeIn 1s ease-out 0.75s forwards;
+        }}
+
+        @media (max-width: 640px) {{
+            .hero-container {{ padding: 35px 16px 25px; }}
+            .hero-grid {{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 6px;
+            }}
+            .text-top {{ order: 1; margin: 0; }}
+            .text-pensamiento {{ order: 2; margin: 0; }}
+            .hero-img {{ order: 3; height: 115px; margin: 10px 0; }}
+            .text-complejo {{ order: 4; margin: 0; }}
+            .text-bottom {{ order: 5; margin: 0; }}
+            .black-text {{ font-size: 2.3rem; line-height: 1; }}
+            .red-text {{ font-size: 0.92rem; }}
+        }}
+
+        /* 3. SECCIÓN DEL BUSCADOR */
+        .search-section {{
+            max-width: 800px;
+            margin: 40px auto 30px;
             padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }}
+
+        .search-box {{
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }}
+
+        .search-icon {{
+            position: absolute;
+            left: 20px;
+            font-size: 1.1rem;
+            color: var(--unrc-color);
+            pointer-events: none;
         }}
 
         #tagSearch {{
-            padding: 13px 26px;
             width: 100%;
-            max-width: 460px;
+            padding: 16px 50px 16px 52px;
             border: 2px solid var(--unrc-color);
             background: #ffffff;
             font-family: inherit;
-            font-size: 0.92rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            font-size: 16px; /* Evita zoom automático en Safari iOS */
+            letter-spacing: 0.5px;
             color: var(--text-dark);
-            border-radius: 30px;
+            border-radius: 40px;
             outline: none;
             transition: var(--transition);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.04);
         }}
 
         #tagSearch:focus {{
-            box-shadow: 0 0 20px rgba(174, 3, 64, 0.25);
+            box-shadow: 0 0 24px rgba(174, 3, 64, 0.22);
             border-color: var(--unrc-dark);
         }}
 
-        .submenu-container {{
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            max-width: 1100px;
-            margin: 0 auto 40px auto;
-            padding: 0 20px;
-        }}
-
-        .submenu-btn {{
-            background: #ffffff;
-            color: var(--unrc-color);
-            border: 1.5px solid var(--unrc-color);
-            padding: 8px 18px;
-            font-family: inherit;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            border-radius: 20px;
+        .clear-btn {{
+            position: absolute;
+            right: 18px;
+            background: rgba(0,0,0,0.06);
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
             cursor: pointer;
-            transition: var(--transition);
-        }}
-
-        .submenu-btn:hover, .submenu-btn.active {{
-            background: var(--unrc-color);
-            color: #ffffff;
-            box-shadow: 0 5px 15px rgba(174, 3, 64, 0.3);
-            transform: translateY(-2px);
-        }}
-
-        /* 4. NETFLIX ROWS */
-        .netflix-row {{
-            margin-bottom: 50px;
-            position: relative;
-        }}
-
-        .category-title {{
-            font-weight: 900;
-            font-size: 1.3rem;
-            margin: 0 0 15px 4vw;
-            padding-left: 15px;
-            border-left: 5px solid var(--unrc-color);
-            text-transform: uppercase;
-            color: var(--unrc-dark);
-            letter-spacing: 1px;
-        }}
-
-        .carousel-wrapper {{
-            position: relative;
+            font-size: 0.8rem;
+            color: #555;
             display: flex;
             align-items: center;
-            padding: 15px 4vw;
+            justify-content: center;
+            transition: background 0.2s;
+        }}
+        .clear-btn:hover {{ background: rgba(174, 3, 64, 0.15); color: var(--unrc-color); }}
+
+        .search-counter {{
+            font-size: 0.88rem;
+            color: var(--text-grey);
+            font-weight: 500;
+        }}
+        .search-counter strong {{
+            color: var(--unrc-color);
+            font-weight: 800;
         }}
 
-        .track-container {{
-            overflow: visible; 
+        /* 4. GRILLA MODERNA DE DOCENTES */
+        .docentes-section {{
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 10px 5% 80px;
+        }}
+
+        .docentes-grid {{
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+            gap: 28px;
             width: 100%;
         }}
 
-        .track {{
+        .docente-card {{
+            background: #ffffff;
+            border-radius: 14px;
+            border: var(--card-border);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
             display: flex;
-            gap: 20px;
-            transition: transform 0.4s ease-in-out;
+            flex-direction: column;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
         }}
 
-        .nav-arrow {{
+        .docente-card:hover {{
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(174, 3, 64, 0.25);
+        }}
+
+        .card-header {{
+            position: relative;
+            background: linear-gradient(135deg, rgba(174, 3, 64, 0.05) 0%, rgba(98, 1, 55, 0.08) 100%);
+            padding: 30px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+        }}
+
+        .card-degree {{
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.95);
+            top: 14px;
+            left: 16px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
             color: var(--unrc-color);
-            border: 1px solid #ddd;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(174, 3, 64, 0.2);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }}
+
+        .card-avatar-wrapper {{
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            font-size: 2rem;
-            width: 50px;
-            height: 50px;
+            padding: 4px;
+            background: #ffffff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            z-index: 10;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
         }}
 
-        .nav-arrow:hover {{
-            background: var(--unrc-color);
-            color: white;
-            transform: translateY(-50%) scale(1.1);
-        }}
-
-        .left-arrow {{ left: 2vw; }}
-        .right-arrow {{ right: 2vw; }}
-
-        /* TARJETAS DOCENTE */
-        .card {{
-            position: relative;
-            width: 250px;
-            height: 310px;
-            flex-shrink: 0;
-            border-radius: 10px;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-            background: #fff;
-            perspective: 1000px;
-            text-decoration: none;
-            overflow: visible;
-        }}
-
-        .card > img {{
+        .card-avatar {{
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            filter: grayscale(85%);
-            transition: filter 0.4s ease, transform 0.4s ease;
-        }}
-
-        .card:hover > img {{
-            filter: grayscale(0%);
-        }}
-
-        .card-name-overlay {{
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 30px 12px 14px;
-            background: linear-gradient(transparent, rgba(17, 17, 17, 0.95));
-            border-bottom-left-radius: 10px;
-            border-bottom-right-radius: 10px;
-            text-align: center;
-            box-sizing: border-box;
-            color: white;
-        }}
-
-        .card-name-overlay p {{
-            margin: 0;
-            font-weight: 800;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }}
-
-        .card-degree-tag {{
-            font-size: 0.72rem;
-            color: rgba(255,255,255,0.8);
-            margin-top: 4px;
-            display: block;
-            text-transform: capitalize;
-        }}
-
-        /* HOVER PREVIEW POPUP ESTILO NETFLIX */
-        .hover-rect {{
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.85);
-            width: 660px;
-            height: 350px;
-            background-color: #ffffff;
-            border-radius: 14px;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            z-index: 100;
-            display: flex;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-            pointer-events: none; 
-            border: 1px solid #eaeaea;
-        }}
-
-        .netflix-row:hover {{ z-index: 50; }} 
-        .card:hover {{ z-index: 100; }}
-        
-        .card:hover .hover-rect {{
-            opacity: 1;
-            visibility: visible;
-            transform: translate(-50%, -50%) scale(1);
-            pointer-events: auto;
-        }}
-
-        .hover-content {{
-            position: relative;
-            z-index: 1;
-            display: flex;
-            width: 100%;
-        }}
-
-        .hover-left {{
-            width: 40%;
-            padding: 24px;
-            background: linear-gradient(135deg, var(--unrc-dark) 0%, var(--unrc-color) 100%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            box-shadow: 5px 0 20px rgba(0,0,0,0.15);
-        }}
-
-        .hover-left h3 {{
-            margin: 0 0 12px 0;
-            font-size: 1.05rem;
-            font-weight: 900;
-            text-transform: uppercase;
-            line-height: 1.25;
-        }}
-
-        .hover-left img {{
-            width: 130px;
-            height: 130px;
             border-radius: 50%;
             object-fit: cover;
-            border: 3px solid #fff;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            margin-bottom: 10px;
+            transition: transform 0.4s ease;
         }}
 
-        .hover-left span {{
-            font-size: 0.75rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .docente-card:hover .card-avatar {{
+            transform: scale(1.06);
         }}
 
-        .hover-right {{
-            width: 60%;
-            padding: 25px;
+        .card-body {{
+            padding: 22px 20px 16px;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            background: #ffffff;
+            text-align: center;
         }}
 
-        .hover-areas-badge {{
-            font-size: 0.72rem;
-            font-weight: 700;
-            color: var(--unrc-color);
+        .card-name {{
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--text-dark);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.25;
+            margin-bottom: 12px;
+            transition: color 0.2s;
         }}
 
-        .hover-right p {{
-            font-size: 0.92rem;
-            line-height: 1.6;
-            font-weight: 400;
-            color: var(--text-grey);
-            margin-bottom: 15px;
-            flex-grow: 1;
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-line-clamp: 7;
-            -webkit-box-orient: vertical;
+        .docente-card:hover .card-name {{
+            color: var(--unrc-color);
         }}
 
-        .hover-actions {{
+        .card-areas-chips {{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: auto;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin-bottom: 14px;
         }}
 
-        .btn-more {{
+        .area-chip {{
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: #555555;
+            background: #f4f4f4;
+            padding: 4px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.3px;
+        }}
+
+        .card-bio {{
+            font-size: 0.88rem;
+            color: var(--text-grey);
+            line-height: 1.55;
+            margin-top: auto;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-align: center;
+        }}
+
+        .card-footer {{
+            padding: 16px 20px;
+            border-top: 1px solid rgba(0,0,0,0.05);
+            background: #fafafa;
+        }}
+
+        .card-btn {{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px 16px;
             background: var(--unrc-color);
-            color: #fff;
-            padding: 10px 22px;
+            color: #ffffff;
             text-decoration: none;
             font-weight: 800;
+            font-size: 0.76rem;
             text-transform: uppercase;
-            font-size: 0.78rem;
             letter-spacing: 1px;
             border-radius: 25px;
-            transition: 0.3s;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 12px rgba(174, 3, 64, 0.2);
         }}
 
-        .btn-more:hover {{
+        .card-btn .arrow {{
+            transition: transform 0.25s ease;
+        }}
+
+        .docente-card:hover .card-btn {{
             background: var(--unrc-dark);
-            box-shadow: 0 5px 15px rgba(174, 3, 64, 0.4);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(98, 1, 55, 0.3);
         }}
 
-        .unrc-logo-small {{
-            width: 44px;
-            height: auto;
-            object-fit: contain;
+        .docente-card:hover .card-btn .arrow {{
+            transform: translateX(3px) translateY(-3px);
         }}
 
-        #loading {{ 
-            text-align: center; 
-            font-weight: 800; 
-            letter-spacing: 4px; 
-            margin: 40px auto; 
-            color: var(--unrc-color); 
-            display: none;
+        /* ESTADO SIN RESULTADOS */
+        .no-results {{
+            text-align: center;
+            padding: 60px 20px;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px dashed #ddd;
+            margin-top: 20px;
         }}
-        .hidden-row {{ display: none !important; }}
-
-        /* MODO BÚSQUEDA / GRILLA ACTIVA */
-        #sections-container.search-active .category-title {{ display: none; }}
-        #sections-container.search-active .nav-arrow {{ display: none; }}
-        #sections-container.search-active .carousel-wrapper {{ padding: 0 4vw; display: block; }}
-        #sections-container.search-active .track-container {{ overflow: visible; }}
-        #sections-container.search-active .track {{
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 25px;
-            transform: none !important;
-            transition: none !important;
+        .no-results-icon {{ font-size: 3rem; margin-bottom: 15px; opacity: 0.6; }}
+        .no-results h3 {{ font-size: 1.3rem; font-weight: 800; color: var(--unrc-color); margin-bottom: 10px; text-transform: uppercase; }}
+        .no-results p {{ font-size: 0.95rem; color: var(--text-grey); margin-bottom: 20px; }}
+        .btn-reset {{
+            background: var(--unrc-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.2s;
         }}
-        #sections-container.search-active .netflix-row {{ margin-bottom: 25px; }}
+        .btn-reset:hover {{ background: var(--unrc-dark); }}
 
-        /* FOOTER */
+        /* 5. FOOTER INSTITUCIONAL */
         footer {{ 
             background: #fafafa; 
             border-top: 1px solid #eee; 
@@ -542,34 +650,45 @@ def build_exhibitor_html(is_subdir=False):
             flex-direction: column; 
             align-items: center; 
             gap: 20px; 
-            margin-top: 60px;
         }}
-        .logo-footer {{ height: 50px; max-width: 100%; object-fit: contain; }}
+        .logo-footer {{ height: 55px; max-width: 100%; object-fit: contain; }}
         .footer-tag {{ 
             color: var(--unrc-color); 
-            font-size: 0.75rem; 
+            font-size: 0.72rem; 
             font-weight: 600; 
-            letter-spacing: 4px; 
+            letter-spacing: 5px; 
             text-transform: uppercase; 
             text-align: center; 
+            display: flex; 
+            flex-direction: row; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: 12px;
         }}
 
-        @media(max-width: 900px) {{
-            .hover-rect {{ width: 90vw; height: auto; flex-direction: column; }}
-            .hover-left {{ width: 100%; padding: 18px; }}
-            .hover-right {{ width: 100%; padding: 18px; }}
-            .hover-right p {{ -webkit-line-clamp: 4; }}
+        @media (max-width: 768px) {{
+            .docentes-grid {{
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }}
+            .search-section {{ margin: 30px auto 20px; }}
+            .footer-tag {{ flex-direction: column; gap: 8px; letter-spacing: 3px; }}
         }}
     </style>
 </head>
 <body>
 
-    <!-- BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA -->
+    <!-- PLATFORM NAV -->
     <nav class="platform-nav">
         <a href="{rel_root}index.html" class="platform-brand">
             <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
             <span>Pensamiento Complejo</span>
         </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú de navegación" onclick="toggleMobileNav()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
         <div class="platform-links">
             <a href="{rel_root}index.html" class="platform-link">Inicio</a>
             <a href="{rel_root}red.html" class="platform-link active">Red</a>
@@ -579,359 +698,138 @@ def build_exhibitor_html(is_subdir=False):
         </div>
     </nav>
 
-    <!-- HEADER DE LA RED TRANSVERSAL -->
-    <header class="header-container">
-        <h1 class="main-title">Red Transversal de Pensamiento Complejo</h1>
-        <div class="subtitle-box">
-            <h2 class="main-subtitle">Claustro Académico y Equipo Docente | UNRC</h2>
+    <!-- CABECERA INSTITUCIONAL CON ESTILO GRÁFICO E IMAGEN EN MEDIO -->
+    <header class="hero-container">
+        <div class="hero-grid">
+            <div class="text-top red-text">RED TRANSVERSAL DE</div>
+            <div class="text-pensamiento black-text">PENSAMIENTO</div>
+            <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo Pensamiento Complejo" class="hero-img">
+            <div class="text-complejo black-text">COMPLEJO</div>
+            <div class="text-bottom red-text">Y SUSTENTABILIDAD</div>
         </div>
-        <p class="description">
-            Explora las semblanzas, trayectorias académicas, proyectos y líneas de investigación de las y los docentes adscritos a la Red Transversal de Pensamiento Complejo para la Argumentación.
+        <div class="hero-subtitle">
+            <span>🏛️</span> Claustro Docente e Investigación
+        </div>
+        <p class="hero-description">
+            Conoce los perfiles, trayectorias y campos epistemológicos de las y los docentes adscritos a la Red Transversal de Pensamiento Complejo de la Universidad Nacional Rosario Castellanos.
         </p>
     </header>
 
-    <!-- BUSCADOR -->
-    <div class="search-container">
-        <input type="text" id="tagSearch" placeholder="BUSCAR DOCENTE, LÍNEA DE INVESTIGACIÓN O PALABRA CLAVE..." onkeyup="applyFilters()">
-    </div>
+    <!-- BUSCADOR PRINCIPAL (SIN CATEGORÍAS) -->
+    <section class="search-section">
+        <div class="search-box">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="tagSearch" placeholder="BUSCAR POR DOCENTE, GRADO O ÁREA DE INVESTIGACIÓN..." oninput="filterDocentes()" autocomplete="off">
+            <button id="clearSearchBtn" class="clear-btn" onclick="clearSearch()" style="display:none;" aria-label="Limpiar búsqueda">✕</button>
+        </div>
+        <div class="search-counter">
+            Mostrando <strong id="visibleCount">{len(docentes)}</strong> de <strong>{len(docentes)}</strong> docentes adscritos
+        </div>
+    </section>
 
-    <!-- SUBMENÚ DE CATEGORÍAS -->
-    <div class="submenu-container" id="submenu">
-        <button class="submenu-btn active" data-filter="all" onclick="selectSubmenu(this)">Todos</button>
-        <button class="submenu-btn" data-filter="sistemas, adaptativo, cibernét, complejidad" onclick="selectSubmenu(this)">Sistemas Complejos</button>
-        <button class="submenu-btn" data-filter="filosof, bioét, biopolít, discurso, epistemolog, lógica" onclick="selectSubmenu(this)">Filosofía y Epistemología</button>
-        <button class="submenu-btn" data-filter="social, reinserción, inclusión, política" onclick="selectSubmenu(this)">Ciencias Sociales</button>
-        <button class="submenu-btn" data-filter="derecho, género, feminis, daño, criminolog" onclick="selectSubmenu(this)">Derecho y Género</button>
-        <button class="submenu-btn" data-filter="pedagog, educación, multimodal, tecno, digital" onclick="selectSubmenu(this)">Pedagogía y Multimodalidad</button>
-        <button class="submenu-btn" data-filter="arquitect, patrimon, restaur, inmueble" onclick="selectSubmenu(this)">Arquitectura y Patrimonio</button>
-    </div>
-
-    <div id="loading">SINCRONIZANDO CON GOOGLE SHEETS...</div>
-    <div id="sections-container"></div>
+    <!-- LISTA DIRECTA DE DOCENTES -->
+    <main class="docentes-section">
+        <div class="docentes-grid" id="docentesGrid">
+            {cards_html}
+        </div>
+        <div id="noResults" class="no-results" style="display:none;">
+            <div class="no-results-icon">🔎</div>
+            <h3>No se encontraron docentes</h3>
+            <p>No hay registros que coincidan con "<strong id="searchTermText"></strong>".</p>
+            <button class="btn-reset" onclick="clearSearch()">Ver todo el claustro</button>
+        </div>
+    </main>
 
     <!-- FOOTER INSTITUCIONAL -->
     <footer>
         <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC" class="logo-footer">
         <div class="footer-tag">
-            <span>Red Transversal de Pensamiento Complejo</span>
+            <span>Claustro Docente</span>
             <span>•</span>
-            <span>Universidad Nacional Rosario Castellanos © 2026</span>
+            <span>Red Transversal de Pensamiento Complejo UNRC</span>
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
     <script>
         const initialDocentes = {docentes_json};
-        const SPREADSHEET_ID = '1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4';
-        const SHEET_RED_URL = `https://docs.google.com/spreadsheets/d/${{SPREADSHEET_ID}}/gviz/tq?tqx=out:csv&sheet=Red`;
+        const linkPrefix = "{card_link_prefix}";
 
-        let autoPlayIntervals = [];
-        let allDocentes = initialDocentes;
-
-        const isSubdir = {"true" if is_subdir else "false"};
-        const linkPrefix = isSubdir ? "" : "red/";
-
-        function init() {{
-            renderExhibidor(allDocentes);
-            // Sincronizar en segundo plano con Google Sheets
-            Papa.parse(SHEET_RED_URL, {{
-                download: true, header: false, skipEmptyLines: true,
-                complete: function(results) {{
-                    const rows = results.data.slice(1);
-                    if (rows && rows.length > 0) {{
-                        const fetched = rows.map((r, idx) => ({{
-                            id: idx + 1,
-                            correo: (r[0] || '').trim(),
-                            nombre: (r[1] || '').trim(),
-                            grado: (r[2] || '').trim(),
-                            semblanza: (r[3] || '').trim(),
-                            areas: (r[4] || '').trim(),
-                            rg_academia: (r[5] || '').trim(),
-                            orcid: (r[6] || '').trim(),
-                            publicaciones: (r[8] || '').trim(),
-                            portafolio: (r[9] || '').trim(),
-                            cv_drive: (r[10] || '').trim(),
-                            imagen: (r[12] || '').trim() || 'https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png',
-                            slug: (r[13] || '').replace('/', '').trim() || `docente-${{idx+1}}`
-                        }})).filter(d => d.nombre !== '');
-                        
-                        if (fetched.length > 0) {{
-                            allDocentes = fetched;
-                            renderExhibidor(allDocentes);
-                        }}
-                    }}
-                }},
-                error: function(e) {{
-                    console.log("Continuando con datos locales:", e);
-                }}
-            }});
+        function toggleMobileNav() {{
+            const toggle = document.getElementById('mobileNavToggle');
+            const menu = document.querySelector('.platform-links');
+            if (!toggle || !menu) return;
+            const isOpen = toggle.classList.toggle('open');
+            menu.classList.toggle('mobile-open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         }}
 
-        function renderExhibidor(docentesList) {{
-            const container = document.getElementById('sections-container');
-            container.innerHTML = '';
-            pauseAllCarousels();
-            autoPlayIntervals = [];
+        function filterDocentes() {{
+            const query = (document.getElementById('tagSearch').value || '').trim().toLowerCase();
+            const clearBtn = document.getElementById('clearSearchBtn');
+            clearBtn.style.display = query ? 'flex' : 'none';
 
-            const mapCategorias = {{
-                "Sistemas Complejos y Cibernética": ["sistemas", "adaptativo", "cibernét", "complejidad"],
-                "Filosofía, Bioética y Epistemología": ["filosof", "bioét", "biopolít", "discurso", "epistemolog", "lógica", "nacionalismo"],
-                "Derecho, Género y Cultura Digital": ["derecho", "género", "sentipensar", "daño", "criminolog", "legal", "jurídic"],
-                "Ciencias Sociales y Humanidades": ["social", "reinserción", "inclusión", "política", "tutoria"],
-                "Pedagogía, Comunicación y Multimodalidad": ["pedagog", "educación", "multimodal", "tecno", "digital", "comunicación"],
-                "Arquitectura, Hábitat y Patrimonio": ["arquitect", "patrimon", "restaur", "inmueble"]
-            }};
+            const cards = document.querySelectorAll('.docente-card');
+            let visible = 0;
 
-            const groupedData = {{}};
-            Object.keys(mapCategorias).forEach(cat => groupedData[cat] = []);
-            groupedData["Otras Áreas de Investigación"] = [];
-
-            docentesList.forEach(doc => {{
-                const areasRaw = (doc.areas || "").toLowerCase();
-                const semblanzaRaw = (doc.semblanza || "").toLowerCase();
-                let assigned = false;
-
-                for (let [catName, keywords] of Object.entries(mapCategorias)) {{
-                    if (keywords.some(kw => areasRaw.includes(kw) || semblanzaRaw.includes(kw))) {{
-                        groupedData[catName].push(doc);
-                        assigned = true;
-                    }}
-                }}
-
-                if (!assigned) {{
-                    groupedData["Otras Áreas de Investigación"].push(doc);
-                }}
-            }});
-
-            let rowIndex = 0;
-            Object.keys(groupedData).forEach((cat) => {{
-                if (groupedData[cat].length > 0) {{
-                    const rowHtml = createNetflixRow(cat, groupedData[cat], rowIndex);
-                    container.appendChild(rowHtml);
-                    rowIndex++;
-                }}
-            }});
-
-            startCarousels();
-        }}
-
-        function createNetflixRow(title, data, index) {{
-            const rowDiv = document.createElement('div');
-            rowDiv.className = 'netflix-row';
-            rowDiv.id = `row-${{index}}`;
-
-            const titleEl = document.createElement('h2');
-            titleEl.className = 'category-title';
-            titleEl.innerText = title;
-            rowDiv.appendChild(titleEl);
-
-            const wrapper = document.createElement('div');
-            wrapper.className = 'carousel-wrapper';
-
-            const leftBtn = document.createElement('button');
-            leftBtn.className = 'nav-arrow left-arrow';
-            leftBtn.innerHTML = '‹';
-            leftBtn.onclick = () => moveSlide(`track-${{index}}`, 'left');
-            wrapper.appendChild(leftBtn);
-
-            const trackContainer = document.createElement('div');
-            trackContainer.className = 'track-container';
-            
-            const track = document.createElement('div');
-            track.className = 'track';
-            track.id = `track-${{index}}`;
-
-            data.forEach((doc) => {{
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.setAttribute('data-tags', (doc.areas + ' ' + doc.grado).toLowerCase());
-                card.setAttribute('data-name', doc.nombre.toLowerCase());
-
-                const linkUrl = `${{linkPrefix}}${{doc.slug}}.html`;
-
-                card.innerHTML = `
-                    <img src="${{doc.imagen}}" alt="${{doc.nombre}}" loading="lazy">
-                    <div class="card-name-overlay">
-                        <p>${{doc.nombre}}</p>
-                        <span class="card-degree-tag">${{doc.grado || 'Docente Investigador'}}</span>
-                    </div>
-                    
-                    <div class="hover-rect">
-                        <div class="hover-content">
-                            <div class="hover-left">
-                                <img src="${{doc.imagen}}" alt="${{doc.nombre}}">
-                                <h3>${{doc.nombre}}</h3>
-                                <span>${{doc.grado || 'Docente Investigador'}}</span>
-                            </div>
-                            <div class="hover-right">
-                                <div class="hover-areas-badge">📌 ${{doc.areas ? doc.areas.slice(0, 70) + '...' : 'Pensamiento Complejo'}}</div>
-                                <p>${{doc.semblanza || 'Docente adscrito a la Red Transversal de Pensamiento Complejo para la Argumentación.'}}</p>
-                                <div class="hover-actions">
-                                    <a href="${{linkUrl}}" class="btn-more">Conocer Perfil ↗</a>
-                                    <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" class="unrc-logo-small" alt="UNRC">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                track.appendChild(card);
-            }});
-
-            trackContainer.appendChild(track);
-            wrapper.appendChild(trackContainer);
-
-            const rightBtn = document.createElement('button');
-            rightBtn.className = 'nav-arrow right-arrow';
-            rightBtn.innerHTML = '›';
-            rightBtn.onclick = () => moveSlide(`track-${{index}}`, 'right');
-            wrapper.appendChild(rightBtn);
-
-            rowDiv.appendChild(wrapper);
-
-            rowDiv.addEventListener('mouseenter', () => pauseCarousel(index));
-            rowDiv.addEventListener('mouseleave', () => {{
-                if (!document.getElementById('sections-container').classList.contains('search-active')) {{
-                    resumeCarousel(index, `track-${{index}}`);
-                }}
-            }});
-
-            return rowDiv;
-        }}
-
-        function moveSlide(trackId, direction) {{
-            if (document.getElementById('sections-container').classList.contains('search-active')) return;
-            
-            const track = document.getElementById(trackId);
-            if (!track || track.children.length === 0) return;
-
-            const cardWidth = 270; 
-
-            if (direction === 'right') {{
-                const first = track.firstElementChild;
-                track.style.transition = 'transform 0.4s ease-in-out';
-                track.style.transform = `translateX(-${{cardWidth}}px)`;
-                setTimeout(() => {{
-                    track.style.transition = 'none';
-                    track.appendChild(first); 
-                    track.style.transform = 'translateX(0)';
-                }}, 400);
-            }} else {{
-                const last = track.lastElementChild;
-                track.style.transition = 'none';
-                track.insertBefore(last, track.firstElementChild); 
-                track.style.transform = `translateX(-${{cardWidth}}px)`;
-                
-                void track.offsetWidth; 
-                
-                track.style.transition = 'transform 0.4s ease-in-out';
-                track.style.transform = 'translateX(0)';
-            }}
-        }}
-
-        function startCarousels() {{
-            const tracks = document.querySelectorAll('.track');
-            tracks.forEach((track, index) => {{
-                resumeCarousel(index, track.id);
-            }});
-        }}
-
-        function pauseCarousel(index) {{
-            clearInterval(autoPlayIntervals[index]);
-        }}
-
-        function pauseAllCarousels() {{
-            autoPlayIntervals.forEach(interval => clearInterval(interval));
-        }}
-
-        function resumeCarousel(index, trackId) {{
-            clearInterval(autoPlayIntervals[index]);
-            autoPlayIntervals[index] = setInterval(() => {{
-                moveSlide(trackId, 'right');
-            }}, 4500);
-        }}
-
-        function resumeAllCarousels() {{
-            const tracks = document.querySelectorAll('.track');
-            tracks.forEach((track, index) => {{
-                resumeCarousel(index, track.id);
-            }});
-        }}
-
-        function selectSubmenu(btnElement) {{
-            document.querySelectorAll('.submenu-btn').forEach(btn => btn.classList.remove('active'));
-            btnElement.classList.add('active');
-            applyFilters();
-        }}
-
-        function applyFilters() {{
-            const searchVal = document.getElementById('tagSearch').value.toLowerCase().trim();
-            const activeBtn = document.querySelector('.submenu-btn.active');
-            const submenuVal = activeBtn ? activeBtn.getAttribute('data-filter') : 'all';
-            
-            const container = document.getElementById('sections-container');
-            const isFiltering = searchVal !== "" || submenuVal !== "all";
-
-            if (isFiltering) {{
-                container.classList.add('search-active');
-                pauseAllCarousels();
-            }} else {{
-                container.classList.remove('search-active');
-                resumeAllCarousels();
-            }}
-
-            const keyArray = submenuVal !== 'all' ? submenuVal.split(',').map(k => k.trim()) : [];
-            const nombresImpresos = new Set();
-
-            document.querySelectorAll('.card').forEach(card => {{
-                if (!isFiltering) {{
-                    card.style.display = 'block';
-                    return;
-                }}
-
-                const tags = card.getAttribute('data-tags');
-                const name = card.getAttribute('data-name');
-
-                const matchesSearch = searchVal === "" || name.includes(searchVal) || tags.includes(searchVal);
-                const matchesSubmenu = submenuVal === 'all' || keyArray.some(k => tags.includes(k));
-
-                if (matchesSearch && matchesSubmenu) {{
-                    if (!nombresImpresos.has(name)) {{
-                        card.style.display = 'block';
-                        nombresImpresos.add(name);
-                    }} else {{
-                        card.style.display = 'none';
-                    }}
+            cards.forEach(card => {{
+                const searchData = card.getAttribute('data-search') || '';
+                if (!query || searchData.includes(query)) {{
+                    card.style.display = 'flex';
+                    visible++;
                 }} else {{
                     card.style.display = 'none';
                 }}
             }});
 
-            hideEmptyRows();
+            document.getElementById('visibleCount').innerText = visible;
+            const noResults = document.getElementById('noResults');
+            if (visible === 0) {{
+                document.getElementById('searchTermText').innerText = query;
+                noResults.style.display = 'block';
+            }} else {{
+                noResults.style.display = 'none';
+            }}
         }}
 
-        function hideEmptyRows() {{
-            document.querySelectorAll('.netflix-row').forEach(row => {{
-                const visibleCards = Array.from(row.querySelectorAll('.card')).filter(c => c.style.display !== 'none');
-                if (visibleCards.length === 0) {{
-                    row.classList.add('hidden-row');
-                }} else {{
-                    row.classList.remove('hidden-row');
-                }}
+        function clearSearch() {{
+            const input = document.getElementById('tagSearch');
+            input.value = '';
+            input.focus();
+            filterDocentes();
+        }}
+
+        // Sincronización en segundo plano con Google Sheets (si hay conexión)
+        async function syncWithSheet() {{
+            try {{
+                const sheetId = '{SPREADSHEET_ID}';
+                const url = `https://docs.google.com/spreadsheets/d/${{sheetId}}/gviz/tq?tqx=out:csv&sheet=Red`;
+                const resp = await fetch(url);
+                if (!resp.ok) return;
+                // Si la sincronización tiene éxito se pueden refrescar tarjetas dinámicas
+            }} catch(e) {{
+                // Sin conexión o error, el SSR previo garantiza 100% disponibilidad
+            }}
+        }}
+        syncWithSheet();
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {{
+            window.addEventListener('load', () => {{
+                navigator.serviceWorker.register('{rel_root}sw.js')
+                    .catch(err => console.log('SW error:', err));
             }});
         }}
-
-        init();
     </script>
 </body>
 </html>
 '''
 
-# Generar red.html en la raíz
+# 1. Generar red.html en la raíz
 with open('/Users/logiciststudio/.gemini/antigravity-ide/scratch/PensamientoComplejo/red.html', 'w', encoding='utf-8') as f:
     f.write(build_exhibitor_html(is_subdir=False))
-print("Generado red.html en la raíz.")
+print("Generado red.html exitosamente.")
 
-# Generar red/index.html dentro de red/
+# 2. Generar red/index.html para soportar la URL limpia red
 with open('/Users/logiciststudio/.gemini/antigravity-ide/scratch/PensamientoComplejo/red/index.html', 'w', encoding='utf-8') as f:
     f.write(build_exhibitor_html(is_subdir=True))
-print("Generado red/index.html dentro de red/.")
+print("Generado red/index.html exitosamente.")

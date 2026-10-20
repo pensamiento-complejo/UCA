@@ -2,28 +2,44 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Eduardo Benjamín López López | Red Transversal de Pensamiento Complejo UNRC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap" rel="stylesheet">
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <link rel="manifest" href="../../manifest.webmanifest">
+    <meta name="theme-color" content="#ae0340">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Pensamiento Complejo">
+    <link rel="apple-touch-icon" href="../../icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../icons/favicon-32.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
+        @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
         :root { 
             --vino: #ae0340; 
             --vino-dark: #620137; 
             --bg: #ffffff; 
             --text: #111111; 
-            --muted: #666666; 
+            --muted: #555555; 
             --border: #f0f0f0;
+            --card-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
-        * { box-sizing: border-box; }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body { 
-            font-family: 'Lato', sans-serif; 
-            margin: 0; 
+            font-family: 'Open Sauce One', 'Lato', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto; 
             background: var(--bg); 
             color: var(--text); 
             -webkit-font-smoothing: antialiased; 
             padding-top: 60px;
+            overflow-x: hidden;
+            line-height: 1.6;
         }
         
         /* 1. BARRA DE NAVEGACIÓN GLOBAL PLATAFORMA */
@@ -33,7 +49,7 @@
             left: 0;
             width: 100%;
             height: 60px;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.96);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             z-index: 10000;
@@ -61,7 +77,7 @@
         .platform-links {
             display: flex;
             align-items: center;
-            gap: 18px;
+            gap: 16px;
         }
         .platform-link {
             color: #4b5563;
@@ -70,8 +86,8 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.06em;
-            padding: 6px 12px;
-            border-radius: 4px;
+            padding: 8px 14px;
+            border-radius: 6px;
             transition: color 0.25s, background 0.25s;
         }
         .platform-link:hover {
@@ -83,9 +99,76 @@
             background: var(--vino);
         }
 
+        /* BOTÓN HAMBURGUESA MÓVIL */
+        .mobile-nav-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            width: 44px;
+            height: 44px;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            z-index: 10002;
+        }
+        .mobile-nav-toggle .bar {
+            width: 24px;
+            height: 2.5px;
+            background-color: #111111;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .mobile-nav-toggle.open .bar:nth-child(1) {
+            transform: translateY(7.5px) rotate(45deg);
+        }
+        .mobile-nav-toggle.open .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-nav-toggle.open .bar:nth-child(3) {
+            transform: translateY(-7.5px) rotate(-45deg);
+        }
+
+        @media (max-width: 820px) {
+            .mobile-nav-toggle { display: flex; }
+            .platform-links {
+                position: fixed;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 24px 20px;
+                gap: 10px;
+                transform: translateY(-100%);
+                opacity: 0;
+                pointer-events: none;
+                transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
+                overflow-y: auto;
+                box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+            }
+            .platform-links.mobile-open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .platform-link {
+                font-size: 1rem;
+                padding: 14px 18px;
+                border-radius: 8px;
+                border: 1px solid rgba(0, 0, 0, 0.05);
+            }
+        }
+
         /* 2. SUBHEADER STICKY CON IDENTIDAD DOCENTE */
         .header-identity-bar { 
-            background: rgba(255, 255, 255, 0.98); 
+            background: rgba(255, 255, 255, 0.96); 
             padding: 0 5%; 
             display: flex; 
             align-items: center; 
@@ -94,18 +177,20 @@
             z-index: 999; 
             height: 52px;
             border-bottom: 1px solid #f0f0f0;
+            backdrop-filter: blur(10px);
         }
         .header-identity {
             display: flex; 
             align-items: center; 
-            gap: 15px; 
+            gap: 12px; 
             opacity: 0; 
             transform: translateX(-20px); 
-            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .header-identity.visible { opacity: 1; transform: translateX(0); }
         .header-photo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 1.5px solid var(--vino); }
-        .header-name { font-weight: 900; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; color: var(--vino); }
+        .header-name { font-weight: 800; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; color: var(--vino); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
+        
         .back-to-red {
             margin-left: auto;
             font-size: 0.75rem;
@@ -121,150 +206,271 @@
             border-radius: 20px;
             border: 1px solid var(--vino);
             transition: all 0.25s;
+            white-space: nowrap;
         }
         .back-to-red:hover {
             background: var(--vino);
             color: #fff;
         }
 
-        /* 3. HERO SECTION */
-        .hero { 
-            display: grid; 
-            grid-template-columns: 1fr 1.25fr; 
-            min-height: 65vh; 
-            align-items: center; 
-            padding: 50px 5% 40px; 
-            gap: 60px; 
-            max-width: 1300px;
+        /* 3. PERFIL DOCENTE: ESTRUCTURA PRINCIPAL EN ORDEN EXACTO */
+        .profile-container {
+            max-width: 960px;
             margin: 0 auto;
+            padding: 40px 24px 80px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
-        
-        .photo-box { display: flex; justify-content: center; align-items: center; }
-        .photo-box img { 
-            width: 100%; 
-            max-width: 320px; 
-            aspect-ratio: 1/1; 
-            object-fit: cover; 
-            border-radius: 50%; 
-            filter: grayscale(100%); 
-            border: 2px solid #f0f0f0; 
-            transition: 0.8s ease; 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.06); 
+
+        /* MOMENTO 1: GRADO */
+        .profile-degree {
+            margin-bottom: 18px;
         }
-        .photo-box img:hover { filter: grayscale(0%); transform: scale(1.02); }
-        
-        .hero-info h1 { 
-            font-weight: 900; 
-            font-size: clamp(2rem, 3.8vw, 3.2rem); 
-            line-height: 1.05; 
-            color: var(--vino); 
-            margin: 0 0 10px; 
-            text-transform: uppercase; 
-            letter-spacing: -0.01em;
-        }
-        
         .degree-badge {
             display: inline-block;
             background: rgba(174, 3, 64, 0.08);
             color: var(--vino);
-            font-size: 0.8rem;
-            font-weight: 700;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            font-weight: 800;
             text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 7px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(174, 3, 64, 0.18);
+        }
+
+        /* MOMENTO 2: FOTO */
+        .photo-box {
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .photo-box img {
+            width: clamp(200px, 24vw, 250px);
+            height: clamp(200px, 24vw, 250px);
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #ffffff;
+            box-shadow: 0 16px 36px rgba(98, 1, 55, 0.14), 0 0 0 1px rgba(0,0,0,0.06);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .photo-box img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 20px 44px rgba(98, 1, 55, 0.22);
+        }
+
+        /* MOMENTO 3: NOMBRE */
+        .profile-name {
+            font-size: clamp(1.8rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: var(--vino);
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            line-height: 1.15;
+            margin: 0 0 10px;
+            max-width: 820px;
+        }
+        .profile-lines {
+            font-size: 0.92rem;
             letter-spacing: 1.5px;
-            padding: 5px 14px;
-            border-radius: 20px;
-            margin-bottom: 12px;
-            border: 1px solid rgba(174, 3, 64, 0.15);
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 0 0 20px;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 800px;
         }
 
-        .lines { 
-            font-size: 0.85rem; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            color: var(--muted); 
-            margin: 12px 0 20px; 
-            font-weight: 400; 
-            line-height: 1.6; 
+        /* MOMENTO 4: CONTACTO Y ORCID, ACADEMIA EDU Y CV */
+        .contact-info {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--vino-dark);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
         }
-        
-        .semblanza-text { 
-            font-size: 1.05rem; 
-            font-weight: 300; 
-            line-height: 1.85; 
-            margin: 20px 0; 
-            color: #444; 
-            text-align: justify; 
-            max-width: 95%; 
+        .contact-icon { font-size: 1.1rem; }
+        .contact-label { color: #555; font-weight: 500; }
+        .contact-link {
+            color: var(--vino);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 1px dotted var(--vino);
+            transition: border-bottom-color 0.2s;
         }
-        
-        .contact-info { 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            color: var(--vino-dark); 
-            letter-spacing: 1px; 
-            margin-top: 15px; 
-            text-transform: uppercase; 
-        }
+        .contact-link:hover { border-bottom: 1px solid var(--vino); }
 
-        .action-bar { display: flex; gap: 12px; margin-top: 25px; flex-wrap: wrap; }
+        .action-bar { 
+            display: flex; 
+            justify-content: center; 
+            gap: 12px; 
+            margin-bottom: 45px; 
+            flex-wrap: wrap; 
+            width: 100%;
+        }
         .btn-minimal { 
-            padding: 10px 18px; 
+            padding: 11px 22px; 
             text-decoration: none; 
             text-transform: uppercase; 
-            font-size: 0.68rem; 
-            letter-spacing: 2px; 
-            font-weight: 700; 
-            border: 1px solid var(--vino); 
-            transition: 0.3s; 
+            font-size: 0.72rem; 
+            letter-spacing: 1.5px; 
+            font-weight: 800; 
+            border: 1.5px solid var(--vino); 
+            transition: all 0.3s ease; 
             cursor: pointer; 
             text-align: center; 
-            border-radius: 4px;
+            border-radius: 6px;
+            min-height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            font-family: inherit;
         }
-        .btn-outline { color: var(--vino); background: transparent; }
-        .btn-outline:hover { background: var(--vino); color: white; transform: translateY(-2px); }
+        .btn-outline { color: var(--vino); background: #ffffff; }
+        .btn-outline:hover { background: var(--vino); color: white; transform: translateY(-2px); box-shadow: 0 6px 16px rgba(174, 3, 64, 0.2); }
         .btn-solid { background: var(--vino); color: white; }
-        .btn-solid:hover { background: var(--vino-dark); border-color: var(--vino-dark); transform: translateY(-2px); }
+        .btn-solid:hover { background: var(--vino-dark); border-color: var(--vino-dark); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(98, 1, 55, 0.3); }
 
-        /* 4. PRODUCCIÓN INTELECTUAL */
+        /* MOMENTO 5: ABAJO SEMBLANZA */
+        .semblanza-wrapper {
+            width: 100%;
+            text-align: left;
+            margin-top: 10px;
+            padding-top: 30px;
+            border-top: 1px solid #f0f0f0;
+        }
         .section-label { 
-            font-size: 1.8rem; 
+            font-size: 1.4rem; 
             font-weight: 900; 
             text-transform: uppercase; 
-            margin: 80px 5% 30px; 
-            border-bottom: 2px solid var(--text); 
-            padding-bottom: 12px; 
-            max-width: 1300px;
+            letter-spacing: 1px; 
+            color: var(--vino); 
+            margin: 0 0 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            border-bottom: 2px solid var(--vino); 
+            padding-bottom: 10px; 
         }
-        .pub-list { 
-            padding: 0 5% 100px; 
-            max-width: 1300px;
-            margin: 0 auto;
+        .semblanza-text { 
+            font-size: 1.05rem; 
+            font-weight: 400; 
+            line-height: 1.85; 
+            color: #333333; 
+            text-align: justify; 
         }
+
+        /* MOMENTO 6: LUEGO PRODUCCIÓN INTELECTUAL (OMITIDA SI NO HAY) */
+        .production-wrapper {
+            width: 100%;
+            text-align: left;
+            margin-top: 50px;
+        }
+        .pub-list { width: 100%; }
         .apa-entry { 
-            margin-bottom: 25px; 
-            font-size: 0.92rem; 
+            margin-bottom: 24px; 
+            font-size: 0.94rem; 
             line-height: 1.65; 
             border-bottom: 1px solid #f4f4f4; 
-            padding-bottom: 20px; 
+            padding-bottom: 18px; 
             display: flex; 
             justify-content: space-between; 
             align-items: flex-start; 
-            gap: 30px; 
+            gap: 25px; 
         }
-        .apa-text { color: #222; max-width: 85%; }
+        .apa-text { color: #222; max-width: 82%; }
         .btn-link { 
-            font-size: 0.65rem; 
-            font-weight: 900; 
+            font-size: 0.68rem; 
+            font-weight: 800; 
             color: var(--vino); 
             text-decoration: none; 
             border: 1px solid var(--vino); 
-            padding: 7px 14px; 
-            transition: 0.3s; 
+            padding: 8px 14px; 
+            transition: all 0.25s; 
             white-space: nowrap; 
             text-transform: uppercase; 
             border-radius: 4px;
+            display: inline-flex;
+            align-items: center;
+            min-height: 38px;
         }
         .btn-link:hover { background: var(--vino); color: white; }
+
+        /* 4. MODAL CV (SIN BOTÓN DE DESCARGAR CV) */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            background: rgba(174, 3, 64, 0.35); 
+            backdrop-filter: blur(14px); 
+            -webkit-backdrop-filter: blur(14px); 
+            z-index: 20000; 
+            display: none; 
+            justify-content: center; 
+            align-items: center; 
+            padding: 20px;
+        }
+        .modal-box { 
+            width: 100%;
+            max-width: 780px; 
+            max-height: 85vh; 
+            background: white; 
+            padding: 45px 35px; 
+            overflow-y: auto; 
+            position: relative; 
+            box-shadow: 0 40px 80px rgba(0,0,0,0.25); 
+            border-radius: 12px;
+            border: 1px solid #eee; 
+            text-align: left;
+        }
+        .close-btn { 
+            position: absolute; 
+            top: 20px; right: 25px; 
+            cursor: pointer; 
+            font-size: 0.78rem; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            color: var(--vino); 
+            padding: 8px;
+        }
+        .cv-title { 
+            font-weight: 900; 
+            font-size: 1.6rem; 
+            text-transform: uppercase; 
+            color: var(--vino); 
+            margin-bottom: 25px; 
+            border-bottom: 3px solid var(--vino); 
+            display: inline-block; 
+            padding-bottom: 6px;
+        }
+        .cv-section h4 { 
+            border-bottom: 1px solid #f0f0f0; 
+            text-transform: uppercase; 
+            font-size: 0.82rem; 
+            letter-spacing: 2px; 
+            color: var(--vino); 
+            margin-top: 25px; 
+            padding-bottom: 8px; 
+        }
+        .cv-row { 
+            display: grid; 
+            grid-template-columns: 140px 1fr; 
+            gap: 20px; 
+            margin: 15px 0; 
+            font-size: 0.9rem; 
+            font-weight: 400; 
+            line-height: 1.6; 
+            color: #444; 
+        }
+        .cv-year { font-weight: 700; color: #888; }
 
         /* 5. FOOTER INSTITUCIONAL */
         footer { 
@@ -281,89 +487,28 @@
             color: var(--vino); 
             font-size: 0.72rem; 
             font-weight: 600; 
-            letter-spacing: 6px; 
+            letter-spacing: 5px; 
             text-transform: uppercase; 
             text-align: center; 
             display: flex; 
             flex-direction: row; 
             flex-wrap: wrap; 
             justify-content: center; 
-            gap: 15px;
+            gap: 12px;
         }
 
-        /* 6. MODAL CV */
-        .modal-overlay { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background: rgba(174, 3, 64, 0.3); 
-            backdrop-filter: blur(16px); 
-            -webkit-backdrop-filter: blur(16px); 
-            z-index: 20000; 
-            display: none; 
-            justify-content: center; 
-            align-items: center; 
-            padding: 20px;
-        }
-        .modal-box { 
-            width: 100%;
-            max-width: 800px; 
-            max-height: 85vh; 
-            background: white; 
-            padding: 50px; 
-            overflow-y: auto; 
-            position: relative; 
-            box-shadow: 0 40px 80px rgba(0,0,0,0.25); 
-            border-radius: 12px;
-            border: 1px solid #eee; 
-        }
-        .close-btn { 
-            position: absolute; 
-            top: 25px; right: 30px; 
-            cursor: pointer; 
-            font-size: 0.75rem; 
-            font-weight: 900; 
-            letter-spacing: 2px; 
-            color: var(--vino); 
-        }
-        .cv-title { 
-            font-weight: 900; 
-            font-size: 1.8rem; 
-            text-transform: uppercase; 
-            color: var(--vino); 
-            margin-bottom: 25px; 
-            border-bottom: 4px solid var(--vino); 
-            display: inline-block; 
-            padding-bottom: 6px;
-        }
-        .cv-section h4 { 
-            border-bottom: 1px solid #f0f0f0; 
-            text-transform: uppercase; 
-            font-size: 0.8rem; 
-            letter-spacing: 2px; 
-            color: var(--vino); 
-            margin-top: 30px; 
-            padding-bottom: 8px; 
-        }
-        .cv-row { 
-            display: grid; 
-            grid-template-columns: 140px 1fr; 
-            gap: 20px; 
-            margin: 15px 0; 
-            font-size: 0.9rem; 
-            font-weight: 300; 
-            line-height: 1.6; 
-            color: #444; 
-        }
-        .cv-year { font-weight: 700; color: #999; }
-
-        @media(max-width: 900px) {
-            .hero { grid-template-columns: 1fr; min-height: auto; padding-bottom: 40px; gap: 30px; text-align: center; }
-            .semblanza-text { text-align: left; margin: 20px auto; }
-            .action-bar { justify-content: center; }
-            .apa-entry { flex-direction: column; gap: 15px; }
-            .modal-box { padding: 30px 20px; }
-            .cv-row { grid-template-columns: 1fr; gap: 6px; }
+        /* RESPONSIVIDAD PROFUNDA SMARTPHONES */
+        @media (max-width: 768px) {
+            .profile-container { padding: 30px 16px 60px; }
+            .semblanza-text { text-align: left; font-size: 1rem; }
+            .action-bar { gap: 8px; }
+            .btn-minimal { flex: 1 1 130px; font-size: 0.68rem; padding: 10px 14px; }
+            .apa-entry { flex-direction: column; gap: 12px; }
+            .apa-text { max-width: 100%; }
+            .btn-link { align-self: flex-start; }
+            .modal-box { padding: 30px 20px; max-height: 90vh; }
+            .cv-row { grid-template-columns: 1fr; gap: 4px; }
+            .footer-tag { flex-direction: column; gap: 8px; letter-spacing: 3px; }
         }
     </style>
 </head>
@@ -375,6 +520,11 @@
             <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
             <span>Pensamiento Complejo</span>
         </a>
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Abrir menú de navegación" onclick="toggleMobileNav()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
         <div class="platform-links">
             <a href="../../index.html" class="platform-link">Inicio</a>
             <a href="../../red.html" class="platform-link active">Red</a>
@@ -393,38 +543,59 @@
         <a href="../../red.html" class="back-to-red">‹ Volver a la Red</a>
     </div>
 
-    <!-- HERO -->
-    <div class="hero" id="heroTrigger">
+    <!-- MAIN PROFILE CONTENT IN EXACT SPECIFIED ORDER:
+         1. GRADO
+         2. FOTO
+         3. NOMBRE
+         4. CONTACTO Y ORCID, ACADEMIA EDU Y CV
+         5. SEMBLANZA (ABAJO)
+         6. PRODUCCIÓN INTELECTUAL (LUEGO, OMITIDA SI NO HAY)
+    -->
+    <main class="profile-container" id="heroTrigger">
+        
+        <!-- 1. GRADO -->
+        <div class="profile-degree">
+            <span class="degree-badge">Lic. en Filosofía Ced 08810880</span>
+        </div>
+
+        <!-- 2. FOTO -->
         <div class="photo-box">
             <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1792456387706_Fotografia_-_Eduardo_L_pez.jpg" alt="Eduardo Benjamín López López">
         </div>
-        <div class="hero-info">
-            <span class="degree-badge">Lic. en Filosofía Ced 08810880</span>
-            <h1>Eduardo Benjamín López López</h1>
-            <div class="lines">Ciencias Sociales</div>
-            <div class="semblanza-text">Licenciado en Filosofía</div>
-            <div class="contact-info">Contacto institucional: lopezlopez.eduardo1984@gmail.com</div>
-            <div class="action-bar">
-                <a href="https://orcid.org/0009-0002-3789-6667" target="_blank" class="btn-minimal btn-outline">ORCID</a>
-<a href="https://orcid.org/0009-0002-3789-6667" target="_blank" class="btn-minimal btn-outline">Academia.edu</a>
-<div class="btn-minimal btn-solid" onclick="toggleCV(true)">Curriculum Vitae</div>
 
+        <!-- 3. NOMBRE -->
+        <h1 class="profile-name">Eduardo Benjamín López López</h1>
+        <div class="profile-lines">Ciencias Sociales</div>
+
+        <!-- 4. CONTACTO Y BOTONES (ORCID, ACADEMIA EDU, CV) -->
+        
+        <div class="contact-info">
+            <span class="contact-icon">✉️</span>
+            <span class="contact-label">Contacto institucional:</span>
+            <a href="mailto:lopezlopez.eduardo1984@gmail.com" class="contact-link">lopezlopez.eduardo1984@gmail.com</a>
+        </div>
+        
+        <div class="action-bar">
+            <a href="https://orcid.org/0009-0002-3789-6667" target="_blank" rel="noopener" class="btn-minimal btn-outline">ORCID</a>
+<a href="https://orcid.org/0009-0002-3789-6667" target="_blank" rel="noopener" class="btn-minimal btn-outline">Academia.edu</a>
+<button type="button" class="btn-minimal btn-solid" onclick="toggleCV(true)">Curriculum Vitae</button>
+
+        </div>
+
+        <!-- 5. SEMBLANZA -->
+        <div class="semblanza-wrapper">
+            <h2 class="section-label">📖 Semblanza Académica</h2>
+            <div class="semblanza-text">
+                Licenciado en Filosofía
             </div>
         </div>
-    </div>
 
-    <!-- PRODUCCIÓN INTELECTUAL -->
-    <h2 class="section-label">Producción Intelectual</h2>
-    <div class="pub-list">
+        <!-- 6. PRODUCCIÓN INTELECTUAL (OMITIDA SI NO HAY) -->
         
-        <div style="padding: 30px; background: #fafafa; border-radius: 8px; border: 1px solid #eee; text-align: center; color: #666; margin-bottom: 40px;">
-            <p style="font-size: 1rem; margin-bottom: 8px; font-weight: 700; color: #ae0340;">📋 Registro en Proceso</p>
-            <p style="font-size: 0.9rem; margin: 0;">La producción intelectual y publicaciones arbitradas de este perfil se encuentran en proceso de catalogación institucional en la Red.</p>
-        </div>
-        
-    </div>
 
-    <!-- MODAL CV -->
+    </main>
+
+    <!-- MODAL CV (SIN BOTÓN DE DESCARGAR CV) -->
     <div id="cvModal" class="modal-overlay" onclick="toggleCV(false)">
         <div class="modal-box" onclick="event.stopPropagation()">
             <div class="close-btn" onclick="toggleCV(false)">[ CERRAR ]</div>
@@ -448,12 +619,6 @@
                     Licenciado en Filosofía
                 </div>
             </div>
-
-            
-        <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #f0f0f0;">
-            <a href="https://drive.google.com/open?id=1Bs_1kx6YUSoZ7r9bW_iyI5aQe3xTc-Qo" target="_blank" class="btn-minimal btn-solid" style="display:inline-block; max-width:280px; text-decoration:none;">Descargar CV en PDF ↗</a>
-        </div>
-        
         </div>
     </div>
 
@@ -479,6 +644,23 @@
         function toggleCV(show) { 
             document.getElementById('cvModal').style.display = show ? 'flex' : 'none'; 
             document.body.style.overflow = show ? 'hidden' : '';
+        }
+
+        function toggleMobileNav() {
+            const toggle = document.getElementById('mobileNavToggle');
+            const menu = document.querySelector('.platform-links');
+            if (!toggle || !menu) return;
+            const isOpen = toggle.classList.toggle('open');
+            menu.classList.toggle('mobile-open', isOpen);
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+
+        // PWA Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('../../sw.js')
+                    .catch(err => console.log('SW error:', err));
+            });
         }
     </script>
 </body>
