@@ -1,4 +1,4 @@
-import urllib.request, ssl, csv, io, os, html, re, json
+import urllib.request, ssl, csv, io, os, html, re, json, unicodedata
 
 ctx = ssl._create_unverified_context()
 SPREADSHEET_ID = '1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4'
@@ -12,8 +12,13 @@ docentes_raw = reader[1:]
 
 docentes = []
 for idx, r in enumerate(docentes_raw):
-    correo = (r[0] or '').strip()
+    if len(r) < 2:
+        continue
     nombre = (r[1] or '').strip()
+    if not nombre or nombre.lower() == 'nombre completo':
+        continue
+
+    correo = (r[0] or '').strip()
     grado = (r[2] or '').strip()
     semblanza = (r[3] or '').strip()
     areas = (r[4] or '').strip()
@@ -26,9 +31,13 @@ for idx, r in enumerate(docentes_raw):
     # OMIT Col L (r[11])
     imagen = (r[12] or '').strip()
     slug_raw = (r[13] or '').strip()
-    clean_slug = slug_raw.replace('/', '').strip() or f'docente-{idx+1}'
+    clean_slug = slug_raw.replace('/', '').strip()
+    if not clean_slug and nombre:
+        clean_slug = re.sub(r'[^a-z0-9]', '', unicodedata.normalize('NFD', nombre.lower()).encode('ascii', 'ignore').decode('utf-8'))
+    if not clean_slug:
+        clean_slug = f'docente-{idx+1}'
 
-    if not imagen:
+    if not imagen or not imagen.startswith('http'):
         imagen = 'https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png'
 
     docentes.append({
@@ -54,13 +63,14 @@ def render_pre_card(doc, link_prefix):
     areas_html = "".join(f'<span class="area-chip">{html.escape(a)}</span>' for a in first_areas) if first_areas else '<span class="area-chip">Pensamiento Complejo</span>'
     
     clean_search_text = f"{doc['nombre']} {doc['grado']} {doc['areas']} {doc['correo']}".lower()
+    default_img = 'https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png'
 
     return f'''
     <article class="docente-card" data-search="{html.escape(clean_search_text)}" onclick="window.location.href='{link_url}'">
         <div class="card-header">
             <span class="card-degree">{html.escape(doc['grado'] or 'Docente')}</span>
             <div class="card-avatar-wrapper">
-                <img src="{doc['imagen']}" alt="{html.escape(doc['nombre'])}" class="card-avatar" loading="lazy">
+                <img src="{doc['imagen']}" alt="{html.escape(doc['nombre'])}" class="card-avatar" loading="lazy" onerror="this.onerror=null;this.src='{default_img}';">
             </div>
         </div>
         <div class="card-body">
@@ -101,6 +111,9 @@ def build_exhibitor_html(is_subdir=False):
     <meta name="apple-mobile-web-app-title" content="Pensamiento Complejo">
     <link rel="apple-touch-icon" href="{rel_root}icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="{rel_root}icons/favicon-32.png">
+
+    <!-- PapaParse para sincronización en tiempo real con la hoja Red -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
@@ -723,7 +736,7 @@ def build_exhibitor_html(is_subdir=False):
             <button id="clearSearchBtn" class="clear-btn" onclick="clearSearch()" style="display:none;" aria-label="Limpiar búsqueda">✕</button>
         </div>
         <div class="search-counter">
-            Mostrando <strong id="visibleCount">{len(docentes)}</strong> de <strong>{len(docentes)}</strong> docentes adscritos
+            Mostrando <strong id="visibleCount">{len(docentes)}</strong> de <strong id="totalDocentesCount">{len(docentes)}</strong> docentes adscritos
         </div>
     </section>
 
@@ -753,6 +766,57 @@ def build_exhibitor_html(is_subdir=False):
     <script>
         const initialDocentes = {docentes_json};
         const linkPrefix = "{card_link_prefix}";
+        const SPREADSHEET_ID = '{SPREADSHEET_ID}';
+        const RED_CSV_URL = `https://docs.google.com/spreadsheets/d/${{SPREADSHEET_ID}}/gviz/tq?tqx=out:csv&sheet=Red`;
+        const defaultLogo = 'https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png';
+
+        function escapeHtml(text) {{
+            if (!text) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }}
+
+        function createDocenteCard(doc) {{
+            const cleanSlug = (doc.slug || '').replace(/^\\/+/, '').trim();
+            const linkUrl = cleanSlug ? `${{linkPrefix}}${{cleanSlug}}.html` : '#';
+            const areasList = (doc.areas || '').split(/[,;\\n•*]+/).map(a => a.trim()).filter(Boolean);
+            const firstAreas = areasList.slice(0, 2);
+            const areasHtml = firstAreas.length > 0 
+                ? firstAreas.map(a => `<span class="area-chip">${{escapeHtml(a)}}</span>`).join('') 
+                : '<span class="area-chip">Pensamiento Complejo</span>';
+            
+            const cleanSearchText = `${{doc.nombre || ''}} ${{doc.grado || ''}} ${{doc.areas || ''}} ${{doc.correo || ''}}`.toLowerCase();
+            const imgUrl = (doc.imagen && doc.imagen.startsWith('http')) ? doc.imagen : defaultLogo;
+            const bioText = (doc.semblanza || '').length > 120 ? doc.semblanza.substring(0, 120) + '...' : (doc.semblanza || '');
+
+            return `
+            <article class="docente-card" data-search="${{escapeHtml(cleanSearchText)}}" onclick="window.location.href='${{linkUrl}}'">
+                <div class="card-header">
+                    <span class="card-degree">${{escapeHtml(doc.grado || 'Docente')}}</span>
+                    <div class="card-avatar-wrapper">
+                        <img src="${{imgUrl}}" alt="${{escapeHtml(doc.nombre)}}" class="card-avatar" loading="lazy" onerror="this.onerror=null;this.src='${{defaultLogo}}';">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h3 class="card-name">${{escapeHtml(doc.nombre)}}</h3>
+                    <div class="card-areas-chips">
+                        ${{areasHtml}}
+                    </div>
+                    <p class="card-bio">${{escapeHtml(bioText)}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="${{linkUrl}}" class="card-btn" onclick="event.stopPropagation();">
+                        <span>Conocer Perfil</span>
+                        <span class="arrow">↗</span>
+                    </a>
+                </div>
+            </article>
+            `;
+        }}
 
         function toggleMobileNav() {{
             const toggle = document.getElementById('mobileNavToggle');
@@ -798,17 +862,72 @@ def build_exhibitor_html(is_subdir=False):
             filterDocentes();
         }}
 
-        // Sincronización en segundo plano con Google Sheets (si hay conexión)
-        async function syncWithSheet() {{
-            try {{
-                const sheetId = '{SPREADSHEET_ID}';
-                const url = `https://docs.google.com/spreadsheets/d/${{sheetId}}/gviz/tq?tqx=out:csv&sheet=Red`;
-                const resp = await fetch(url);
-                if (!resp.ok) return;
-                // Si la sincronización tiene éxito se pueden refrescar tarjetas dinámicas
-            }} catch(e) {{
-                // Sin conexión o error, el SSR previo garantiza 100% disponibilidad
-            }}
+        // Mapeo dinámico y exclusivo con la hoja "Red" (todo y solo lo que aparezca en el sheet)
+        function syncWithSheet() {{
+            if (typeof Papa === 'undefined') return;
+            Papa.parse(RED_CSV_URL, {{
+                download: true,
+                header: false,
+                skipEmptyLines: true,
+                complete: function(results) {{
+                    if (!results || !results.data || results.data.length < 2) return;
+                    const rows = results.data.slice(1);
+                    const validDocentes = [];
+
+                    rows.forEach((r, idx) => {{
+                        if (!r || r.length < 2) return;
+                        const nombre = (r[1] || '').trim();
+                        if (!nombre || nombre.toLowerCase() === 'nombre completo') return;
+
+                        const correo = (r[0] || '').trim();
+                        const grado = (r[2] || '').trim();
+                        const semblanza = (r[3] || '').trim();
+                        const areas = (r[4] || '').trim();
+                        const rg_academia = (r[5] || '').trim();
+                        const orcid = (r[6] || '').trim();
+                        // OMITIR Col H (r[7]) - Foto drive
+                        const publicaciones = (r[8] || '').trim();
+                        const portafolio = (r[9] || '').trim();
+                        const cv_drive = (r[10] || '').trim();
+                        // OMITIR Col L (r[11]) - WhatsApp
+                        const imagen = (r[12] || '').trim() || defaultLogo;
+                        const rawSlug = (r[13] || '').trim();
+                        let cleanSlug = rawSlug.replace(/^\\/+/, '').trim();
+                        if (!cleanSlug && nombre) {{
+                            cleanSlug = nombre.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(/[^a-z0-9]/g, "");
+                        }}
+
+                        validDocentes.push({{
+                            id: idx + 1,
+                            correo: correo,
+                            nombre: nombre,
+                            grado: grado,
+                            semblanza: semblanza,
+                            areas: areas,
+                            rg_academia: rg_academia,
+                            orcid: orcid,
+                            publicaciones: publicaciones,
+                            portafolio: portafolio,
+                            cv_drive: cv_drive,
+                            imagen: imagen,
+                            slug: cleanSlug
+                        }});
+                    }});
+
+                    if (validDocentes.length === 0) return;
+
+                    const grid = document.getElementById('docentesGrid');
+                    if (grid) {{
+                        grid.innerHTML = validDocentes.map(d => createDocenteCard(d)).join('\\n');
+                    }}
+                    const totalEl = document.getElementById('totalDocentesCount');
+                    if (totalEl) totalEl.innerText = validDocentes.length;
+                    filterDocentes();
+                }},
+                error: function(err) {{
+                    console.warn("Aviso: Sincronización en vivo con Google Sheets no disponible, usando contenido local.", err);
+                }}
+            }});
         }}
         syncWithSheet();
 

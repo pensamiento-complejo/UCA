@@ -1332,6 +1332,39 @@
     }
 
     // MAPEO DE HOJA "Complejidades Hub"
+    function resolveItemImage(item, defaultImg) {
+      // 1. Reflejar imagen de vista previa de la columna I
+      if (item.imagenVistaPrevia && item.imagenVistaPrevia.trim().startsWith('http')) {
+        const colI = item.imagenVistaPrevia.trim();
+        const driveMatch = colI.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || colI.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+        if (driveMatch) {
+          return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w800`;
+        }
+        return colI;
+      }
+      // 2. En caso de que no, la de la columna F
+      if (item.urlColF && item.urlColF.trim()) {
+        const colF = item.urlColF.trim();
+        const ytId = extractYouTubeID(colF);
+        if (ytId) {
+          return `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+        }
+        const driveMatch = colF.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || colF.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+        if (driveMatch) {
+          return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w800`;
+        }
+        if (colF.startsWith('http')) {
+          return colF;
+        }
+      }
+      // 3. Fallback predeterminado
+      return defaultImg;
+    }
+
+    function resolveItemLink(item, defaultUrl) {
+      return item.botonDescarga || item.urlColF || defaultUrl;
+    }
+
     function loadHubData() {
       Papa.parse(HUB_CSV_URL, {
         download: true, header: false, skipEmptyLines: true,
@@ -1344,10 +1377,12 @@
             etiquetas: (row[2] || '').trim(),
             autor: (row[3] || '').trim(),
             categoria: (row[4] || '').trim(),
+            urlColF: (row[5] || '').trim(), // Columna F (URL / Video / Imagen)
             video: (row[5] || '').trim(),
-            secciones: (row[6] || '').trim(),
-            newsletter: (row[7] || '').trim(),
-            imagen: (row[8] || '').trim(), // Columna I: Vista previa
+            secciones: (row[6] || '').trim(), // Columna G (Secciones)
+            newsletter: (row[7] || '').trim(), // Columna H
+            imagenVistaPrevia: (row[8] || '').trim(), // Columna I: Vista previa
+            imagen: (row[8] || '').trim(),
             botonDescarga: (row[9] || '').trim() // Columna J
           })).filter(item => item.titulo !== '');
 
@@ -1355,28 +1390,41 @@
             setStageVideo(globalHubData[0]);
           }
 
-          // 1. Noticias y Eventos -> Columna G: "noticia"
-          const noticiasItems = globalHubData.filter(item => 
-            item.secciones.toLowerCase().includes('noticia')
-          );
+          // 1. Noticias y Eventos -> Columna G / Cat: "convocatoria, noticia, artículo, evento, actualidad y medios"
+          const noticiasKeywords = ['convocatoria', 'noticia', 'artículo', 'articulo', 'evento', 'actualidad', 'medios'];
+          const noticiasItems = globalHubData.filter(item => {
+            const sec = (item.secciones || '').toLowerCase();
+            const cat = (item.categoria || '').toLowerCase();
+            const etq = (item.etiquetas || '').toLowerCase();
+            return noticiasKeywords.some(kw => sec.includes(kw) || cat.includes(kw) || etq.includes(kw));
+          });
           renderNoticias(noticiasItems);
 
           // 2. Clases y Documentales -> Columna G: "documentales"
-          const documentalesItems = globalHubData.filter(item => 
-            item.secciones.toLowerCase().includes('documental')
-          );
+          const documentalesKeywords = ['documental', 'documentales'];
+          const documentalesItems = globalHubData.filter(item => {
+            const sec = (item.secciones || '').toLowerCase();
+            const cat = (item.categoria || '').toLowerCase();
+            return documentalesKeywords.some(kw => sec.includes(kw) || cat.includes(kw));
+          });
           renderDocumentales(documentalesItems);
 
-          // 3. Biblioteca PDF -> Columna G: "biblioteca PDF" con vista previa en Col I
-          const bibliotecaItems = globalHubData.filter(item => 
-            item.secciones.toLowerCase().includes('biblioteca') || item.secciones.toLowerCase().includes('pdf')
-          );
+          // 3. Biblioteca PDF -> Columna G: "biblioteca PDF" con vista previa en Col I o Col F
+          const bibliotecaKeywords = ['biblioteca', 'pdf'];
+          const bibliotecaItems = globalHubData.filter(item => {
+            const sec = (item.secciones || '').toLowerCase();
+            const cat = (item.categoria || '').toLowerCase();
+            return bibliotecaKeywords.some(kw => sec.includes(kw) || cat.includes(kw));
+          });
           renderBiblioteca(bibliotecaItems);
 
-          // 4. Análisis en Audio -> Columna G: "podcast"
-          const podcastItems = globalHubData.filter(item => 
-            item.secciones.toLowerCase().includes('podcast')
-          );
+          // 4. Análisis en Audio -> Columna G: "podcast" con vista previa en Col I o Col F
+          const podcastKeywords = ['podcast', 'podcasts', 'audio'];
+          const podcastItems = globalHubData.filter(item => {
+            const sec = (item.secciones || '').toLowerCase();
+            const cat = (item.categoria || '').toLowerCase();
+            return podcastKeywords.some(kw => sec.includes(kw) || cat.includes(kw));
+          });
           renderPodcasts(podcastItems);
 
           // 5. Videoteca y Cápsulas
@@ -1421,24 +1469,24 @@
       if (!container) return;
 
       const fallbackNoticias = [
-        { titulo: "Seminario de Lógica Informal", descripcion: "Apertura de inscripciones para el ciclo 2026-II.", etiquetas: "Convocatoria", imagen: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" },
-        { titulo: "Cartografía Conceptual", descripcion: "Metodología para el mapeo de estructuras lógicas.", etiquetas: "Taller Práctico", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" },
-        { titulo: "Volumen Complecti", descripcion: "Repositorio de artículos sometidos a arbitraje.", etiquetas: "Publicación", imagen: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=80", url: "newsletter.html" }
+        { titulo: "Seminario de Lógica Informal", descripcion: "Apertura de inscripciones para el ciclo 2026-II.", etiquetas: "Convocatoria", imagen: "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80", urlColF: "newsletter.html" },
+        { titulo: "Cartografía Conceptual", descripcion: "Metodología para el mapeo de estructuras lógicas.", etiquetas: "Taller Práctico", imagen: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80", urlColF: "newsletter.html" },
+        { titulo: "Volumen Complecti", descripcion: "Repositorio de artículos sometidos a arbitraje.", etiquetas: "Publicación", imagen: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=80", urlColF: "newsletter.html" }
       ];
 
       const list = items.length > 0 ? items : fallbackNoticias;
       container.innerHTML = '';
 
       list.forEach(item => {
-        const link = item.botonDescarga || item.video || item.url || 'newsletter.html';
-        const img = item.imagen || 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80';
+        const link = resolveItemLink(item, 'newsletter.html');
+        const img = resolveItemImage(item, 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80');
         const card = document.createElement('a');
         card.href = link;
         if (link.startsWith('http')) card.target = '_blank';
         card.className = 'news-card-mini';
         card.innerHTML = `
-          <img src="${img}" class="news-img-mini" alt="${item.titulo}" loading="lazy">
-          <span class="news-tag-mini">${item.etiquetas || 'Noticia'}</span>
+          <img src="${img}" class="news-img-mini" alt="${item.titulo}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=400&q=80';">
+          <span class="news-tag-mini">${item.etiquetas || item.secciones || 'Noticia'}</span>
           <h4 class="news-title-mini">${item.titulo}</h4>
           <p class="news-desc-mini">${item.descripcion}</p>
         `;
@@ -1451,25 +1499,22 @@
       if (!container) return;
 
       const fallbackDocumentales = [
-        { titulo: "Clase 01: Bases de la Argumentación", autor: "Vans Emerén", video: "https://www.youtube.com/watch?v=P-1QTW71bzk", imagen: "https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" },
-        { titulo: "Documental: Redes Complejas y Sistemas", autor: "Michael Gilbert", video: "https://www.youtube.com/watch?v=C-oWuLxcZO0", imagen: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=600&q=80" }
+        { titulo: "Clase 01: Bases de la Argumentación", autor: "Vans Emerén", video: "https://www.youtube.com/watch?v=P-1QTW71bzk", urlColF: "https://www.youtube.com/watch?v=P-1QTW71bzk" },
+        { titulo: "Documental: Redes Complejas y Sistemas", autor: "Michael Gilbert", video: "https://www.youtube.com/watch?v=C-oWuLxcZO0", urlColF: "https://www.youtube.com/watch?v=C-oWuLxcZO0" }
       ];
 
       const list = items.length > 0 ? items : fallbackDocumentales;
       container.innerHTML = '';
 
       list.forEach(item => {
-        const ytId = extractYouTubeID(item.video);
-        let imgUrl = item.imagen;
-        if (!imgUrl && ytId) imgUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
-        if (!imgUrl) imgUrl = 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80';
+        const imgUrl = resolveItemImage(item, 'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80');
 
         const card = document.createElement('div');
         card.className = 'card card-video';
         card.innerHTML = `
           <div class="card-img-wrapper">
             <span class="card-badge" style="background:#111111;">Clase / Documental</span>
-            <img src="${imgUrl}" alt="${item.titulo}" class="card-img" loading="lazy">
+            <img src="${imgUrl}" alt="${item.titulo}" class="card-img" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80';">
           </div>
           <h3 class="card-title">${item.titulo}</h3>
           <span class="card-meta">👤 ${item.autor || 'Red Transversal UNRC'}</span>
@@ -1487,18 +1532,19 @@
       if (!container) return;
 
       const fallbackBiblioteca = [
-        { titulo: "Introducción al Pensamiento Complejo", autor: "Edgar Morin", imagen: "https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
-        { titulo: "Argumentación Sistémica", autor: "Revista Complecti", imagen: "https://images.unsplash.com/photo-1532012197267-da84d127e765?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
-        { titulo: "Lógicas No Clásicas", autor: "Susan Haack", imagen: "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=80", url: "uca.html" },
-        { titulo: "Manual de Redacción Académica", autor: "Material Docente", imagen: "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=300&q=80", url: "uca.html" }
+        { titulo: "Introducción al Pensamiento Complejo", autor: "Edgar Morin", urlColF: "uca.html" },
+        { titulo: "Argumentación Sistémica", autor: "Revista Complecti", urlColF: "uca.html" },
+        { titulo: "Lógicas No Clásicas", autor: "Susan Haack", urlColF: "uca.html" },
+        { titulo: "Manual de Redacción Académica", autor: "Material Docente", urlColF: "uca.html" }
       ];
 
       const list = items.length > 0 ? items : fallbackBiblioteca;
       container.innerHTML = '';
 
       list.forEach(item => {
-        const link = item.botonDescarga || item.video || item.url || 'uca.html';
-        const imgUrl = item.imagen || 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80';
+        const link = resolveItemLink(item, 'uca.html');
+        // Reflejar la imagen de vista previa de la columna I, en caso de que no, la de la F
+        const imgUrl = resolveItemImage(item, 'https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80');
 
         const card = document.createElement('a');
         card.href = link;
@@ -1507,7 +1553,7 @@
         card.innerHTML = `
           <div class="card-img-wrapper">
             <span class="card-badge">Biblioteca PDF</span>
-            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy">
+            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&w=300&q=80';">
           </div>
           <h3 class="card-title">${item.titulo}</h3>
           <span class="card-meta">${item.autor || 'Recurso Abierto'}</span>
@@ -1521,17 +1567,18 @@
       if (!container) return;
 
       const fallbackPodcasts = [
-        { titulo: "Ep. 14: Filosofía Aplicada", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" },
-        { titulo: "Ep. 15: Entropía e Información", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1590602847861-f357a9332bbc?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" },
-        { titulo: "Ep. 16: Diálogos Críticos", autor: "Red Transversal UNRC", imagen: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=300&q=80", url: "newsletter.html" }
+        { titulo: "Ep. 14: Filosofía Aplicada", autor: "Red Transversal UNRC", urlColF: "newsletter.html" },
+        { titulo: "Ep. 15: Entropía e Información", autor: "Red Transversal UNRC", urlColF: "newsletter.html" },
+        { titulo: "Ep. 16: Diálogos Críticos", autor: "Red Transversal UNRC", urlColF: "newsletter.html" }
       ];
 
       const list = items.length > 0 ? items : fallbackPodcasts;
       container.innerHTML = '';
 
       list.forEach(item => {
-        const link = item.botonDescarga || item.video || item.url || 'newsletter.html';
-        const imgUrl = item.imagen || 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80';
+        const link = resolveItemLink(item, 'newsletter.html');
+        // Reflejar la imagen de vista previa de la columna I, en caso de que no, la de la F
+        const imgUrl = resolveItemImage(item, 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80');
 
         const card = document.createElement('a');
         card.href = link;
@@ -1540,7 +1587,7 @@
         card.innerHTML = `
           <div class="card-img-wrapper">
             <span class="card-badge" style="background:#1DB954;">Podcast Spotify</span>
-            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy">
+            <img src="${imgUrl}" class="card-img" alt="${item.titulo}" loading="lazy" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1478737270239-2f02b77fc618?auto=format&fit=crop&w=300&q=80';">
           </div>
           <h3 class="card-title">${item.titulo}</h3>
           <span class="card-meta">🎙️ ${item.autor || 'Red Transversal UNRC'}</span>
