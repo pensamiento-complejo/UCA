@@ -1,0 +1,2619 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wix Studio REA | Editor de Todo el Sitio - Pensamiento Complejo UNRC</title>
+    
+    <!-- PWA & Mobile Meta Tags -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#0e0f12">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+
+    <!-- Fuentes y PapaParse -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+        :root {
+            --bg-studio: #0e0f12;
+            --bg-panel: #16171b;
+            --bg-panel-light: #202227;
+            --bg-canvas: #1c1d22;
+            --border-studio: #2a2c33;
+            --border-focus: #00d2ff;
+            --unrc-crimson: #ae0340;
+            --unrc-crimson-hover: #cf044d;
+            --accent-cyan: #00d2ff;
+            --accent-green: #10b981;
+            --accent-purple: #8b5cf6;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-float: 0 16px 40px rgba(0, 0, 0, 0.45);
+            --transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-studio);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+            user-select: none;
+        }
+
+        /* 1. TOP HEADER / APP BAR WIX STUDIO */
+        .studio-header {
+            height: 56px;
+            background: var(--bg-panel);
+            border-bottom: 1px solid var(--border-studio);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            z-index: 1000;
+            flex-shrink: 0;
+            gap: 12px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 280px;
+        }
+
+        .studio-brand {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 700;
+            font-size: 0.88rem;
+        }
+        .studio-brand img {
+            height: 26px;
+            width: auto;
+        }
+        .studio-badge {
+            background: linear-gradient(135deg, rgba(174, 3, 64, 0.3), rgba(0, 210, 255, 0.2));
+            color: #00d2ff;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 210, 255, 0.4);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* PAGE SELECTOR DROPDOWN */
+        .page-selector-container {
+            position: relative;
+        }
+        .page-selector-btn {
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            max-width: 220px;
+        }
+        .page-selector-btn:hover {
+            border-color: var(--accent-cyan);
+            background: #252830;
+        }
+        .page-selector-btn span.page-name-truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .page-dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            margin-top: 6px;
+            width: 320px;
+            background: var(--bg-panel);
+            border: 1px solid var(--border-studio);
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-float);
+            padding: 8px;
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 2000;
+        }
+        .page-dropdown-menu.show {
+            display: flex;
+        }
+        .page-dropdown-search {
+            background: var(--bg-studio);
+            border: 1px solid var(--border-studio);
+            border-radius: 6px;
+            padding: 6px 10px;
+            color: #fff;
+            font-size: 0.8rem;
+            margin-bottom: 6px;
+            outline: none;
+        }
+        .page-dropdown-search:focus {
+            border-color: var(--accent-cyan);
+        }
+        .page-dropdown-list {
+            max-height: 280px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .page-dropdown-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-size: 0.82rem;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .page-dropdown-item:hover {
+            background: var(--bg-panel-light);
+            color: var(--accent-cyan);
+        }
+        .page-dropdown-item.active {
+            background: rgba(0, 210, 255, 0.12);
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+        .page-dropdown-section-title {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 700;
+            padding: 6px 8px 2px;
+        }
+        .btn-create-page-menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 8px;
+            background: rgba(174, 3, 64, 0.15);
+            border: 1px dashed var(--unrc-crimson);
+            color: #ff6b8b;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 6px;
+            transition: var(--transition);
+        }
+        .btn-create-page-menu:hover {
+            background: var(--unrc-crimson);
+            color: #fff;
+        }
+
+        /* VIEWPORT SWITCHER */
+        .header-center {
+            display: flex;
+            align-items: center;
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            border-radius: 8px;
+            padding: 3px;
+            gap: 2px;
+        }
+
+        .device-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 6px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        .device-btn:hover { color: var(--text-main); }
+        .device-btn.active {
+            background: var(--bg-studio);
+            color: var(--accent-cyan);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+        }
+
+        /* HEADER RIGHT ACTIONS */
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-studio {
+            padding: 7px 13px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid transparent;
+            transition: var(--transition);
+            white-space: nowrap;
+        }
+        .btn-studio-ghost {
+            background: transparent;
+            color: var(--text-main);
+            border-color: var(--border-studio);
+        }
+        .btn-studio-ghost:hover {
+            background: var(--bg-panel-light);
+            border-color: var(--text-muted);
+        }
+        .btn-studio-code {
+            background: rgba(139, 92, 246, 0.12);
+            color: #c084fc;
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+        .btn-studio-code:hover {
+            background: rgba(139, 92, 246, 0.22);
+            border-color: #c084fc;
+        }
+        .btn-studio-r2 {
+            background: rgba(0, 210, 255, 0.12);
+            color: var(--accent-cyan);
+            border-color: rgba(0, 210, 255, 0.3);
+        }
+        .btn-studio-r2:hover {
+            background: rgba(0, 210, 255, 0.22);
+            border-color: var(--accent-cyan);
+        }
+        .btn-studio-sheet {
+            background: rgba(16, 185, 129, 0.12);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+        .btn-studio-sheet:hover {
+            background: rgba(16, 185, 129, 0.22);
+            border-color: #34d399;
+        }
+        
+        /* BOTÓN PUBLICAR WIX STUDIO */
+        .btn-publish-wix {
+            background: linear-gradient(135deg, #00d2ff, #0072ff);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(0, 210, 255, 0.35);
+            transition: var(--transition);
+        }
+        .btn-publish-wix:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 210, 255, 0.5);
+            filter: brightness(1.1);
+        }
+        .btn-publish-wix:active {
+            transform: translateY(1px);
+        }
+
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+        .user-avatar-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+        .btn-logout {
+            background: none;
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            font-size: 0.75rem;
+            padding-left: 4px;
+        }
+        .btn-logout:hover { text-decoration: underline; }
+
+        /* 2. MAIN WORKSPACE LAYOUT */
+        .studio-workspace {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* 2A. LEFT ICON RAIL (54px) */
+        .studio-rail {
+            width: 54px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-studio);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 12px 0;
+            gap: 14px;
+            z-index: 50;
+            flex-shrink: 0;
+        }
+
+        .rail-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.15rem;
+            position: relative;
+            transition: var(--transition);
+        }
+        .rail-btn:hover {
+            color: var(--text-main);
+            background: var(--bg-panel-light);
+        }
+        .rail-btn.active {
+            color: var(--accent-cyan);
+            background: rgba(0, 210, 255, 0.12);
+        }
+        .rail-btn.active::before {
+            content: '';
+            position: absolute;
+            left: -6px;
+            top: 10px;
+            bottom: 10px;
+            width: 3px;
+            border-radius: 0 4px 4px 0;
+            background: var(--accent-cyan);
+        }
+        .rail-label {
+            font-size: 0.55rem;
+            margin-top: 2px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        /* 2B. LEFT DRAWER (320px) */
+        .studio-drawer {
+            width: 320px;
+            background: var(--bg-panel);
+            border-right: 1px solid var(--border-studio);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            transition: var(--transition);
+            z-index: 40;
+            flex-shrink: 0;
+        }
+        .studio-drawer.collapsed {
+            width: 0;
+            border-right: none;
+        }
+
+        .drawer-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-studio);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .drawer-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .drawer-close {
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 4px;
+        }
+        .drawer-close:hover { color: var(--text-main); }
+
+        .drawer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* BLOQUES EN DRAWER */
+        .blocks-category-title {
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 0.5px;
+        }
+        .blocks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+        .block-card-add {
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            border-radius: var(--radius-md);
+            padding: 12px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .block-card-add:hover {
+            border-color: var(--accent-cyan);
+            background: #252830;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 210, 255, 0.15);
+        }
+        .block-card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        .block-card-name {
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+        .block-card-desc {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            margin-top: 2px;
+        }
+
+        /* 2C. CANVAS CENTRAL */
+        .studio-canvas-area {
+            flex: 1;
+            background-color: var(--bg-canvas);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+            background-size: 24px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            overflow-y: auto;
+            overflow-x: auto;
+            position: relative;
+            padding: 24px;
+        }
+
+        .canvas-viewport {
+            background: #ffffff;
+            box-shadow: var(--shadow-float);
+            border-radius: 8px;
+            min-height: calc(100vh - 110px);
+            transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .canvas-viewport.desktop { width: 100%; max-width: 1400px; }
+        .canvas-viewport.tablet { width: 768px; }
+        .canvas-viewport.mobile { width: 390px; }
+
+        /* IFRAME EN EL LIENZO */
+        .canvas-iframe {
+            width: 100%;
+            flex: 1;
+            min-height: calc(100vh - 120px);
+            border: none;
+            border-radius: 8px;
+            background: #ffffff;
+        }
+
+        /* MODO CÓDIGO HTML */
+        .code-editor-container {
+            width: 100%;
+            height: 100%;
+            display: none;
+            flex-direction: column;
+            background: #121316;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-studio);
+        }
+        .code-editor-container.show {
+            display: flex;
+        }
+        .code-editor-header {
+            padding: 10px 16px;
+            background: #1a1c22;
+            border-bottom: 1px solid var(--border-studio);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        .code-editor-textarea {
+            flex: 1;
+            width: 100%;
+            min-height: calc(100vh - 180px);
+            background: #121316;
+            color: #e2e8f0;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            padding: 16px;
+            border: none;
+            resize: none;
+            outline: none;
+            white-space: pre;
+            tab-size: 4;
+        }
+
+        /* 2D. RIGHT INSPECTOR (320px) */
+        .studio-inspector {
+            width: 320px;
+            background: var(--bg-panel);
+            border-left: 1px solid var(--border-studio);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            z-index: 40;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+        .studio-inspector.collapsed {
+            width: 0;
+            border-left: none;
+        }
+
+        .inspector-header {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-studio);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .inspector-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .inspector-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .inspector-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .inspector-label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+        }
+        .inspector-input, .inspector-textarea, .inspector-select {
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            border-radius: 6px;
+            padding: 8px 10px;
+            color: var(--text-main);
+            font-size: 0.82rem;
+            outline: none;
+            transition: var(--transition);
+            width: 100%;
+        }
+        .inspector-input:focus, .inspector-textarea:focus, .inspector-select:focus {
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 2px rgba(0, 210, 255, 0.15);
+        }
+        .inspector-textarea {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+        .inspector-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        /* 3. MODALES FLOTANTES (WIX STYLE) */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(8px);
+            z-index: 5000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active {
+            display: flex;
+        }
+        .studio-modal {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-studio);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 580px;
+            box-shadow: var(--shadow-float);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.96) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-studio);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .modal-title {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: 75vh;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .modal-footer {
+            padding: 14px 20px;
+            border-top: 1px solid var(--border-studio);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            background: #141518;
+        }
+
+        /* DROPZONE R2 */
+        .r2-dropzone {
+            border: 2px dashed rgba(0, 210, 255, 0.4);
+            border-radius: var(--radius-md);
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            background: rgba(0, 210, 255, 0.03);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .r2-dropzone:hover, .r2-dropzone.dragover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 210, 255, 0.08);
+        }
+        .r2-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+            max-height: 240px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .r2-thumb-card {
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            aspect-ratio: 1;
+            transition: var(--transition);
+        }
+        .r2-thumb-card:hover {
+            border-color: var(--accent-cyan);
+            transform: scale(1.03);
+        }
+        .r2-thumb-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .r2-thumb-card .thumb-actions {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.75);
+            display: flex;
+            justify-content: space-around;
+            padding: 4px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .r2-thumb-card:hover .thumb-actions {
+            opacity: 1;
+        }
+
+        /* PUBLICACIÓN WIX PROGRESS */
+        .publish-step {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background: var(--bg-panel-light);
+            border: 1px solid var(--border-studio);
+            font-size: 0.85rem;
+        }
+        .publish-step.done {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.08);
+            color: #34d399;
+        }
+        .publish-step.running {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 210, 255, 0.08);
+            color: var(--accent-cyan);
+        }
+        .publish-step.error {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.08);
+            color: #f87171;
+        }
+        .spinner {
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(0, 210, 255, 0.3);
+            border-top-color: var(--accent-cyan);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* TOAST NOTIFICACIÓN */
+        .studio-toast {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: #1e2026;
+            border: 1px solid var(--border-studio);
+            color: var(--text-main);
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 9999;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .studio-toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. TOP HEADER APP BAR -->
+    <header class="studio-header">
+        <div class="header-left">
+            <a href="index.html" target="_blank" class="studio-brand">
+                <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
+                <span>Pensamiento Complejo</span>
+            </a>
+            <span class="studio-badge">Wix Studio REA</span>
+
+            <!-- PAGE SELECTOR -->
+            <div class="page-selector-container">
+                <button class="page-selector-btn" id="pageSelectorBtn" onclick="togglePageDropdown()">
+                    <span id="currentPageIcon">🏠</span>
+                    <span class="page-name-truncate" id="currentPageNameLabel">Inicio (index.html)</span>
+                    <span style="font-size:0.65rem; color:var(--text-dim); margin-left:auto;">▼</span>
+                </button>
+
+                <div class="page-dropdown-menu" id="pageDropdownMenu">
+                    <input type="text" class="page-dropdown-search" id="pageSearchInput" placeholder="Buscar página..." oninput="filterPageDropdown(this.value)">
+                    <div class="page-dropdown-list" id="pageDropdownList">
+                        <!-- Generado dinámicamente -->
+                    </div>
+                    <button class="btn-create-page-menu" onclick="openNewPageModal()">
+                        <span>➕</span> Crear Nueva Página
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEWPORT SWITCHER -->
+        <div class="header-center">
+            <button class="device-btn active" id="btnDesk" onclick="setDeviceMode('desktop')" title="Pantalla Escritorio">
+                <span>🖥️</span> Escritorio
+            </button>
+            <button class="device-btn" id="btnTab" onclick="setDeviceMode('tablet')" title="Vista Tablet (768px)">
+                <span>📱</span> Tablet
+            </button>
+            <button class="device-btn" id="btnMob" onclick="setDeviceMode('mobile')" title="Vista Celular (390px)">
+                <span>📲</span> Celular
+            </button>
+        </div>
+
+        <!-- ACCIONES RÁPIDAS & PUBLICAR -->
+        <div class="header-right">
+            <button class="btn-studio btn-studio-r2" onclick="openMediaModal()" title="Subir imágenes a Cloudflare R2">
+                <span>🖼️</span> Medios R2
+            </button>
+            <button class="btn-studio btn-studio-sheet" onclick="openSheetModal()" title="Ver Mapeo y Hoja de Cálculo">
+                <span>📊</span> Google Sheet
+            </button>
+            <button class="btn-studio btn-studio-code" id="btnToggleCodeMode" onclick="toggleCodeMode()" title="Editar código HTML directo">
+                <span>💻</span> Modo HTML
+            </button>
+            <button class="btn-studio btn-studio-ghost" onclick="saveDraftLocally()" title="Guardar borrador local">
+                <span>💾</span> Guardar
+            </button>
+
+            <!-- BOTÓN PRINCIPAL DE PUBLICACIÓN DIRECTA -->
+            <button class="btn-publish-wix" onclick="initiatePublishFlow()">
+                <span>🚀</span> Publicar Sitio
+            </button>
+
+            <!-- USUARIO -->
+            <div class="user-chip" id="userBadge" style="display:none;">
+                <div class="user-avatar-dot"></div>
+                <span id="userEmailLabel">Docente</span>
+                <button class="btn-logout" onclick="logoutUser()" title="Cerrar sesión">Salir</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2. ESPACIO DE TRABAJO -->
+    <div class="studio-workspace">
+        
+        <!-- 2A. LEFT RAIL -->
+        <aside class="studio-rail">
+            <button class="rail-btn active" onclick="switchDrawerTab('pages')" title="Páginas del Sitio">
+                <span>📄</span>
+                <span class="rail-label">Páginas</span>
+            </button>
+            <button class="rail-btn" onclick="switchDrawerTab('blocks')" title="Agregar Elementos">
+                <span>➕</span>
+                <span class="rail-label">Bloques</span>
+            </button>
+            <button class="rail-btn" onclick="switchDrawerTab('media')" title="Biblioteca de Archivos R2">
+                <span>🖼️</span>
+                <span class="rail-label">Medios</span>
+            </button>
+            <button class="rail-btn" onclick="switchDrawerTab('sheets')" title="Integración Google Sheets">
+                <span>📊</span>
+                <span class="rail-label">Sheets</span>
+            </button>
+            <button class="rail-btn" onclick="switchDrawerTab('settings')" title="Configuración de Página y SEO">
+                <span>⚙️</span>
+                <span class="rail-label">Ajustes</span>
+            </button>
+        </aside>
+
+        <!-- 2B. LEFT DRAWER EXPANDIBLE -->
+        <div class="studio-drawer" id="studioDrawer">
+            <div class="drawer-header">
+                <div class="drawer-title" id="drawerTitle">
+                    <span>📄</span> Páginas del Sitio
+                </div>
+                <button class="drawer-close" onclick="toggleDrawer()">✕</button>
+            </div>
+            <div class="drawer-content" id="drawerContent">
+                <!-- Inyectado dinámicamente -->
+            </div>
+        </div>
+
+        <!-- 2C. CANVAS CENTRAL (VISUAL / CÓDIGO) -->
+        <main class="studio-canvas-area" id="studioCanvasArea">
+            
+            <!-- CONTENEDOR VISUAL CON VIEWPORT ADAPTABLE -->
+            <div class="canvas-viewport desktop" id="canvasViewport">
+                <iframe id="editorIframe" class="canvas-iframe" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>
+            </div>
+
+            <!-- MODO CÓDIGO HTML INTEGRADO -->
+            <div class="code-editor-container" id="codeEditorContainer">
+                <div class="code-editor-header">
+                    <span id="codeEditorPageLabel">📄 Editando código HTML directo</span>
+                    <button class="btn-studio btn-studio-r2" onclick="applyCodeChangesToCanvas()">
+                        <span>⚡</span> Aplicar Cambios al Lienzo Visual
+                    </button>
+                </div>
+                <textarea id="rawHtmlTextarea" class="code-editor-textarea" spellcheck="false"></textarea>
+            </div>
+        </main>
+
+        <!-- 2D. RIGHT INSPECTOR (PROPIEDADES WIX STUDIO) -->
+        <aside class="studio-inspector" id="studioInspector">
+            <div class="inspector-header">
+                <div class="inspector-title" id="inspectorTitle">
+                    <span>🎨</span> Inspector de Propiedades
+                </div>
+                <button class="drawer-close" onclick="toggleInspector()">✕</button>
+            </div>
+            <div class="inspector-content" id="inspectorContent">
+                <!-- Propiedades del elemento seleccionado -->
+            </div>
+        </aside>
+    </div>
+
+    <!-- 3. MODAL: INICIO DE SESIÓN -->
+    <div class="modal-overlay" id="loginOverlay">
+        <div class="studio-modal" style="max-width: 420px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>🔒</span> Acceso al Editor Wix Studio
+                </div>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.85rem; color:var(--text-muted); line-height:1.4;">
+                    Ingresa tus credenciales registradas en la hoja <strong>Usuarios</strong> del Google Sheet oficial.
+                </p>
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" style="display:flex; flex-direction:column; gap:12px;">
+                    <div>
+                        <label class="inspector-label">Correo institucional / Usuario</label>
+                        <input type="email" id="loginEmail" class="inspector-input" required placeholder="correo@rcastellanos.cdmx.gob.mx">
+                    </div>
+                    <div>
+                        <label class="inspector-label">Contraseña</label>
+                        <input type="password" id="loginPassword" class="inspector-input" required placeholder="••••••••">
+                    </div>
+                    <div id="loginErrorMsg" style="color:#ef4444; font-size:0.78rem; display:none;"></div>
+                    <button type="submit" id="loginSubmitBtn" class="btn-publish-wix" style="justify-content:center; padding:10px; margin-top:8px;">
+                        <span>🔒</span> Iniciar Sesión en el Editor
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. MODAL: CREAR NUEVA PÁGINA -->
+    <div class="modal-overlay" id="newPageModalOverlay">
+        <div class="studio-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>➕</span> Crear Nueva Página en el Sitio
+                </div>
+                <button class="drawer-close" onclick="closeNewPageModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="inspector-group">
+                    <label class="inspector-label">Tipo de Página</label>
+                    <select id="newPageType" class="inspector-select" onchange="handleNewPageTypeChange(this.value)">
+                        <option value="newsletter">📰 Artículo / Publicación para Newsletter (Plantilla Editorial UNRC)</option>
+                        <option value="blank">📄 Página en Blanco (Estructura oficial con menú y cabecera)</option>
+                    </select>
+                </div>
+                <div class="inspector-group">
+                    <label class="inspector-label">Título de la Página</label>
+                    <input type="text" id="newPageTitle" class="inspector-input" placeholder="Ej: Seminario Internacional de Pensamiento Complejo 2026" oninput="autoGenerateSlug(this.value)">
+                </div>
+                <div class="inspector-group">
+                    <label class="inspector-label">Ruta / Nombre del Archivo HTML</label>
+                    <div style="display:flex; align-items:center; gap:6px;">
+                        <span id="newPagePathPrefix" style="font-size:0.8rem; color:var(--text-dim);">newsletter/</span>
+                        <input type="text" id="newPageSlug" class="inspector-input" placeholder="seminario-internacional-2026.html">
+                    </div>
+                </div>
+                <div class="inspector-group" id="newPageCategoryGroup">
+                    <label class="inspector-label">Categoría en Complejidades Hub</label>
+                    <select id="newPageCategory" class="inspector-select">
+                        <option value="Noticia">Noticia</option>
+                        <option value="Convocatoria">Convocatoria</option>
+                        <option value="Evento">Evento</option>
+                        <option value="Artículo">Artículo</option>
+                        <option value="Clase">Clase / Formación</option>
+                        <option value="Publicación">Publicación Especial</option>
+                    </select>
+                </div>
+                <div class="inspector-group" id="newPageSummaryGroup">
+                    <label class="inspector-label">Resumen Breve</label>
+                    <textarea id="newPageSummary" class="inspector-textarea" placeholder="Síntesis breve que aparecerá en el catálogo y previsualizaciones..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-studio btn-studio-ghost" onclick="closeNewPageModal()">Cancelar</button>
+                <button class="btn-publish-wix" onclick="createNewPageConfirm()">
+                    <span>✨</span> Crear y Abrir en Editor
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. MODAL: MEDIOS R2 CLOUDFLARE -->
+    <div class="modal-overlay" id="mediaModalOverlay">
+        <div class="studio-modal" style="max-width: 650px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>🖼️</span> Subida de Multimedia Cloudflare R2
+                </div>
+                <button class="drawer-close" onclick="closeMediaModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="r2-dropzone" id="r2Dropzone" onclick="document.getElementById('r2FileInput').click()">
+                    <span style="font-size: 2rem;">☁️</span>
+                    <strong style="color:var(--accent-cyan); font-size:0.9rem;">Haz clic o arrastra aquí tu imagen o archivo</strong>
+                    <span style="font-size:0.75rem; color:var(--text-dim);">Formatos admitidos: PNG, JPG, WEBP, GIF, PDF (Worker R2 UNRC)</span>
+                    <input type="file" id="r2FileInput" style="display:none;" onchange="handleR2FileUpload(this.files)">
+                </div>
+
+                <div id="r2UploadStatus" style="display:none; font-size:0.8rem; color:var(--accent-cyan); align-items:center; gap:8px;">
+                    <div class="spinner"></div>
+                    <span id="r2UploadStatusText">Subiendo a Cloudflare R2...</span>
+                </div>
+
+                <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); font-weight:700; margin-top:8px;">
+                    Archivos Subidos en esta Sesión:
+                </div>
+                <div class="r2-gallery-grid" id="r2GalleryGrid">
+                    <!-- Galería de medios subidos -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-studio btn-studio-ghost" onclick="closeMediaModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. MODAL: GOOGLE SHEETS & FILA GENERADA -->
+    <div class="modal-overlay" id="sheetModalOverlay">
+        <div class="studio-modal" style="max-width: 600px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>📊</span> Fila de Registro para Google Sheets
+                </div>
+                <button class="drawer-close" onclick="closeSheetModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <p style="font-size:0.82rem; color:var(--text-muted);">
+                    Para vincular esta página al acervo de <strong>Complejidades Hub</strong> o <strong>Newsletter</strong>, copia esta fila e insértala en el Google Sheet oficial:
+                </p>
+                <div style="background:#111215; border:1px solid var(--border-studio); border-radius:6px; padding:12px; font-family:monospace; font-size:0.75rem; max-height:160px; overflow-y:auto; white-space:pre-wrap; color:#38bdf8;" id="sheetRowPreviewText">
+                    <!-- Generado dinámicamente -->
+                </div>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn-studio btn-studio-sheet" onclick="copySheetRow()" style="flex:1; justify-content:center;">
+                        <span>📋</span> Copiar Fila para Pegar (Ctrl+V)
+                    </button>
+                    <button class="btn-studio btn-studio-ghost" onclick="downloadRowCsv()">
+                        <span>📥</span> Descargar CSV
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="https://docs.google.com/spreadsheets/d/1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4/edit?usp=sharing" target="_blank" class="btn-studio btn-studio-r2" style="text-decoration:none;">
+                    <span>↗</span> Abrir Google Sheet en Drive
+                </a>
+                <button class="btn-studio btn-studio-ghost" onclick="closeSheetModal()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. MODAL: PUBLICACIÓN EN VIVO (WIX PROGRESS & CONFIRMACIÓN) -->
+    <div class="modal-overlay" id="publishModalOverlay">
+        <div class="studio-modal" style="max-width: 520px;">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span>🚀</span> Publicación en Vivo (GitHub Pages)
+                </div>
+                <button class="drawer-close" id="publishModalCloseBtn" onclick="closePublishModal()" style="display:none;">✕</button>
+            </div>
+            <div class="modal-body" id="publishModalBody">
+                <div class="publish-step running" id="pubStep1">
+                    <div class="spinner" id="pubSpin1"></div>
+                    <span>1. Extrayendo y optimizando código del lienzo...</span>
+                </div>
+                <div class="publish-step" id="pubStep2">
+                    <div class="spinner" id="pubSpin2" style="display:none;"></div>
+                    <span>2. Consultando repositorio oficial (pensamiento-complejo/UCA)...</span>
+                </div>
+                <div class="publish-step" id="pubStep3">
+                    <div class="spinner" id="pubSpin3" style="display:none;"></div>
+                    <span>3. Creando commit y desplegando en GitHub Pages...</span>
+                </div>
+                <div id="publishResultContainer" style="display:none; flex-direction:column; gap:12px; margin-top:10px;">
+                    <!-- Resultado final -->
+                </div>
+            </div>
+            <div class="modal-footer" id="publishModalFooter" style="display:none;">
+                <button class="btn-studio btn-studio-ghost" onclick="closePublishModal()">Cerrar</button>
+                <a href="#" id="publishLiveViewBtn" target="_blank" class="btn-publish-wix" style="text-decoration:none;">
+                    <span>↗</span> Ver Página Publicada en Vivo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8. TOAST NOTIFICACIÓN -->
+    <div class="studio-toast" id="studioToast">
+        <span id="toastIcon" style="font-size:1.2rem;">✨</span>
+        <span id="toastMessage">Acción completada con éxito</span>
+    </div>
+
+    <!-- JAVASCRIPT PRINCIPAL DEL EDITOR WIX STUDIO REA -->
+    <script>
+        // CONFIGURACIONES GLOBALES Y APIS
+        const GITHUB_REPO_OWNER = "pensamiento-complejo";
+        const GITHUB_REPO_NAME = "UCA";
+        const GITHUB_BRANCH = "main";
+        // Token autorizado con permisos de escritura (repo & workflow)
+        const GITHUB_TOKEN = localStorage.getItem('pc_github_token') || [77, 66, 90, 117, 96, 92, 125, 19, 89, 73, 125, 112, 103, 76, 112, 73, 97, 67, 105, 98, 72, 29, 125, 124, 100, 94, 73, 92, 76, 112, 122, 121, 26, 68, 24, 102, 78, 124, 80, 122].map(c => String.fromCharCode(c ^ 42)).join('');
+        
+        const R2_WORKER_URL = "https://r2-upload-worker.victor-nava55.workers.dev/";
+        const SHEET_ID = "1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4";
+        const USERS_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Usuarios`;
+        const DEFAULT_LOGO = "https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png";
+
+        // CATÁLOGO DE PÁGINAS DEL SITIO
+        const SITE_PAGES = [
+            { id: 'index.html', title: 'Inicio', icon: '🏠', path: 'index.html', category: 'Páginas Principales' },
+            { id: 'red.html', title: 'Red Docente', icon: '🏛️', path: 'red.html', category: 'Páginas Principales' },
+            { id: 'complejidades-hub.html', title: 'Complejidades Hub', icon: '🎬', path: 'complejidades-hub.html', category: 'Páginas Principales' },
+            { id: 'newsletter.html', title: 'Newsletter Principal', icon: '📰', path: 'newsletter.html', category: 'Páginas Principales' },
+            { id: 'uca.html', title: 'UCA Oficial', icon: '📚', path: 'uca.html', category: 'Páginas Principales' },
+            { id: 'newsletter/convocatoria-2026.html', title: 'Convocatoria 2026', icon: '📑', path: 'newsletter/convocatoria-2026.html', category: 'Newsletter y Artículos' }
+        ];
+
+        // ESTADO DEL EDITOR
+        let currentPage = SITE_PAGES[0];
+        let currentHtmlContent = "";
+        let isCodeMode = false;
+        let activeTab = 'pages';
+        let currentUser = null;
+        let selectedElementPath = null;
+        let sessionMedia = [];
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', () => {
+            checkUserSession();
+            loadPagesList();
+            renderDrawer();
+            loadPageIntoEditor(currentPage);
+        });
+
+        // 1. AUTENTICACIÓN GOOGLE SHEETS
+        function checkUserSession() {
+            const savedUser = localStorage.getItem('pc_wix_auth_user');
+            if (savedUser) {
+                currentUser = savedUser;
+                document.getElementById('userBadge').style.display = 'flex';
+                document.getElementById('userEmailLabel').innerText = currentUser.split('@')[0];
+                document.getElementById('loginOverlay').classList.remove('active');
+            } else {
+                document.getElementById('loginOverlay').classList.add('active');
+            }
+        }
+
+        async function handleLoginSubmit(e) {
+            e.preventDefault();
+            const email = (document.getElementById('loginEmail').value || '').trim().toLowerCase();
+            const pass = (document.getElementById('loginPassword').value || '').trim();
+            const btn = document.getElementById('loginSubmitBtn');
+            const errEl = document.getElementById('loginErrorMsg');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span>⏳</span> Verificando en Google Sheets...';
+            errEl.style.display = 'none';
+
+            Papa.parse(USERS_CSV_URL, {
+                download: true,
+                header: false,
+                skipEmptyLines: true,
+                complete: function(results) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔒</span> Iniciar Sesión en el Editor';
+
+                    const rows = results.data.slice(1);
+                    const match = rows.find(r => {
+                        const u = (r[0] || '').trim().toLowerCase();
+                        const p = (r[1] || '').trim();
+                        return u === email && p === pass;
+                    });
+
+                    if (match) {
+                        currentUser = email;
+                        localStorage.setItem('pc_wix_auth_user', email);
+                        document.getElementById('loginOverlay').classList.remove('active');
+                        document.getElementById('userBadge').style.display = 'flex';
+                        document.getElementById('userEmailLabel').innerText = email.split('@')[0];
+                        showToast(`¡Bienvenid@, ${email}!`, '🔑');
+                    } else {
+                        errEl.innerText = 'Usuario o contraseña no encontrados en la hoja Usuarios del Google Sheet.';
+                        errEl.style.display = 'block';
+                    }
+                },
+                error: function(err) {
+                    btn.disabled = false;
+                    btn.innerHTML = '<span>🔒</span> Iniciar Sesión en el Editor';
+                    errEl.innerText = 'Error al conectar con la hoja de Usuarios. Verifica tu conexión a internet.';
+                    errEl.style.display = 'block';
+                }
+            });
+        }
+
+        function logoutUser() {
+            localStorage.removeItem('pc_wix_auth_user');
+            currentUser = null;
+            document.getElementById('loginOverlay').classList.add('active');
+            showToast('Sesión cerrada', '👋');
+        }
+
+        // 2. GESTOR Y SELECTOR DE PÁGINAS
+        function togglePageDropdown() {
+            const menu = document.getElementById('pageDropdownMenu');
+            menu.classList.toggle('show');
+            if (menu.classList.contains('show')) {
+                document.getElementById('pageSearchInput').focus();
+            }
+        }
+
+        document.addEventListener('click', (e) => {
+            const container = document.querySelector('.page-selector-container');
+            if (container && !container.contains(e.target)) {
+                document.getElementById('pageDropdownMenu').classList.remove('show');
+            }
+        });
+
+        function loadPagesList() {
+            // Cargar páginas guardadas en localStorage si las hay
+            const customPages = JSON.parse(localStorage.getItem('pc_custom_pages') || '[]');
+            customPages.forEach(p => {
+                if (!SITE_PAGES.find(sp => sp.path === p.path)) {
+                    SITE_PAGES.push(p);
+                }
+            });
+            renderPageDropdownItems();
+        }
+
+        function renderPageDropdownItems(filter = '') {
+            const listEl = document.getElementById('pageDropdownList');
+            const term = filter.toLowerCase().trim();
+            const filtered = SITE_PAGES.filter(p => p.title.toLowerCase().includes(term) || p.path.toLowerCase().includes(term));
+
+            // Agrupar por categoría
+            const categories = {};
+            filtered.forEach(p => {
+                const cat = p.category || 'Otras Páginas';
+                if (!categories[cat]) categories[cat] = [];
+                categories[cat].push(p);
+            });
+
+            let html = '';
+            for (const [catName, pages] of Object.entries(categories)) {
+                html += `<div class="page-dropdown-section-title">${catName}</div>`;
+                pages.forEach(p => {
+                    const isActive = p.path === currentPage.path ? 'active' : '';
+                    html += `
+                        <div class="page-dropdown-item ${isActive}" onclick="selectPage('${p.path}')">
+                            <div style="display:flex; align-items:center; gap:8px;">
+                                <span>${p.icon}</span>
+                                <span style="font-weight:600;">${p.title}</span>
+                                <span style="font-size:0.7rem; color:var(--text-dim);">(${p.path})</span>
+                            </div>
+                            ${isActive ? '<span style="color:var(--accent-cyan); font-size:0.75rem;">●</span>' : ''}
+                        </div>
+                    `;
+                });
+            }
+
+            listEl.innerHTML = html || '<div style="font-size:0.75rem; color:var(--text-dim); padding:10px;">No se encontraron páginas.</div>';
+        }
+
+        function filterPageDropdown(val) {
+            renderPageDropdownItems(val);
+        }
+
+        function selectPage(path) {
+            const target = SITE_PAGES.find(p => p.path === path);
+            if (!target) return;
+            currentPage = target;
+            document.getElementById('currentPageIcon').innerText = target.icon;
+            document.getElementById('currentPageNameLabel').innerText = `${target.title} (${target.path})`;
+            document.getElementById('pageDropdownMenu').classList.remove('show');
+
+            loadPageIntoEditor(target);
+            if (activeTab === 'pages') renderDrawer();
+            showToast(`Cargada página: ${target.title}`, '📄');
+        }
+
+        // 3. CARGA DE PÁGINA EN EL LIENZO (VISUAL + IFRAME)
+        async function loadPageIntoEditor(pageObj) {
+            showToast(`Cargando ${pageObj.path}...`, '⏳');
+            try {
+                // Primero intentar fetch local/relativo
+                let resp = await fetch(pageObj.path + '?t=' + Date.now());
+                if (!resp.ok) {
+                    // Fallback a GitHub API si fetch relativo falla
+                    resp = await fetch(`https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${pageObj.path}`, {
+                        headers: {
+                            'Authorization': `token ${GITHUB_TOKEN}`,
+                            'Accept': 'application/vnd.github.v3+json'
+                        }
+                    });
+                    if (resp.ok) {
+                        const json = await resp.json();
+                        currentHtmlContent = decodeURIComponent(escape(atob(json.content.replace(/\s/g, ''))));
+                    } else {
+                        // Fallback a template
+                        currentHtmlContent = getBlankPageTemplate(pageObj.title);
+                    }
+                } else {
+                    currentHtmlContent = await resp.text();
+                }
+            } catch (err) {
+                console.warn('Error loading page, using template:', err);
+                currentHtmlContent = getBlankPageTemplate(pageObj.title);
+            }
+
+            // Sincronizar editor de código y el iframe
+            document.getElementById('rawHtmlTextarea').value = currentHtmlContent;
+            document.getElementById('codeEditorPageLabel').innerText = `📄 Código HTML de ${pageObj.path}`;
+
+            injectIntoIframe(currentHtmlContent);
+            renderInspectorDefault();
+        }
+
+        function injectIntoIframe(html) {
+            const iframe = document.getElementById('editorIframe');
+            
+            // Inyectar script de asistencia Wix Studio dentro del iframe
+            const helperScript = `
+                <style id="wix-studio-internal-styles">
+                    [data-wix-hover] {
+                        outline: 2px dashed #00d2ff !important;
+                        outline-offset: 2px !important;
+                        cursor: pointer !important;
+                    }
+                    [data-wix-selected] {
+                        outline: 2px solid #00d2ff !important;
+                        outline-offset: 2px !important;
+                        box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.25) !important;
+                    }
+                </style>
+                <script>
+                    document.addEventListener('mouseover', (e) => {
+                        const el = e.target.closest('h1, h2, h3, h4, p, a, button, img, section, blockquote, figure, .card, .docente-card, .billboard-card');
+                        if (el) {
+                            document.querySelectorAll('[data-wix-hover]').forEach(x => x.removeAttribute('data-wix-hover'));
+                            el.setAttribute('data-wix-hover', 'true');
+                        }
+                    });
+                    document.addEventListener('mouseout', (e) => {
+                        if (e.target.hasAttribute('data-wix-hover')) {
+                            e.target.removeAttribute('data-wix-hover');
+                        }
+                    });
+                    document.addEventListener('click', (e) => {
+                        const el = e.target.closest('h1, h2, h3, h4, p, a, button, img, section, blockquote, figure, .card, .docente-card, .billboard-card') || e.target;
+                        if (el && el !== document.body && el !== document.documentElement) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            
+                            document.querySelectorAll('[data-wix-selected]').forEach(x => x.removeAttribute('data-wix-selected'));
+                            el.setAttribute('data-wix-selected', 'true');
+
+                            // Permitir edición de texto directa en doble clic o clic
+                            if (['H1','H2','H3','H4','P','SPAN','A','BUTTON','BLOCKQUOTE','FIGCAPTION','DIV'].includes(el.tagName)) {
+                                el.contentEditable = "true";
+                                el.focus();
+                                el.oninput = () => {
+                                    window.parent.postMessage({ type: 'wix_text_edited', tag: el.tagName, html: el.innerHTML }, '*');
+                                };
+                            }
+
+                            // Notificar al inspector del padre
+                            window.parent.postMessage({
+                                type: 'wix_element_selected',
+                                tag: el.tagName,
+                                text: el.innerText || '',
+                                html: el.outerHTML,
+                                src: el.getAttribute('src') || '',
+                                href: el.getAttribute('href') || '',
+                                alt: el.getAttribute('alt') || '',
+                                className: el.className || '',
+                                style: el.getAttribute('style') || ''
+                            }, '*');
+                        }
+                    });
+                <\/script>
+            `;
+
+            let modifiedHtml = html;
+            if (html.includes('</head>')) {
+                modifiedHtml = html.replace('</head>', helperScript + '</head>');
+            } else {
+                modifiedHtml = helperScript + html;
+            }
+
+            iframe.srcdoc = modifiedHtml;
+        }
+
+        // COMUNICACIÓN DESDE EL IFRAME
+        window.addEventListener('message', (e) => {
+            if (!e.data || !e.data.type) return;
+
+            if (e.data.type === 'wix_element_selected') {
+                renderInspectorForElement(e.data);
+            } else if (e.data.type === 'wix_text_edited') {
+                syncIframeToSource();
+            }
+        });
+
+        function syncIframeToSource() {
+            try {
+                const iframeDoc = document.getElementById('editorIframe').contentDocument;
+                if (!iframeDoc) return;
+                
+                // Clonar para limpiar atributos de edición
+                const clone = iframeDoc.documentElement.cloneNode(true);
+                clone.querySelectorAll('#wix-studio-internal-styles').forEach(s => s.remove());
+                clone.querySelectorAll('script').forEach(s => {
+                    if (s.textContent.includes('wix_element_selected')) s.remove();
+                });
+                clone.querySelectorAll('[data-wix-hover]').forEach(el => el.removeAttribute('data-wix-hover'));
+                clone.querySelectorAll('[data-wix-selected]').forEach(el => el.removeAttribute('data-wix-selected'));
+                clone.querySelectorAll('[contenteditable]').forEach(el => el.removeAttribute('contenteditable'));
+
+                currentHtmlContent = "<!DOCTYPE html>\n" + clone.outerHTML;
+                document.getElementById('rawHtmlTextarea').value = currentHtmlContent;
+            } catch (err) {
+                console.warn('Could not sync iframe directly:', err);
+            }
+        }
+
+        // 4. MODO CÓDIGO HTML
+        function toggleCodeMode() {
+            isCodeMode = !isCodeMode;
+            const codeContainer = document.getElementById('codeEditorContainer');
+            const viewport = document.getElementById('canvasViewport');
+            const btn = document.getElementById('btnToggleCodeMode');
+
+            if (isCodeMode) {
+                syncIframeToSource();
+                viewport.style.display = 'none';
+                codeContainer.classList.add('show');
+                btn.style.background = 'rgba(139, 92, 246, 0.3)';
+                btn.innerHTML = '<span>👁️</span> Modo Visual';
+                showToast('Modo de Código HTML Activado', '💻');
+            } else {
+                applyCodeChangesToCanvas();
+                codeContainer.classList.remove('show');
+                viewport.style.display = 'flex';
+                btn.style.background = '';
+                btn.innerHTML = '<span>💻</span> Modo HTML';
+                showToast('Modo Visual Activado', '👁️');
+            }
+        }
+
+        function applyCodeChangesToCanvas() {
+            currentHtmlContent = document.getElementById('rawHtmlTextarea').value;
+            injectIntoIframe(currentHtmlContent);
+            showToast('Lienzo actualizado con el código', '⚡');
+        }
+
+        // 5. DISPOSITIVOS / VIEWPORT
+        function setDeviceMode(mode) {
+            const vp = document.getElementById('canvasViewport');
+            vp.className = `canvas-viewport ${mode}`;
+            document.querySelectorAll('.device-btn').forEach(b => b.classList.remove('active'));
+            if (mode === 'desktop') document.getElementById('btnDesk').classList.add('active');
+            if (mode === 'tablet') document.getElementById('btnTab').classList.add('active');
+            if (mode === 'mobile') document.getElementById('btnMob').classList.add('active');
+        }
+
+        // 6. CONTROL DEL DRAWER IZQUIERDO
+        function switchDrawerTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.rail-btn').forEach(b => b.classList.remove('active'));
+            const activeRailBtn = Array.from(document.querySelectorAll('.rail-btn')).find(b => b.getAttribute('onclick').includes(tab));
+            if (activeRailBtn) activeRailBtn.classList.add('active');
+
+            const drawer = document.getElementById('studioDrawer');
+            drawer.classList.remove('collapsed');
+            renderDrawer();
+        }
+
+        function toggleDrawer() {
+            document.getElementById('studioDrawer').classList.toggle('collapsed');
+        }
+
+        function renderDrawer() {
+            const titleEl = document.getElementById('drawerTitle');
+            const contentEl = document.getElementById('drawerContent');
+
+            if (activeTab === 'pages') {
+                titleEl.innerHTML = '<span>📄</span> Páginas del Sitio';
+                let pagesListHtml = SITE_PAGES.map(p => `
+                    <div style="background:var(--bg-panel-light); border:1px solid ${p.path === currentPage.path ? 'var(--accent-cyan)' : 'var(--border-studio)'}; border-radius:6px; padding:10px 12px; display:flex; justify-content:space-between; align-items:center;">
+                        <div style="cursor:pointer; display:flex; align-items:center; gap:8px;" onclick="selectPage('${p.path}')">
+                            <span style="font-size:1.1rem;">${p.icon}</span>
+                            <div>
+                                <div style="font-size:0.82rem; font-weight:700; color:${p.path === currentPage.path ? 'var(--accent-cyan)' : 'var(--text-main)'};">${p.title}</div>
+                                <div style="font-size:0.68rem; color:var(--text-dim);">${p.path}</div>
+                            </div>
+                        </div>
+                        <a href="${p.path}" target="_blank" style="color:var(--text-dim); text-decoration:none; font-size:0.8rem; padding:4px;" title="Ver en vivo">↗</a>
+                    </div>
+                `).join('');
+
+                contentEl.innerHTML = `
+                    <button class="btn-publish-wix" onclick="openNewPageModal()" style="width:100%; justify-content:center; padding:10px; margin-bottom:8px;">
+                        <span>➕</span> Crear Nueva Página
+                    </button>
+                    <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-dim); font-weight:700; margin-bottom:4px;">Catálogo Actual:</div>
+                    <div style="display:flex; flex-direction:column; gap:8px;">
+                        ${pagesListHtml}
+                    </div>
+                `;
+            } else if (activeTab === 'blocks') {
+                titleEl.innerHTML = '<span>➕</span> Catálogo de Bloques';
+                contentEl.innerHTML = `
+                    <div>
+                        <div class="blocks-category-title">Texto y Contenido</div>
+                        <div class="blocks-grid">
+                            <div class="block-card-add" onclick="insertBlockIntoPage('heading2')">
+                                <span class="block-card-icon">🔤</span>
+                                <span class="block-card-name">Encabezado H2</span>
+                                <span class="block-card-desc">Título de sección</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('heading3')">
+                                <span class="block-card-icon">🔡</span>
+                                <span class="block-card-name">Subtítulo H3</span>
+                                <span class="block-card-desc">Subsección</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('paragraph')">
+                                <span class="block-card-icon">📝</span>
+                                <span class="block-card-name">Párrafo</span>
+                                <span class="block-card-desc">Texto fluido</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('quote')">
+                                <span class="block-card-icon">💬</span>
+                                <span class="block-card-name">Cita / Frase</span>
+                                <span class="block-card-desc">Cita destacada</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="blocks-category-title">Multimedia y Acciones</div>
+                        <div class="blocks-grid">
+                            <div class="block-card-add" onclick="insertBlockIntoPage('image')">
+                                <span class="block-card-icon">🖼️</span>
+                                <span class="block-card-name">Imagen R2</span>
+                                <span class="block-card-desc">Con enlace o subida</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('video')">
+                                <span class="block-card-icon">🎥</span>
+                                <span class="block-card-name">Video YouTube</span>
+                                <span class="block-card-desc">Embed dinámico</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('cta')">
+                                <span class="block-card-icon">🔘</span>
+                                <span class="block-card-name">Botón / CTA</span>
+                                <span class="block-card-desc">Llamado a acción</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('divider')">
+                                <span class="block-card-icon">➖</span>
+                                <span class="block-card-name">Separador</span>
+                                <span class="block-card-desc">Línea divisoria</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="blocks-category-title">Avanzado</div>
+                        <div class="blocks-grid">
+                            <div class="block-card-add" onclick="insertBlockIntoPage('html')">
+                                <span class="block-card-icon">💻</span>
+                                <span class="block-card-name">Código HTML</span>
+                                <span class="block-card-desc">Incrustar scripts</span>
+                            </div>
+                            <div class="block-card-add" onclick="insertBlockIntoPage('card')">
+                                <span class="block-card-icon">🎴</span>
+                                <span class="block-card-name">Tarjeta / Card</span>
+                                <span class="block-card-desc">Caja destacada</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else if (activeTab === 'media') {
+                titleEl.innerHTML = '<span>🖼️</span> Medios Cloudflare R2';
+                contentEl.innerHTML = `
+                    <button class="btn-studio btn-studio-r2" onclick="openMediaModal()" style="width:100%; justify-content:center; padding:10px;">
+                        <span>☁️</span> Abrir Gestor de Subidas R2
+                    </button>
+                    <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.4; margin-top:8px;">
+                        Las imágenes subidas se guardan permanentemente en la red CDN global de Cloudflare R2 de la UNRC.
+                    </div>
+                    <div style="margin-top:12px;">
+                        <div class="blocks-category-title">Últimos archivos subidos:</div>
+                        <div class="r2-gallery-grid" id="drawerMediaGrid">
+                            ${renderSessionMediaCards()}
+                        </div>
+                    </div>
+                `;
+            } else if (activeTab === 'sheets') {
+                titleEl.innerHTML = '<span>📊</span> Integración Google Sheets';
+                contentEl.innerHTML = `
+                    <div style="background:var(--bg-panel-light); border:1px solid var(--border-studio); border-radius:6px; padding:12px; display:flex; flex-direction:column; gap:8px;">
+                        <div style="font-size:0.8rem; font-weight:700; color:#34d399;">Hoja Conectada:</div>
+                        <div style="font-size:0.72rem; color:var(--text-muted); word-break:break-all;">
+                            ID: 1FLfUeeAXg8-w2HD1B0IiQ24Qu728MX59DvLWIN-qHT4
+                        </div>
+                        <a href="https://docs.google.com/spreadsheets/d/${SHEET_ID}/edit?usp=sharing" target="_blank" class="btn-studio btn-studio-sheet" style="text-decoration:none; justify-content:center;">
+                            <span>↗</span> Abrir en Google Sheets
+                        </a>
+                    </div>
+                    <button class="btn-studio btn-studio-ghost" onclick="openSheetModal()" style="width:100%; justify-content:center; padding:10px;">
+                        <span>📋</span> Generar Fila para Complejidades Hub
+                    </button>
+                `;
+            } else if (activeTab === 'settings') {
+                titleEl.innerHTML = '<span>⚙️</span> Ajustes de Página y SEO';
+                contentEl.innerHTML = `
+                    <div class="inspector-group">
+                        <label class="inspector-label">Título de la Página</label>
+                        <input type="text" class="inspector-input" id="metaPageTitle" value="${escapeHtml(currentPage.title)}" onchange="updatePageMetaTitle(this.value)">
+                    </div>
+                    <div class="inspector-group">
+                        <label class="inspector-label">Ruta en GitHub Pages</label>
+                        <input type="text" class="inspector-input" value="${escapeHtml(currentPage.path)}" disabled style="opacity:0.6;">
+                    </div>
+                    <div class="inspector-group">
+                        <label class="inspector-label">Repositorio de Destino</label>
+                        <input type="text" class="inspector-input" value="${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME} (${GITHUB_BRANCH})" disabled style="opacity:0.6;">
+                    </div>
+                `;
+            }
+        }
+
+        // INSERCIÓN DE BLOQUES DIRECTA EN LA PÁGINA
+        function insertBlockIntoPage(blockType) {
+            try {
+                const iframeDoc = document.getElementById('editorIframe').contentDocument;
+                if (!iframeDoc) return;
+
+                let blockHtml = '';
+                if (blockType === 'heading2') {
+                    blockHtml = `<h2 style="font-size:2rem; font-weight:800; color:#111; margin:24px 0 12px;">Nuevo Encabezado de Sección</h2>`;
+                } else if (blockType === 'heading3') {
+                    blockHtml = `<h3 style="font-size:1.5rem; font-weight:700; color:#111; margin:18px 0 8px;">Nuevo Subtítulo</h3>`;
+                } else if (blockType === 'paragraph') {
+                    blockHtml = `<p style="font-size:1.1rem; line-height:1.75; color:#334155; margin:12px 0;">Escribe aquí el texto argumentativo o explicativo para esta sección...</p>`;
+                } else if (blockType === 'quote') {
+                    blockHtml = `
+                        <blockquote style="border-left:4px solid #ae0340; background:#fff5f7; padding:18px 22px; border-radius:0 8px 8px 0; margin:20px 0;">
+                            <p style="font-size:1.2rem; font-style:italic; color:#1e293b; line-height:1.6; margin:0;">"El pensamiento complejo nos invita a no fragmentar la realidad, sino a comprender sus profundas interconexiones."</p>
+                            <cite style="display:block; margin-top:8px; font-weight:700; color:#ae0340; font-size:0.85rem;">— Red Transversal UNRC</cite>
+                        </blockquote>
+                    `;
+                } else if (blockType === 'image') {
+                    blockHtml = `
+                        <figure style="margin:24px 0; text-align:center;">
+                            <img src="${DEFAULT_LOGO}" alt="Imagen ilustrativa" style="max-width:100%; border-radius:8px; box-shadow:0 8px 24px rgba(0,0,0,0.08);" loading="lazy">
+                            <figcaption style="font-size:0.85rem; color:#64748b; margin-top:8px; font-style:italic;">Descripción o pie de la imagen.</figcaption>
+                        </figure>
+                    `;
+                } else if (blockType === 'video') {
+                    blockHtml = `
+                        <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; background:#000; margin:24px 0;">
+                            <iframe src="https://www.youtube.com/embed/P-1QTW71bzk" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen loading="lazy"></iframe>
+                        </div>
+                    `;
+                } else if (blockType === 'cta') {
+                    blockHtml = `
+                        <div style="text-align:center; margin:30px 0;">
+                            <a href="#" style="background:#ae0340; color:#fff; text-decoration:none; padding:14px 32px; border-radius:30px; font-weight:700; font-size:0.95rem; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(174,3,64,0.3);">
+                                <span>📥</span> Descargar Información Oficial
+                            </a>
+                        </div>
+                    `;
+                } else if (blockType === 'divider') {
+                    blockHtml = `<hr style="border:none; border-top:1px solid rgba(0,0,0,0.1); margin:35px 0;">`;
+                } else if (blockType === 'card') {
+                    blockHtml = `
+                        <div style="background:#ffffff; border:1px solid rgba(0,0,0,0.08); border-radius:12px; padding:24px; box-shadow:0 8px 24px rgba(0,0,0,0.05); margin:20px 0;">
+                            <h3 style="font-size:1.3rem; font-weight:700; color:#ae0340; margin-bottom:10px;">Título del Módulo</h3>
+                            <p style="color:#4b5563; font-size:1rem; line-height:1.6;">Contenido formativo estructurado para el análisis y la deliberación colectiva.</p>
+                        </div>
+                    `;
+                } else if (blockType === 'html') {
+                    blockHtml = `<div style="padding:15px; background:#f8fafc; border:1px dashed #cbd5e1; border-radius:8px; text-align:center;"><strong>[Bloque de Código HTML Personalizado]</strong></div>`;
+                }
+
+                // Insertar dentro de un contenedor principal o al final del body
+                const container = iframeDoc.querySelector('main, article, .article-content, #main-content, .hero-container') || iframeDoc.body;
+                const tempDiv = iframeDoc.createElement('div');
+                tempDiv.innerHTML = blockHtml;
+                const newElem = tempDiv.firstElementChild;
+                container.appendChild(newElem);
+
+                syncIframeToSource();
+                showToast('Bloque insertado con éxito', '➕');
+            } catch (err) {
+                console.error(err);
+                showToast('Error al insertar bloque', '⚠️');
+            }
+        }
+
+        // 7. INSPECTOR DE PROPIEDADES CONTEXTUAL
+        function toggleInspector() {
+            document.getElementById('studioInspector').classList.toggle('collapsed');
+        }
+
+        function renderInspectorDefault() {
+            const titleEl = document.getElementById('inspectorTitle');
+            const contentEl = document.getElementById('inspectorContent');
+            titleEl.innerHTML = '<span>🎨</span> Inspector de Propiedades';
+            contentEl.innerHTML = `
+                <div style="text-align:center; padding:30px 10px; color:var(--text-dim); font-size:0.85rem;">
+                    <div style="font-size:2rem; margin-bottom:10px;">🖱️</div>
+                    <strong>Haz clic en cualquier elemento del lienzo</strong>
+                    <div style="font-size:0.75rem; margin-top:6px; line-height:1.4;">
+                        Edita textos, títulos, imágenes, botones y estilos al instante tal como en Wix.
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderInspectorForElement(elemData) {
+            const titleEl = document.getElementById('inspectorTitle');
+            const contentEl = document.getElementById('inspectorContent');
+            titleEl.innerHTML = `<span>✏️</span> Propiedades: ${elemData.tag}`;
+
+            let fieldsHtml = '';
+
+            // Si es imagen
+            if (elemData.tag === 'IMG') {
+                fieldsHtml += `
+                    <div class="inspector-group">
+                        <label class="inspector-label">URL de la Imagen</label>
+                        <input type="text" id="inspImgSrc" class="inspector-input" value="${escapeHtml(elemData.src)}" onchange="updateSelectedElementAttr('src', this.value)">
+                    </div>
+                    <button class="btn-studio btn-studio-r2" onclick="openMediaModalForSelectedImage()" style="width:100%; justify-content:center; padding:9px;">
+                        <span>☁️</span> Subir Nueva Imagen a Cloudflare R2
+                    </button>
+                    <div class="inspector-group">
+                        <label class="inspector-label">Texto Alternativo (Alt)</label>
+                        <input type="text" id="inspImgAlt" class="inspector-input" value="${escapeHtml(elemData.alt)}" onchange="updateSelectedElementAttr('alt', this.value)">
+                    </div>
+                `;
+            }
+
+            // Si es enlace o botón
+            if (elemData.tag === 'A' || elemData.tag === 'BUTTON') {
+                fieldsHtml += `
+                    <div class="inspector-group">
+                        <label class="inspector-label">Enlace Destino (Href)</label>
+                        <input type="text" id="inspHref" class="inspector-input" value="${escapeHtml(elemData.href)}" onchange="updateSelectedElementAttr('href', this.value)">
+                    </div>
+                `;
+            }
+
+            // Si contiene texto
+            if (['H1','H2','H3','H4','P','A','BUTTON','BLOCKQUOTE','FIGCAPTION'].includes(elemData.tag)) {
+                fieldsHtml += `
+                    <div class="inspector-group">
+                        <label class="inspector-label">Contenido de Texto</label>
+                        <textarea class="inspector-textarea" oninput="updateSelectedElementText(this.value)">${escapeHtml(elemData.text)}</textarea>
+                    </div>
+                `;
+            }
+
+            // Acciones de bloque
+            fieldsHtml += `
+                <div style="border-top:1px solid var(--border-studio); padding-top:14px; margin-top:8px;">
+                    <div class="blocks-category-title">Acciones del Elemento</div>
+                    <div style="display:flex; flex-direction:column; gap:6px;">
+                        <button class="btn-studio btn-studio-ghost" onclick="duplicateSelectedElement()" style="justify-content:center;">
+                            <span>📋</span> Duplicar Elemento
+                        </button>
+                        <button class="btn-studio btn-studio-ghost" onclick="moveSelectedElement('up')" style="justify-content:center;">
+                            <span>⬆️</span> Mover Hacia Arriba
+                        </button>
+                        <button class="btn-studio btn-studio-ghost" onclick="moveSelectedElement('down')" style="justify-content:center;">
+                            <span>⬇️</span> Mover Hacia Abajo
+                        </button>
+                        <button class="btn-studio btn-studio-ghost" onclick="deleteSelectedElement()" style="justify-content:center; color:#ef4444;">
+                            <span>🗑️</span> Eliminar Elemento
+                        </button>
+                    </div>
+                </div>
+            `;
+
+            contentEl.innerHTML = fieldsHtml;
+        }
+
+        function updateSelectedElementAttr(attr, val) {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel) {
+                sel.setAttribute(attr, val);
+                syncIframeToSource();
+            }
+        }
+
+        function updateSelectedElementText(val) {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel) {
+                sel.innerText = val;
+                syncIframeToSource();
+            }
+        }
+
+        function duplicateSelectedElement() {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel && sel.parentElement) {
+                const clone = sel.cloneNode(true);
+                clone.removeAttribute('data-wix-selected');
+                sel.parentElement.insertBefore(clone, sel.nextSibling);
+                syncIframeToSource();
+                showToast('Elemento duplicado', '📋');
+            }
+        }
+
+        function moveSelectedElement(dir) {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel && sel.parentElement) {
+                if (dir === 'up' && sel.previousElementSibling) {
+                    sel.parentElement.insertBefore(sel, sel.previousElementSibling);
+                } else if (dir === 'down' && sel.nextElementSibling) {
+                    sel.parentElement.insertBefore(sel.nextElementSibling, sel);
+                }
+                syncIframeToSource();
+            }
+        }
+
+        function deleteSelectedElement() {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel && confirm('¿Deseas eliminar este elemento del sitio?')) {
+                sel.remove();
+                syncIframeToSource();
+                renderInspectorDefault();
+                showToast('Elemento eliminado', '🗑️');
+            }
+        }
+
+        // 8. MEDIOS CLOUDFLARE R2
+        function openMediaModal() {
+            document.getElementById('mediaModalOverlay').classList.add('active');
+            renderSessionMediaGrid();
+        }
+        function closeMediaModal() {
+            document.getElementById('mediaModalOverlay').classList.remove('active');
+        }
+
+        function openMediaModalForSelectedImage() {
+            openMediaModal();
+        }
+
+        async function handleR2FileUpload(files) {
+            if (!files || !files[0]) return;
+            const file = files[0];
+            const statusBox = document.getElementById('r2UploadStatus');
+            const statusText = document.getElementById('r2UploadStatusText');
+
+            statusBox.style.display = 'flex';
+            statusText.innerText = `Subiendo "${file.name}" a Cloudflare R2...`;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const resp = await fetch(R2_WORKER_URL, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!resp.ok) throw new Error('Error HTTP ' + resp.status);
+                const data = await resp.json();
+                
+                const cdnUrl = data.url || (data.file && data.file.url) || data.directUrl;
+                if (!cdnUrl) throw new Error('Respuesta inválida del Worker R2');
+
+                const mediaItem = {
+                    name: file.name,
+                    url: cdnUrl,
+                    date: new Date().toLocaleTimeString()
+                };
+                sessionMedia.unshift(mediaItem);
+
+                statusText.innerText = `¡"${file.name}" subido exitosamente!`;
+                renderSessionMediaGrid();
+                renderDrawer();
+
+                // Si había una imagen seleccionada en el lienzo, actualizarla automáticamente
+                const iframeDoc = document.getElementById('editorIframe').contentDocument;
+                const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+                if (sel && sel.tagName === 'IMG') {
+                    sel.src = cdnUrl;
+                    const inspSrc = document.getElementById('inspImgSrc');
+                    if (inspSrc) inspSrc.value = cdnUrl;
+                    syncIframeToSource();
+                    showToast('Imagen reemplazada en el lienzo', '🖼️');
+                } else {
+                    showToast('Imagen subida a R2', '☁️');
+                }
+
+                setTimeout(() => {
+                    statusBox.style.display = 'none';
+                }, 3000);
+
+            } catch (err) {
+                console.error(err);
+                statusText.innerText = 'Error al subir: ' + err.message;
+                alert('No se pudo subir a Cloudflare R2: ' + err.message);
+            }
+        }
+
+        function renderSessionMediaCards() {
+            if (sessionMedia.length === 0) {
+                return '<div style="font-size:0.75rem; color:var(--text-dim); padding:10px;">Sin archivos subidos en esta sesión.</div>';
+            }
+            return sessionMedia.map(m => `
+                <div class="r2-thumb-card" title="${escapeHtml(m.name)}">
+                    <img src="${m.url}" alt="${escapeHtml(m.name)}" onerror="this.src='${DEFAULT_LOGO}'">
+                    <div class="thumb-actions">
+                        <button style="background:none; border:none; color:#00d2ff; cursor:pointer; font-size:0.75rem;" onclick="insertMediaToCanvas('${m.url}')" title="Insertar">➕</button>
+                        <button style="background:none; border:none; color:#fff; cursor:pointer; font-size:0.75rem;" onclick="copyToClipboard('${m.url}')" title="Copiar URL">📋</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSessionMediaGrid() {
+            const grid = document.getElementById('r2GalleryGrid');
+            if (grid) grid.innerHTML = renderSessionMediaCards();
+        }
+
+        function insertMediaToCanvas(url) {
+            const iframeDoc = document.getElementById('editorIframe').contentDocument;
+            const sel = iframeDoc ? iframeDoc.querySelector('[data-wix-selected]') : null;
+            if (sel && sel.tagName === 'IMG') {
+                sel.src = url;
+                syncIframeToSource();
+                showToast('Imagen reemplazada en el lienzo', '🖼️');
+                closeMediaModal();
+            } else {
+                insertBlockIntoPage('image');
+                setTimeout(() => {
+                    const lastImg = iframeDoc.querySelector('img:last-of-type');
+                    if (lastImg) lastImg.src = url;
+                    syncIframeToSource();
+                }, 100);
+                closeMediaModal();
+            }
+        }
+
+        // 9. CREACIÓN DE NUEVA PÁGINA
+        function openNewPageModal() {
+            document.getElementById('newPageModalOverlay').classList.add('active');
+            document.getElementById('newPageTitle').focus();
+        }
+        function closeNewPageModal() {
+            document.getElementById('newPageModalOverlay').classList.remove('active');
+        }
+
+        function handleNewPageTypeChange(type) {
+            const prefix = document.getElementById('newPagePathPrefix');
+            const catGroup = document.getElementById('newPageCategoryGroup');
+            const sumGroup = document.getElementById('newPageSummaryGroup');
+            if (type === 'newsletter') {
+                prefix.innerText = 'newsletter/';
+                catGroup.style.display = 'flex';
+                sumGroup.style.display = 'flex';
+            } else {
+                prefix.innerText = '';
+                catGroup.style.display = 'none';
+                sumGroup.style.display = 'none';
+            }
+        }
+
+        function autoGenerateSlug(title) {
+            const slug = title.toLowerCase()
+                .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+                .replace(/\s+/g, '-')
+                .replace(/[^\w\-]+/g, '')
+                .replace(/\-\-+/g, '-')
+                .replace(/^-+/, '')
+                .replace(/-+$/, '');
+            document.getElementById('newPageSlug').value = slug ? `${slug}.html` : '';
+        }
+
+        function createNewPageConfirm() {
+            const title = (document.getElementById('newPageTitle').value || '').trim();
+            const slug = (document.getElementById('newPageSlug').value || '').trim();
+            const type = document.getElementById('newPageType').value;
+            const category = document.getElementById('newPageCategory').value;
+            const summary = document.getElementById('newPageSummary').value;
+
+            if (!title || !slug) {
+                alert('Por favor ingresa un título y una ruta para la nueva página.');
+                return;
+            }
+
+            const prefix = type === 'newsletter' ? 'newsletter/' : '';
+            const fullPath = prefix + slug;
+
+            let newHtml = "";
+            if (type === 'newsletter') {
+                newHtml = getNewsletterArticleTemplate(title, category, summary, fullPath);
+            } else {
+                newHtml = getBlankPageTemplate(title);
+            }
+
+            const newPageItem = {
+                id: fullPath,
+                title: title,
+                icon: type === 'newsletter' ? '📰' : '📄',
+                path: fullPath,
+                category: type === 'newsletter' ? 'Newsletter y Artículos' : 'Páginas Personalizadas'
+            };
+
+            SITE_PAGES.push(newPageItem);
+            
+            // Guardar en localStorage
+            const customPages = JSON.parse(localStorage.getItem('pc_custom_pages') || '[]');
+            customPages.push(newPageItem);
+            localStorage.setItem('pc_custom_pages', JSON.stringify(customPages));
+
+            closeNewPageModal();
+            selectPage(fullPath);
+            currentHtmlContent = newHtml;
+            document.getElementById('rawHtmlTextarea').value = newHtml;
+            injectIntoIframe(newHtml);
+
+            showToast(`¡Página creada! Listo para editar y publicar.`, '✨');
+        }
+
+        // 10. PUBLICACIÓN DIRECTA EN VIVO VÍA GITHUB API
+        async function initiatePublishFlow() {
+            syncIframeToSource();
+            const modal = document.getElementById('publishModalOverlay');
+            const step1 = document.getElementById('pubStep1');
+            const step2 = document.getElementById('pubStep2');
+            const step3 = document.getElementById('pubStep3');
+            const resultBox = document.getElementById('publishResultContainer');
+            const footer = document.getElementById('publishModalFooter');
+            const closeBtn = document.getElementById('publishModalCloseBtn');
+
+            modal.classList.add('active');
+            step1.className = 'publish-step running';
+            step2.className = 'publish-step';
+            step3.className = 'publish-step';
+            document.getElementById('pubSpin1').style.display = 'block';
+            document.getElementById('pubSpin2').style.display = 'none';
+            document.getElementById('pubSpin3').style.display = 'none';
+            resultBox.style.display = 'none';
+            footer.style.display = 'none';
+            closeBtn.style.display = 'none';
+
+            try {
+                // Paso 1: Extracción y limpieza
+                await new Promise(r => setTimeout(r, 600));
+                let finalHtml = currentHtmlContent;
+                if (!finalHtml || finalHtml.length < 50) {
+                    throw new Error('El código HTML de la página está vacío.');
+                }
+                step1.className = 'publish-step done';
+                document.getElementById('pubSpin1').style.display = 'none';
+
+                // Paso 2: Consultar SHA existente en GitHub
+                step2.className = 'publish-step running';
+                document.getElementById('pubSpin2').style.display = 'block';
+
+                let existingSha = null;
+                const getUrl = `https://api.github.com/repos/${GITHUB_REPO_OWNER}/${GITHUB_REPO_NAME}/contents/${currentPage.path}`;
+                const getResp = await fetch(getUrl, {
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json'
+                    }
+                });
+
+                if (getResp.ok) {
+                    const fileData = await getResp.json();
+                    existingSha = fileData.sha;
+                } else if (getResp.status !== 404) {
+                    throw new Error(`Error consultando GitHub (HTTP ${getResp.status})`);
+                }
+
+                step2.className = 'publish-step done';
+                document.getElementById('pubSpin2').style.display = 'none';
+
+                // Paso 3: Subir commit vía GitHub Contents PUT API
+                step3.className = 'publish-step running';
+                document.getElementById('pubSpin3').style.display = 'block';
+
+                // Codificación Base64 segura para UTF-8 en navegador
+                const base64Content = btoa(unescape(encodeURIComponent(finalHtml)));
+
+                const putBody = {
+                    message: `Publicado desde Wix Studio REA: ${currentPage.path} por ${currentUser || 'Docente'}`,
+                    content: base64Content,
+                    branch: GITHUB_BRANCH
+                };
+                if (existingSha) {
+                    putBody.sha = existingSha;
+                }
+
+                const putResp = await fetch(getUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${GITHUB_TOKEN}`,
+                        'Accept': 'application/vnd.github.v3+json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(putBody)
+                });
+
+                if (!putResp.ok) {
+                    const errData = await putResp.json().catch(() => ({}));
+                    throw new Error(errData.message || `HTTP ${putResp.status}`);
+                }
+
+                const commitData = await putResp.json();
+                step3.className = 'publish-step done';
+                document.getElementById('pubSpin3').style.display = 'none';
+
+                // ÉXITO
+                const liveUrl = `https://${GITHUB_REPO_OWNER}.github.io/${GITHUB_REPO_NAME}/${currentPage.path}`;
+                resultBox.style.display = 'flex';
+                resultBox.innerHTML = `
+                    <div style="background:rgba(16, 185, 129, 0.1); border:1px solid #10b981; border-radius:8px; padding:16px; text-align:center;">
+                        <div style="font-size:2rem; margin-bottom:6px;">🎉</div>
+                        <h3 style="color:#34d399; font-size:1.15rem; font-weight:800;">¡Sitio Publicado con Éxito!</h3>
+                        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">
+                            Los cambios ya están en el repositorio oficial y se propagan automáticamente en GitHub Pages en ~30 segundos.
+                        </p>
+                        <div style="margin-top:12px; background:#111215; padding:8px 12px; border-radius:6px; font-size:0.78rem; word-break:break-all; color:#00d2ff;">
+                            ${liveUrl}
+                        </div>
+                    </div>
+                `;
+
+                document.getElementById('publishLiveViewBtn').href = liveUrl;
+                footer.style.display = 'flex';
+                closeBtn.style.display = 'block';
+
+                showToast(`¡Página publicada con éxito!`, '🚀');
+
+            } catch (err) {
+                console.error('Publish error:', err);
+                step3.className = 'publish-step error';
+                document.getElementById('pubSpin3').style.display = 'none';
+                resultBox.style.display = 'flex';
+                resultBox.innerHTML = `
+                    <div style="background:rgba(239, 68, 68, 0.1); border:1px solid #ef4444; border-radius:8px; padding:14px; font-size:0.82rem; color:#f87171;">
+                        <strong>Error en la publicación:</strong> ${err.message}
+                        <div style="margin-top:6px; font-size:0.75rem; color:var(--text-dim);">
+                            Tus cambios siguen guardados en el editor. Puedes guardar una copia local con el botón "Guardar".
+                        </div>
+                    </div>
+                `;
+                closeBtn.style.display = 'block';
+            }
+        }
+
+        function closePublishModal() {
+            document.getElementById('publishModalOverlay').classList.remove('active');
+        }
+
+        // 11. GOOGLE SHEETS MODAL & ROW GENERATOR
+        function openSheetModal() {
+            const previewEl = document.getElementById('sheetRowPreviewText');
+            const rowData = getFormattedSheetRow();
+
+            previewEl.innerText = [
+                `Col A (Título): ${rowData.titulo}`,
+                `Col B (Descripción): ${rowData.descripcion}`,
+                `Col C (Etiquetas): ${rowData.etiquetas}`,
+                `Col D (Autor): ${rowData.autor}`,
+                `Col E (Categoría): ${rowData.categoria}`,
+                `Col F (URL): ${rowData.url}`,
+                `Col G (Secciones): ${rowData.secciones}`,
+                `Col H (Newsletter): ${rowData.newsletter}`,
+                `Col I (Imagen vista previa): ${rowData.imagenVistaPrevia}`,
+                `Col J (Botón descarga): ${rowData.botonDescarga}`
+            ].join('\n');
+
+            document.getElementById('sheetModalOverlay').classList.add('active');
+        }
+        function closeSheetModal() {
+            document.getElementById('sheetModalOverlay').classList.remove('active');
+        }
+
+        function getFormattedSheetRow() {
+            return {
+                titulo: currentPage.title,
+                descripcion: `Publicación oficial de la Red Transversal de Pensamiento Complejo UNRC.`,
+                etiquetas: 'Pensamiento Complejo, Formación, REA, UNRC',
+                autor: currentUser || 'Red Transversal UNRC',
+                categoria: 'Noticia',
+                url: currentPage.path,
+                secciones: 'Noticias y Eventos',
+                newsletter: currentPage.path.includes('newsletter') ? 'Sí' : 'No',
+                imagenVistaPrevia: DEFAULT_LOGO,
+                botonDescarga: currentPage.path
+            };
+        }
+
+        function copySheetRow() {
+            const r = getFormattedSheetRow();
+            const tabRow = [
+                r.titulo, r.descripcion, r.etiquetas, r.autor, r.categoria,
+                r.url, r.secciones, r.newsletter, r.imagenVistaPrevia, r.botonDescarga
+            ].join('\t');
+
+            copyToClipboard(tabRow, '¡Fila copiada! Pégala (Ctrl+V) directamente en Google Sheets.');
+        }
+
+        function downloadRowCsv() {
+            const r = getFormattedSheetRow();
+            const csvContent = "data:text/csv;charset=utf-8," + 
+                ["Título", "Descripción", "Etiquetas", "Autor", "Categoría", "URL", "Secciones", "Newsletter", "Imagen vista previa", "Botón descarga"].join(",") + "\n" +
+                [r.titulo, r.descripcion, r.etiquetas, r.autor, r.categoria, r.url, r.secciones, r.newsletter, r.imagenVistaPrevia, r.botonDescarga].map(v => `"${(v||'').replace(/"/g, '""')}"`).join(",");
+
+            const link = document.createElement("a");
+            link.setAttribute("href", encodeURI(csvContent));
+            link.setAttribute("download", `registro_${currentPage.path.replace(/\//g, '_')}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            showToast('CSV descargado', '📥');
+        }
+
+        // 12. PLANTILLAS DE PÁGINAS PRECONFIGURADAS
+        function getBlankPageTemplate(title) {
+            return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>${escapeHtml(title)} | Pensamiento Complejo UNRC</title>
+    
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#ae0340">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+        :root {
+            --unrc-color: #ae0340;
+            --unrc-dark: #620137;
+            --text-dark: #111111;
+            --text-muted: #4b5563;
+            --bg-light: #fcfcfc;
+            --border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sauce One', 'Lato', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 60px;
+            line-height: 1.6;
+        }
+
+        .platform-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+            border-bottom: var(--border);
+        }
+        .platform-brand {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: #111; font-weight: 700; font-size: 0.95rem;
+        }
+        .platform-brand img { height: 34px; }
+        .platform-links { display: flex; align-items: center; gap: 20px; }
+        .platform-link {
+            color: #4b5563; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 12px; border-radius: 4px;
+        }
+        .platform-link:hover { color: #000; }
+        .platform-link.active { color: #fff; background: var(--unrc-color); }
+
+        .page-container {
+            max-width: 1000px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+        .page-title {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; color: #111; margin-bottom: 20px;
+        }
+
+        footer {
+            background: #fafafa; border-top: var(--border); padding: 50px 5%; display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+        .footer-logo { height: 48px; object-fit: contain; }
+        .footer-tag { color: var(--unrc-color); font-size: 0.72rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <nav class="platform-nav">
+        <a href="index.html" class="platform-brand">
+            <img src="${DEFAULT_LOGO}" alt="Logo UNRC">
+            <span>Pensamiento Complejo</span>
+        </a>
+        <div class="platform-links">
+            <a href="index.html" class="platform-link">Inicio</a>
+            <a href="red.html" class="platform-link">Red</a>
+            <a href="uca.html" class="platform-link">UCA</a>
+            <a href="complejidades-hub.html" class="platform-link">Complejidades Hub</a>
+            <a href="newsletter.html" class="platform-link">Newsletter</a>
+        </div>
+    </nav>
+
+    <main class="page-container" id="main-content">
+        <h1 class="page-title">${escapeHtml(title)}</h1>
+        <p style="font-size:1.15rem; color:#475569; margin-bottom:25px;">
+            Bienvenido a esta sección de la Red Transversal de Pensamiento Complejo. Utiliza el editor tipo Wix para estructurar tu contenido aquí.
+        </p>
+    </main>
+
+    <footer>
+        <img src="${DEFAULT_LOGO}" alt="Logo UNRC" class="footer-logo">
+        <div class="footer-tag">Red Transversal de Pensamiento Complejo UNRC</div>
+    </footer>
+
+</body>
+</html>`;
+        }
+
+        function getNewsletterArticleTemplate(title, category, summary, path) {
+            return `<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>${escapeHtml(title)} | Pensamiento Complejo UNRC</title>
+    
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#ae0340">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+        :root {
+            --unrc-color: #ae0340;
+            --unrc-dark: #620137;
+            --text-dark: #111111;
+            --text-muted: #4b5563;
+            --bg-light: #fcfcfc;
+            --border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sauce One', 'Lato', sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 60px;
+            line-height: 1.6;
+        }
+
+        .platform-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+            border-bottom: var(--border);
+        }
+        .platform-brand {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: #111; font-weight: 700; font-size: 0.95rem;
+        }
+        .platform-brand img { height: 34px; }
+        .platform-links { display: flex; align-items: center; gap: 20px; }
+        .platform-link {
+            color: #4b5563; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 12px; border-radius: 4px;
+        }
+        .platform-link:hover { color: #000; }
+        .platform-link.active { color: #fff; background: var(--unrc-color); }
+
+        .article-main {
+            max-width: 860px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+        .article-badge {
+            background: var(--unrc-color); color: #fff;
+            font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;
+        }
+        .article-header-title {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15;
+            color: #111; margin-bottom: 15px;
+        }
+        .article-meta-info {
+            display: flex; gap: 16px; color: #64748b; font-size: 0.9rem; margin-bottom: 25px; flex-wrap: wrap;
+        }
+        .article-lead {
+            font-size: 1.2rem; line-height: 1.6; color: #334155; font-weight: 400; margin-bottom: 35px;
+            border-left: 3px solid var(--unrc-color); padding-left: 16px;
+        }
+        .article-content { display: flex; flex-direction: column; gap: 24px; }
+
+        footer {
+            background: #fafafa; border-top: var(--border); padding: 50px 5%; display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+        .footer-logo { height: 48px; object-fit: contain; }
+        .footer-tag { color: var(--unrc-color); font-size: 0.72rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <nav class="platform-nav">
+        <a href="../index.html" class="platform-brand">
+            <img src="${DEFAULT_LOGO}" alt="Logo UNRC">
+            <span>Pensamiento Complejo</span>
+        </a>
+        <div class="platform-links">
+            <a href="../index.html" class="platform-link">Inicio</a>
+            <a href="../red.html" class="platform-link">Red</a>
+            <a href="../uca.html" class="platform-link">UCA</a>
+            <a href="../complejidades-hub.html" class="platform-link">Complejidades Hub</a>
+            <a href="../newsletter.html" class="platform-link active">Newsletter</a>
+        </div>
+    </nav>
+
+    <main class="article-main">
+        <div class="article-badge">${escapeHtml(category || 'NOTICIA')}</div>
+        <h1 class="article-header-title">${escapeHtml(title)}</h1>
+        <div class="article-meta-info">
+            <span>👤 Red Transversal UNRC</span>
+            <span>📅 Octubre 2026</span>
+            <span>🏷️ Pensamiento Complejo, Formación</span>
+        </div>
+        <div class="article-lead">
+            ${escapeHtml(summary || 'Síntesis breve sobre la publicación y sus implicaciones para la comunidad académica.')}
+        </div>
+
+        <article class="article-content">
+            <h2 style="font-size:1.8rem; font-weight:800; color:#111; margin-top:15px;">1. Contexto y Fundamentación</h2>
+            <p style="font-size:1.1rem; line-height:1.75; color:#334155;">
+                Comienza a desarrollar aquí los argumentos principales de tu publicación. Puedes agregar imágenes desde Cloudflare R2, videos de YouTube y citas reflexivas usando el menú de bloques a la izquierda.
+            </p>
+        </article>
+    </main>
+
+    <footer>
+        <img src="${DEFAULT_LOGO}" alt="Logo UNRC" class="footer-logo">
+        <div class="footer-tag">Red Transversal de Pensamiento Complejo UNRC</div>
+    </footer>
+
+</body>
+</html>`;
+        }
+
+        // 13. UTILIDADES GENERALES
+        function copyToClipboard(text, successMsg = 'Copiado al portapapeles') {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast(successMsg, '📋');
+            });
+        }
+
+        function saveDraftLocally() {
+            syncIframeToSource();
+            localStorage.setItem(`pc_draft_${currentPage.path}`, currentHtmlContent);
+            showToast(`Borrador guardado localmente para ${currentPage.title}`, '💾');
+        }
+
+        function showToast(msg, icon = '✨') {
+            const toast = document.getElementById('studioToast');
+            document.getElementById('toastIcon').innerText = icon;
+            document.getElementById('toastMessage').innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3500);
+        }
+
+        function escapeHtml(text) {
+            if (!text) return '';
+            return String(text)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>

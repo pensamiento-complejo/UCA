@@ -708,7 +708,6 @@ def build_exhibitor_html(is_subdir=False):
             <a href="{rel_root}uca.html" class="platform-link">UCA</a>
             <a href="{rel_root}complejidades-hub.html" class="platform-link">Complejidades Hub</a>
             <a href="{rel_root}newsletter.html" class="platform-link">Newsletter</a>
-            <a href="{rel_root}editor.html" class="platform-link" title="Editor Studio REA">Editor</a>
         </div>
     </nav>
 
