@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Seminario de Pensamiento Complejo y Sustentabilidad 2026 | Pensamiento Complejo UNRC</title>
+    
+    <link rel="manifest" href="../manifest.webmanifest">
+    <meta name="theme-color" content="#ae0340">
+    <link rel="icon" type="image/png" sizes="32x32" href="../icons/favicon-32.png">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.cdnfonts.com/css/open-sauce-one');
+
+        :root {
+            --unrc-color: #ae0340;
+            --unrc-dark: #620137;
+            --text-dark: #111111;
+            --text-muted: #4b5563;
+            --bg-light: #fcfcfc;
+            --border: 1px solid rgba(0,0,0,0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sauce One', 'Lato', sans-serif, -apple-system, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding-top: 60px;
+            line-height: 1.6;
+        }
+
+        /* PLATFORM NAV */
+        .platform-nav {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 60px;
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(14px);
+            z-index: 10000;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+            border-bottom: var(--border);
+        }
+        .platform-brand {
+            display: flex; align-items: center; gap: 12px;
+            text-decoration: none; color: #111; font-weight: 700; font-size: 0.95rem;
+        }
+        .platform-brand img { height: 34px; }
+        .platform-links { display: flex; align-items: center; gap: 20px; }
+        .platform-link {
+            color: #4b5563; text-decoration: none; font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; padding: 6px 12px; border-radius: 4px;
+        }
+        .platform-link:hover { color: #000; }
+        .platform-link.active { color: #fff; background: var(--unrc-color); }
+
+        /* ARTÍCULO */
+        .article-main {
+            max-width: 860px;
+            margin: 40px auto 80px;
+            padding: 0 20px;
+        }
+        .article-badge {
+            background: var(--unrc-color); color: #fff;
+            font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px;
+            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;
+        }
+        .article-header-title {
+            font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; line-height: 1.15;
+            color: #111; margin-bottom: 15px;
+        }
+        .article-meta-info {
+            display: flex; gap: 16px; color: #64748b; font-size: 0.9rem; margin-bottom: 25px; flex-wrap: wrap;
+        }
+        .article-lead {
+            font-size: 1.2rem; line-height: 1.6; color: #334155; font-weight: 400; margin-bottom: 35px;
+            border-left: 3px solid var(--unrc-color); padding-left: 16px;
+        }
+        .article-content { display: flex; flex-direction: column; gap: 24px; }
+        .article-section-title { font-size: 1.8rem; font-weight: 800; color: #111; margin-top: 15px; }
+        .article-body-p { font-size: 1.1rem; line-height: 1.75; color: #334155; }
+        .article-figure { margin: 20px 0; }
+        .article-figure img { width: 100%; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+        .article-figcaption { font-size: 0.85rem; color: #64748b; text-align: center; margin-top: 8px; font-style: italic; }
+        .article-blockquote {
+            border-left: 4px solid var(--unrc-color); background: #fff5f7; padding: 20px; border-radius: 0 8px 8px 0; margin: 20px 0;
+        }
+        .article-blockquote p { font-size: 1.25rem; font-style: italic; color: #1e293b; line-height: 1.6; }
+        .article-blockquote cite { display: block; margin-top: 10px; font-weight: 700; color: var(--unrc-color); font-size: 0.9rem; }
+        .article-video-container {
+            position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; background: #000; margin: 20px 0;
+        }
+        .article-video-container iframe { position: absolute; top:0; left:0; width:100%; height:100%; border:0; }
+        .article-cta-box { text-align: center; margin: 30px 0; }
+        .article-cta-btn {
+            background: var(--unrc-color); color: #fff; text-decoration: none; padding: 14px 32px; border-radius: 30px;
+            font-weight: 700; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 8px;
+            box-shadow: 0 4px 16px rgba(174, 3, 64, 0.3); transition: all 0.2s;
+        }
+        .article-cta-btn:hover { background: var(--unrc-dark); transform: translateY(-2px); }
+
+        /* FOOTER */
+        footer {
+            background: #fafafa; border-top: var(--border); padding: 50px 5%; display: flex; flex-direction: column; align-items: center; gap: 15px;
+        }
+        .footer-logo { height: 48px; object-fit: contain; }
+        .footer-tag { color: var(--unrc-color); font-size: 0.72rem; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; }
+    </style>
+</head>
+<body>
+
+    <nav class="platform-nav">
+        <a href="../index.html" class="platform-brand">
+            <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC">
+            <span>Pensamiento Complejo</span>
+        </a>
+        <div class="platform-links">
+            <a href="../index.html" class="platform-link">Inicio</a>
+            <a href="../red.html" class="platform-link">Red</a>
+            <a href="../uca.html" class="platform-link">UCA</a>
+            <a href="../complejidades-hub.html" class="platform-link">Complejidades Hub</a>
+            <a href="../newsletter.html" class="platform-link active">Newsletter</a>
+            <a href="../editor.html" class="platform-link" title="Editor Studio">Editor</a>
+        </div>
+    </nav>
+
+    <main class="article-main">
+        <div class="article-badge">CONVOCATORIA</div>
+        <h1 class="article-header-title">Seminario de Pensamiento Complejo y Sustentabilidad 2026</h1>
+        <div class="article-meta-info">
+            <span>👤 Red Transversal UNRC</span>
+            <span>📅 Octubre 2026</span>
+            <span>🏷️ Pensamiento Complejo, Formación, REA</span>
+        </div>
+        <div class="article-lead">
+            Convocatoria abierta para el ciclo académico 2026-II. Conoce las bases, el cronograma y los módulos formativos impartidos por el claustro docente de la Universidad Nacional Rosario Castellanos.
+        </div>
+
+        <article class="article-content">
+            <h2 class="article-section-title">1. Fundamentos del Pensamiento Complejo</h2>
+            <p class="article-body-p">El pensamiento complejo constituye una herramienta fundamental para comprender y operar en escenarios contemporáneos marcados por la no linealidad, la incertidumbre y la interdependencia sistémica. En este ciclo formativo, exploraremos el andamiaje teórico propuesto por Edgar Morin y las aplicaciones empíricas desarrolladas en los proyectos interdisciplinarios de la UNRC.</p>
+            
+            <figure class="article-figure">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1000&q=80" alt="Taller de Pensamiento Complejo" loading="lazy">
+                <figcaption class="article-figcaption">Mapeo conceptual de redes y sistemas adaptativos en el taller docente.</figcaption>
+            </figure>
+
+            <blockquote class="article-blockquote">
+                <p>"La complejidad no es la clave del mundo, sino el desafío que el mundo le plantea a nuestro pensamiento."</p>
+                <cite>— Edgar Morin</cite>
+            </blockquote>
+
+            <h2 class="article-section-title">2. Sesión Magistral y Modelado</h2>
+            <div class="article-video-container">
+                <iframe src="https://www.youtube.com/embed/P-1QTW71bzk" allowfullscreen loading="lazy"></iframe>
+            </div>
+
+            <div class="article-cta-box">
+                <a href="../uca.html" class="article-cta-btn"><span>📥</span> Descargar Convocatoria Completa en PDF</a>
+            </div>
+        </article>
+    </main>
+
+    <footer>
+        <img src="https://pub-6fb96c9e88234007a84a1dee992411f5.r2.dev/display_1789606914957_Logo_pensamiento_Complejo.png" alt="Logo UNRC" class="footer-logo">
+        <div class="footer-tag">Red Transversal de Pensamiento Complejo UNRC</div>
+    </footer>
+
+</body>
+</html>
